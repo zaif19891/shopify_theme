@@ -1,0 +1,73 @@
+<div class="account-main account-main--{{ section.id }}">
+  <div class="width">
+    <header class="account-main-header">
+      <h1>
+        <a href="/account">
+          {{ 'Accounts.account' | t }}
+        </a>
+      </h1>
+
+      <a href="{{ routes.account_logout_url }}">
+        {{ 'Accounts.logout' | t }}
+      </a>
+    </header>
+
+    <div class="account-main-flex">
+      <div class="account-main-flex-main">
+        <h2>{{ 'Accounts.order_history' | t }}</h2>
+
+        {% paginate customer.orders by 20 %}
+          {% if customer.orders.size > 0 %}
+            <div class="account-main-table-wrap">
+              <table class="account-main-table">
+                <thead>
+                  <tr>
+                    <th>{{ 'Accounts.order_number' | t }}</th>
+                    <th>{{ 'Accounts.date' | t }}</th>
+                    <th>{{ 'Accounts.payment_status' | t }}</th>
+                    <th>{{ 'Accounts.fulfillment_status' | t }}</th>
+                    <th>{{ 'Accounts.total' | t }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in customer.orders %}
+                    <tr>
+                      <td>
+                        <a href="{{ order.customer_url }}">{{ order.name }}</a>
+                      </td>
+                      <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+                      <td>{{ order.financial_status_label }}</td>
+                      <td>{{ order.fulfillment_status_label }}</td>
+                      <td>{{ order.total_price | money_with_currency }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p>{{ 'Accounts.no_orders' | t }}</p>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+            <div class="pagination">
+              <div class="pagination-inner">
+                {{ paginate | default_pagination }}
+              </div>
+            </div>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+
+      <div class="account-main-flex-sidebar">
+        <h2>{{ 'Accounts.customer_details' | t }}</h2>
+
+        {{ customer.default_address | format_address }}
+        <div id="recurpay-account-widget"></div>
+
+        <a href="{{ routes.account_addresses_url }}">
+          {{ 'Accounts.view_addresses' | t }} ({{ customer.addresses_count }})
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

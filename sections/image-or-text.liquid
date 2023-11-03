@@ -1,0 +1,505 @@
+<div class="split-section split-section--{{ section.id }} {% if section.settings.contained %}split-section--contained{% endif %} {% if section.settings.color == 'inverse' %}split-section--inverse{% endif %} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="split-section-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'text' %}
+          <div class="split-section-grid-column split-section-grid-column--text split-section-grid-column--{{ block.settings.alignment }}">
+            <div class="split-section-grid-column-text-wrap">
+              <h2>
+                {{ block.settings.small_heading }}
+              </h2>
+              <h3>
+                {{ block.settings.heading }}
+              </h3>
+              <div class="rte {% if section.settings.color == 'inverse' %}rte--inverse{% endif %}">
+                {{ block.settings.body }}
+              </div>
+              {% if block.settings.button_text != blank %}
+                <a
+                  class="button {% if section.settings.color == 'inverse' %}button--inverse-accent{% endif %}"
+                  href="{{ block.settings.button_url }}"
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% elsif block.type == 'image' %}
+          <div class="split-section-grid-column split-section-grid-column--image">
+            {% if block.settings.image == blank %}
+              <img src="{{ 'img_sample_image_or_text.png' | asset_url }}">
+            {% else %}
+              <img src="{{ block.settings.image | img_url: 'master' }}">
+            {% endif %}
+          </div>
+        {% elsif block.type == 'link-card' %}
+          <a
+            href="{% if block.settings.url == blank %}#{% else %}{{ block.settings.url }}{% endif %}"
+            class="split-section-grid-column split-section-grid-column--link-card"
+          >
+            {% if block.settings.image == blank %}
+              <img src="{{ 'img_sample_image_or_text.png' | asset_url }}">
+            {% else %}
+              <img src="{{ block.settings.image | img_url: 'master' }}">
+            {% endif %}
+            <span class="split-section-link-card-text">
+              <h3>
+                {{ block.settings.heading }}
+              </h3>
+              <span class="button button--secondary">
+                {{ block.settings.button_text }}
+              </span>
+            </span>
+          </a>
+        {% elsif block.type == 'link-block' %}
+          <a
+            href="{% if block.settings.url == blank %}#{% else %}{{ block.settings.url }}{% endif %}"
+            back
+            style="{% if block.settings.bg != blank %}background-image: url({{ block.settings.bg | img_url: 'master' }});{% endif %}"
+            class="split-section-grid-column split-section-grid-column--link-block"
+          >
+            <span class="split-section-link-block-text">
+              <img
+                width="{% if block.settings.image_width != blank %}{{ block.settings.image_width }}{% else %}340{% endif %}"
+                src="{% if block.settings.image != blank %}{{ block.settings.image | img_url: 'master' }}{% else %}{{ 'img_sample_image_or_text.png' | asset_url }}{% endif %}"
+              >
+              <h3>
+                {{ block.settings.heading }}
+              </h3>
+              <span class="button button--secondary">
+                {{ block.settings.button_text }}
+              </span>
+            </span>
+          </a>
+        {% elsif block.type == 'image-text' %}
+          <div class="split-section-grid-column split-section-grid-column--image-text">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: 'master' }}">
+            {% else %}
+              <img src="{{ 'img_sample_image_or_text.png' | asset_url }}">
+            {% endif %}
+
+            <h3>
+              {{ block.settings.heading }}
+            </h3>
+
+            <div class="rte">
+              {{ block.settings.text }}
+            </div>
+          </div>
+        {% elsif block.type == 'review' %}
+          <div class="split-section-grid-column split-section-grid-column--review">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: 'master' }}" class="split-section-review-img">
+            {% else %}
+              <img src="{{ 'img_sample1.png' | asset_url }}" class="split-section-review-img">
+            {% endif %}
+            <div class="split-section-review-text">
+              <blockquote>
+                <p style="background-color: {{ block.settings.text_box_background }}; padding: 16px;">
+                  &#8220;{{ block.settings.review }}&#8221;
+                </p>
+              </blockquote>
+              <div class="split-section-review-text-bottom">
+                <ul>
+                  {% for num in (1..block.settings.stars) %}
+                    <li>{% render 'icon-star' %}</li>
+                  {% endfor %}
+                </ul>
+                <span> - {{ block.settings.reviewer }} </span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="split-section-grid-column split-section-grid-column--text split-section-grid-column--{{ block.settings.alignment }}">
+          <div class="split-section-grid-column-text-wrap">
+            <h2>{{ 'default_values.texts.small_heading' | t }}</h2>
+            <h3>{{ 'default_values.texts.heading' | t }}</h3>
+            <div class="rte {% if section.settings.color == 'inverse' %}rte--inverse{% endif %}">
+              {{ 'default_values.texts.body' | t }}
+            </div>
+            <a
+              class="button {% if section.settings.color == 'inverse' %}button--inverse-accent{% endif %}"
+              href="#"
+            >
+              {{ 'default_values.texts.button_text' | t }}
+            </a>
+          </div>
+        </div>
+        <div class="split-section-grid-column split-section-grid-column--image">
+          <img src="{{ 'img_sample_image_or_text.png' | asset_url }}">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .split-section--{{ section.id }} {
+    padding-top: {{section.settings.padding_top}}px;
+    padding-bottom: {{section.settins.padding_bottom}}px;
+    margin-top: {{section.settings.margin_top}}px;
+    margin-bottom: {{section.settings.margin_bottom}}px;
+  }
+  
+  @media (max-width: 768px){
+    .split-section--{{ section.id }} {
+      padding-top: calc({{section.settings.padding_top}}px * 0.5);
+      padding-bottom: calc({{section.settings.padding_bottom}}px * 0.5);
+      margin-top: calc({{section.settings.margin_top}}px * 0.5);
+      margin-bottom: calc({{section.settings.margin_bottom}}px * 0.5);
+    }
+  }
+
+  .split-section-grid-column--image img, .split-section-grid-column--link-card img, .split-section-link-block-text img {
+    border-radius: var(--image_radius);
+  }
+
+  .split-section-review-text > blockquote > p {
+    border-radius: var(--image_radius);
+  }
+  
+  .split-section--{{ section.id }} .split-section-grid {
+    column-gap: {{ section.settings.block_spacing }}px;
+  }
+
+  {% if section.settings.contained %}
+    .split-section--{{ section.id }} {
+      background-color: var(--background_color);
+    }
+
+    {% if section.settings.color == 'inverse' %}
+      .split-section--{{ section.id }} .split-section-grid {
+        background-color: var(--inverse_background_color);
+        color: var(--inverse_text_color);
+      }
+    {% elsif section.settings.color == 'alt' %}
+      .split-section--{{ section.id }} .split-section-grid {
+        background-color: var(--background_2_color);
+      }
+    {% else %}
+      .split-section--{{ section.id }} .split-section-grid {
+        background-color: var(--background_color);
+      }
+    {% endif %}
+  {% else %}
+    {% if section.settings.color == 'inverse' %}
+      .split-section--{{ section.id }} {
+        background-color: var(--inverse_background_color);
+        color: var(--inverse_text_color);
+      }
+    {% elsif section.settings.color == 'alt' %}
+      .split-section--{{ section.id }} {
+        background-color: var(--background_2_color);
+      }
+    {% else %}
+      .split-section--{{ section.id }} {
+        background-color: var(--background_color);
+      }
+    {% endif %}
+  {% endif  %}
+
+  .button {
+    border-radius: 10px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image & Text",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "select",
+          "label": "spacing",
+          "id": "spacing",
+          "default": "both",
+          "options": [
+            {
+              "value": "both",
+              "label": "Top and bottom"
+            },
+            {
+              "value": "top",
+              "label": "Top only"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom only"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "label": "Alignment",
+          "id": "alignment",
+          "default": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Small heading",
+          "default": "Your smallheading text will go here.",
+          "id": "small_heading"
+        },
+        {
+          "type": "text",
+          "label": "Heading",
+          "default": "Your heading text will go here.",
+          "id": "heading"
+        },
+        {
+          "type": "richtext",
+          "label": "Body text",
+          "default": "<p>Your body text will go here.</p>",
+          "id": "body"
+        },
+        {
+          "type": "text",
+          "label": "Button text",
+          "default": "Call To Action Text Here",
+          "id": "button_text"
+        },
+        {
+          "type": "url",
+          "label": "Button url",
+          "id": "button_url"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        }
+      ]
+    },
+    {
+      "type": "link-card",
+      "name": "Link card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        },
+        {
+          "type": "url",
+          "label": "Url",
+          "id": "url"
+        },
+        {
+          "type": "text",
+          "label": "Heading",
+          "default": "Your heading text will go here.",
+          "id": "heading"
+        },
+        {
+          "type": "text",
+          "label": "Button text",
+          "default": "Call To Action Text Here",
+          "id": "button_text"
+        }
+      ]
+    },
+
+    {
+      "type": "link-block",
+      "name": "Link block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Background",
+          "id": "bg"
+        },
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        },
+        {
+          "type": "range",
+          "label": "Image width",
+          "unit": "px",
+          "id": "image_width",
+          "min": 100,
+          "max": 500,
+          "default": 340,
+          "step": 10
+        },
+        {
+          "type": "url",
+          "label": "Url",
+          "id": "url"
+        },
+        {
+          "type": "text",
+          "label": "Heading",
+          "default": "Your heading text will go here.",
+          "id": "heading"
+        },
+        {
+          "type": "text",
+          "label": "Button text",
+          "default": "Call To Action Text Here",
+          "id": "button_text"
+        }
+      ]
+    },
+
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Avatar",
+          "id": "image"
+        },
+        {
+          "type": "range",
+          "label": "Stars",
+          "unit": "str",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "label": "Review",
+          "default": "Your review text will go here",
+          "id": "review"
+        },
+        {
+          "type": "text",
+          "label": "Reviewer",
+          "default": "Sample R",
+          "id": "reviewer"
+        },
+        {
+          "type": "color",
+          "id": "text_box_background",
+          "label": "Text Box Background",
+          "default": "#f8f5f0"
+        }
+      ]
+    },
+    {
+      "type": "image-text",
+      "name": "Image with text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        },
+        {
+          "type": "text",
+          "label": "heading",
+          "default": "Your heading text will go here.",
+          "id": "heading"
+        },
+        {
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Your body text will go here.</p>",
+          "id": "text"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Background color",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "label": "Contained",
+      "id": "contained"
+    },
+    {
+      "type": "range",
+      "label": "Block spacing",
+      "id": "block_spacing",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "default": 100,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image & Text",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

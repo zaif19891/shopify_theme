@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "c437cc08-9a9f-49e2-9101-c773e7d5af71": {
+      "type": "main-custom-blog",
+      "blocks": {
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Topics relating our products"
+          }
+        },
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-body-1": {
+          "type": "body",
+          "disabled": true,
+          "settings": {
+            "body": "Body text will goes here"
+          }
+        },
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-search_bar-1": {
+          "type": "search_bar",
+          "settings": {
+            "placeholder": "Search for texts..."
+          }
+        },
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-blog_categories-1": {
+          "type": "blog_categories",
+          "settings": {
+            "tab_blog1": "educate",
+            "tab_blog2": "charity",
+            "tab_blog3": "local-guides",
+            "tab_blog4": "",
+            "tab_blog5": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-heading-1",
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-body-1",
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-search_bar-1",
+        "template--20054273524022__c437cc08-9a9f-49e2-9101-c773e7d5af71-blog_categories-1"
+      ],
+      "settings": {
+        "spacing": "none",
+        "bg_image": "shopify:\/\/shop_images\/Shop_Banner_38.png",
+        "max_latest_blogs": 4
+      }
+    }
+  },
+  "order": [
+    "c437cc08-9a9f-49e2-9101-c773e7d5af71"
+  ]
+}

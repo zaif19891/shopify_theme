@@ -1,0 +1,194 @@
+<div class="collapsable-content collapsable-content--{{ section.id }} collapsable-content--{{ section.settings.color }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="faqs-name--{{section.id}}">{{ section.settings.faqs }}</div>
+    {% for block in section.blocks %}
+      <div class="collapsable-content-section">
+        <header class="collapsable-content-section-header">
+          {% comment %} <div>+</div> {% endcomment %}
+          <h3>{{ block.settings.heading }}</h3>
+          {% comment %}
+            {% if section.settings.icon != blank %}
+              <img
+                width="{{ section.settings.icon_size }}"
+                src="{{ section.settings.icon | img_url: 'master' }}"
+              >
+            {% else %}
+              <img
+                width="{{ section.settings.icon_size }}"
+                src="{{ 'faq_default.png' | asset_url }}"
+              >
+            {% endif %}
+          {% endcomment %}
+          <div class="faq-icon">+</div>
+        </header>
+
+        <div class="collapsable-content-section-body">
+          <div class="collapsable-content-section-body-inner rte">
+            {{ block.settings.body }}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      {% for i in (1..5) %}
+        <div class="collapsable-content-section">
+          <header class="collapsable-content-section-header">
+            <h3>{{ 'default_values.texts.faq_heading' | t }}</h3>
+
+            <div class="faq-icon">+</div>
+          </header>
+
+          <div class="collapsable-content-section-body">
+            <div class="collapsable-content-section-body-inner rte">
+              {{ 'default_values.texts.faq_body' | t }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% if section.settings.heading_size == 'small' %}
+  {% assign titleSize = 2.25 %}
+{% else %}
+  {% if section.settings.heading_size == 'medium' %}
+    {% assign titleSize = 2.5 %}
+  {% else %}
+    {% assign titleSize = 3 %}
+  {% endif %}
+{% endif %}
+<style>
+  .faqs-name--{{section.id}} {
+    font-size: {{titleSize}}rem;
+    font-weight: 600;
+    text-align: center;
+  }
+</style>
+{% schema %}
+{
+  "name": "FAQ's",
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Sample Question Goes Here",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Sample Answer Goes Here</p>"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "label": "spacing",
+      "id": "spacing",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "FAQ's"
+    },
+    {
+      "type": "text",
+      "id": "faqs",
+      "label": "Heading",
+      "default": "FAQ's"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+
+    {
+      "type": "select",
+      "label": "Background color",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ's",
+      "blocks": [
+        {
+          "type": "section"
+        },
+        {
+          "type": "section"
+        },
+        {
+          "type": "section"
+        },
+        {
+          "type": "section"
+        },
+        {
+          "type": "section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{%- javascript -%}
+  $('.collapsable-content-section').click(function () {
+    if ($(this).find('.faq-icon').text() == '+') {
+      $(this).find('.faq-icon').text('-');
+    } else {
+      $(this).find('.faq-icon').text('+');
+    }
+  });
+{%- endjavascript -%}

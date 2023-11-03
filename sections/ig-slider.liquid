@@ -1,0 +1,279 @@
+<style>
+    .ig-slider {
+      {% if section.settings.usage == "desktop_only" %}
+        display: none;
+      {% else %}
+        display: block;
+      {% endif %}
+    }
+    
+    @media (min-width: 576px) {
+      .ig-slider {
+        {% if section.settings.usage == "mobile_only" %}
+          display: none;
+        {% else %}
+          display: block;
+        {% endif %} 
+      }
+    }
+    
+    .section-template--{{ section.id }}.ig-slider-wrapper {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 12px 0 0 0;
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-video-item, .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-product-item {
+      text-align: center;
+      overflow-x: hidden;
+      width: 21%;
+      display: inline-block;
+      color: var(--text_color);
+    }
+  
+    @media (min-width: 576px) {
+      .section-template--{{ section.id}}.ig-slider-wrapper {
+        display: flex;
+        width: 100%;
+      }
+      
+      .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-video-item, .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-product-item {
+        flex: 1;
+      }
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-video-item:first-child, .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-product-item:first-child {
+      margin-left: 10px;
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-video-item:nth-last-child(2), .section-template--{{ section.id }}.ig-slider-wrapper > .ig-slider-product-item:nth-last-child(2) {
+      margin-right: 10px;
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper .ig-slider-image-wrapper {
+      border: {{ section.settings.border_size | append: 'px' }} solid var(--border_color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 71px;
+      height: 71px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border-style: solid;
+      color: #fff;
+      position: relative;
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper .ig-slider-image-wrapper > .ig-slider-image {
+      
+    }
+  
+    .section-template--{{ section.id }}.ig-slider-wrapper .ig-slider-title {
+      font-size: 11px;
+      line-height: 1;
+      text-align: center;
+      font-weight: var(--body_bold_font_weight);
+      font-family: var(--body_bold_font);
+    }
+  
+    .section-template--{{ section.id }} .ig-slider-video-item svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  
+  <div class="section-template--{{ section.id }} ig-slider-wrapper">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when "video_item" %}
+          <a class="ig-slider-video-item">
+            {% for source in block.settings.video.sources %}
+              <input class="ig-slider-video-item-source" type="hidden" value="{{ source.url }}###{{ source.mime_type }}" />
+            {% endfor %}
+            <span class="ig-slider-image-wrapper">
+              {% if block.settings.image %}
+                <img class="ig-slider-image" src="{{ block.settings.image | img_url: 'master' }}" />
+              {% else %}
+                <img class="ig-slider-image" src="{{ 'img_thumbnail.png' | asset_url}}" />
+              {% endif %}
+              {% render 'icon-play' %}
+            </span>
+            <span class="ig-slider-title">{{ block.settings.title }}</span>
+          </a>
+        {% when "product_item" %}
+          <a class="ig-slider-product-item" href="{{ block.settings.url }}">
+            <span class="ig-slider-image-wrapper">
+              {% if block.settings.image != blank %}
+                <img class="ig-slider-image" src="{{ block.settings.image | img_url: 'master' }}">
+              {% else %}
+                <img class="ig-slider-image" src="{{ 'img_thumbnail2.png' | asset_url}}" />
+              {% endif %}
+            </span>
+            <span class="ig-slider-title">{{ block.settings.title }}</span>
+          </a>
+      {% endcase %}
+    {% endfor %}
+  
+    <div class="ig-slider-modal">
+      <div class="width">
+        <div class="ig-slider-modal-inner">
+          <button class="ig-slider-modal-close">{% render 'icon-close' %}</button>
+          <video playsinline preload="none" controls>
+            <source src="" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "IG Slider",
+      "class": "ig-slider",
+      "settings": [
+        {
+          "type": "select",
+          "id": "usage",
+          "options": [
+            {
+              "label": "Desktop Only",
+              "value": "desktop_only"
+            },
+            {
+              "label": "Mobile Only",
+              "value": "mobile_only"
+            },
+            {
+              "label": "Desktop and Mobile",
+              "value": "both"
+            }
+          ],
+          "default": "mobile_only",
+          "label": "Show on"
+        },
+        {
+          "type": "range",
+          "id": "border_size",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2,
+          "unit": "px",
+          "label": "Border Size"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "video_item",
+          "name": "Video",
+          "settings": [
+            {
+              "label": "Image",
+              "id": "image",
+              "type": "image_picker"
+            },
+            {
+              "label": "Label",
+              "id": "title",
+              "type": "text",
+              "default": "Testimonial"
+            },
+            {
+              "label": "Video url",
+              "id": "video",
+              "type": "video"
+            }
+          ]
+        },
+        {
+          "type": "product_item",
+          "name": "Product",
+          "settings": [
+            {
+              "label": "Image",
+              "id": "image",
+              "type": "image_picker"
+            },
+            {
+              "label": "Label",
+              "id": "title",
+              "type": "text",
+              "default": "Product Title"
+            },
+            {
+              "label": "Url",
+              "id": "url",
+              "type": "url"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "IG Slider",
+          "blocks": [
+            {
+              "type": "video_item"
+            },
+            {
+              "type": "product_item"
+            },
+            {
+              "type": "video_item"
+            },
+            {
+              "type": "product_item"
+            },
+            {
+              "type": "product_item"
+            },
+            {
+              "type": "product_item"
+            }
+          ]
+        }
+      ]
+    }
+  {% endschema %}
+  
+  <script>
+    let sectionId = "{{ section.id }}";
+    document.querySelectorAll('.section-template--' + sectionId + ' .ig-slider-video-item').forEach((item, i) => {
+      item.addEventListener('click', () => {
+        let sourceLinks = item.querySelectorAll("input.ig-slider-video-item-source");
+        var videoUrl = "";
+        sourceLinks.forEach((link) => {
+          let videoSource = link.value;
+          let formattedVideoSource = videoSource.split("###");
+          if(formattedVideoSource.length > 1 && formattedVideoSource[1] == "video/mp4") {
+            console.log(formattedVideoSource[0]);
+            videoUrl = formattedVideoSource[0];
+          }
+        });
+        
+        const modal = document.querySelector(".section-template--" + sectionId + " .ig-slider-modal");
+        modal.classList.add('ig-slider-modal--active');
+        const video = modal.querySelector("video");
+        const source = video.querySelector("source");
+        source.src = videoUrl;
+        video.load();
+        video.play();
+      });
+    });
+  
+    console.log('.section-template--' + sectionId + ' .ig-slider-modal .ig-slider-modal-close');
+    
+    document.querySelector('.section-template--' + sectionId + ' .ig-slider-modal .ig-slider-modal-close').addEventListener("click", function() {
+      const videoModal = document.querySelector('.section-template--' + sectionId + " .ig-slider-modal");
+      const video = videoModal.querySelector("video");
+      video.pause();
+      videoModal.classList.remove('ig-slider-modal--active');
+    });
+  </script>

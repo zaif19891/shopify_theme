@@ -1,0 +1,196 @@
+<style>
+  .product-slider-header > span {
+    font-size: var(--body_bold_font_size);
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .product-slider-item > a > span {
+    border: 1px solid {{ section.settings.slider_border_color }};
+    color: {{ section.settings.slider_txt_color }};
+    font-size: var(--body_font_size);
+    background-color: {{ section.settings.slider_bg_color }};
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+  
+  .section-template--{{ section.id }} {
+    padding-top: {{section.settings.padding_top}}px;
+    padding-bottom: {{section.settings.padding_bottom}}px;
+    margin-top: {{section.settings.margin_top}}px;
+    margin-bottom: {{section.settings.margin_bottom}}px;
+  }
+</style>
+
+<div class="section-template--{{ section.id }} section-template-product-slider {% if section.settings.display_method == 'mobile' %} circle-display-mobile{% elsif section.settings.display_method == 'desktop' %} circle-display-desktop{% endif %}">
+  <div class="product-slider-inner-wrapper">
+    <div class="product-slider-header">
+      <span>
+        {% if section.settings.header == blank %}
+          Shop by product
+        {% else %}
+          {{ section.settings.header }}
+        {% endif %}
+      </span>
+    </div>
+    <div class="product-slider-body">
+      {% for block in section.blocks %}
+        <div class="product-slider-item">
+          <a href="{{ block.settings.item_link }}">
+            <span>{{ block.settings.title }}</span>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Text & Tags",
+    "settings": [
+      {
+        "type": "select",
+        "id": "display_method",
+        "label": "Display Method",
+        "options": [
+          {
+            "value": "mobile",
+            "label": "Only Mobile"
+          },
+          {
+            "value": "desktop",
+            "label": "Only Desktop"
+          },
+          {
+            "value": "mobile-desktop",
+            "label": "Desktop and Mobile"
+          }
+        ],
+        "default": "mobile",
+        "info": "select which device to show this section on"
+      },
+      {
+        "type": "text",
+        "id": "header",
+        "label": "Header",
+        "default": "Shop by Product"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_uppercase",
+        "label": "Transform Uppercase",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "slider_bg_color",
+        "label": "Slider Item Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "slider_txt_color",
+        "label": "Slider Text Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "slider_border_color",
+        "label": "Slider Item Border Color",
+        "default": "#E5E7EB"
+      },
+      {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Top",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 2
+    },{
+      "type": "header",
+      "content": "Section Margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Top",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 2
+    }
+      
+    ],
+    "blocks": [
+      {
+        "type": "tag_item",
+        "name": "Tag",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Label",
+            "default": "Sample Text"
+          },
+          {
+            "type": "url",
+            "id": "item_link",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Text & Tags",
+        "blocks": [
+          {
+            "type": "tag_item"
+          },
+          {
+            "type": "tag_item"
+          },
+          {
+            "type": "tag_item"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

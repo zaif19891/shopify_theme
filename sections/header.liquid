@@ -1,0 +1,308 @@
+<style>
+  .header {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    border-bottom: 1px solid{{ section.settings.border_color }};
+  }
+
+  .header-hamburger span {
+    color: {{ section.settings.icon_color }};
+  }
+
+  .header-nav-item span {
+    color: {{ section.settings.text_color }};
+    font-family: {{section.settings.font_family}}, sans-serif;
+    font-size:{{section.settings.font_size}}px;
+  }
+
+  .header-logo {
+    width: {{ section.settings.logo_width}}px;
+  }
+
+  .header-icons .header-icons-anchor {
+    color: {{ section.settings.icon_color }};
+  }
+  .menu-icon, .cart-icon
+  .header-hamburger {
+    color: {{ section.settings.icon_color }};
+  }
+
+  .header-icons-anchor-cart-count {
+    background-color: {{ section.settings.badge_color }};
+    color: {{ section.settings.badge_text_color }};
+  }
+
+  @media(max-width: 959px) {
+    .header-nav-item {
+      border-bottom: 1px solid{{ section.settings.border_color }};
+    }
+
+    .header-nav-mobile-close-out > a > span,
+    .header-nav-mobile-close-out > a > svg {
+      color: #818181;
+    }
+    .menu-icon, .cart-icon{
+    width:28px;
+    height:32px;
+  }
+  }
+</style>
+
+<div class="width">
+  <div class="header-flex">
+    <button class="header-hamburger">
+      <span class="header-hamburger-open">
+        {%- if section.settings.menu_icon != blank -%}
+          <img src="{{ section.settings.menu_icon | img_url: 'master' }}" class="menu-icon">
+        {%- else -%}
+          {% render 'icon-burger' %}
+        {%- endif -%}
+      </span>
+      <span class="header-hamburger-close">
+        {% render 'icon-close' %}
+      </span>
+    </button>
+
+    <a href="/" class="header-logo">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ shop.name }}">
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
+
+    <ul class="header-nav">
+      <li class="header-nav-item header-nav-mobile-close-out">
+        <a class="header-nav-anchor" href="#">
+          <span>Menu</span>
+          {% render 'icon-close' %}
+        </a>
+      </li>
+      {% for link in section.settings.nav.links %}
+        <li class="header-nav-item {% if link.links != blank %}header-nav-item--has-sub{% endif %} {% if section.settings.font_size == 'small'%}font-size-small{% elsif section.settings.font_size == 'large'%}font-size-large{% else %}font-size-medium{%endif%}">
+          <a
+            class="header-nav-anchor {% if link.links != blank %}header-nav-anchor--sub-trigger{% endif %}"
+            href="{{ link.url }}"
+          >
+            <span>{{ link.title }}</span>
+            {% if link.links != blank %}
+              {% render 'icon-chevron-down' %}
+            {% endif %}
+          </a>
+
+          {% if link.links != blank %}
+            <ul class="header-sub-nav">
+              {% for link in link.links %}
+                <li class="header-sub-nav-item {% if link.links != blank %}header-sub-nav-item--has-sub{% endif %}">
+                  <a
+                    href="{{ link.url }}"
+                    class="header-sub-nav-anchor {% if link.links != blank %}header-sub-nav-anchor--sub-trigger{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+
+                  {% if link.links != blank %}
+                    <ul class="header-sub-sub-nav">
+                      {% for link in link.links %}
+                        <li class="header-sub-sub-nav-item {% if link.links != blank %}header-sub-nav-item--has-sub{% endif %}">
+                          <a
+                            href="{{ link.url }}"
+                            class="header-sub-sub-nav-anchor {% if link.links != blank %}header-sub-nav-anchor--sub-trigger{% endif %}"
+                          >
+                            {{ link.title }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <ul class="header-icons">
+      {% if section.settings.search %}
+        <li class="header-icons-item">
+          <a class="header-icons-anchor header-icons-anchor--search" href="{{ routes.search_url }}">
+            {% render 'icon-search' %}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if shop.customer_accounts_enabled %}
+        <li class="header-icons-item">
+          {% if customer %}
+            <a class="header-icons-anchor" href="{{ routes.account_url }}">
+              {% render 'icon-user' %}
+            </a>
+          {% else %}
+            <a class="header-icons-anchor" href="{{ routes.account_login_url }}">
+              {% render 'icon-user' %}
+            </a>
+          {% endif %}
+        </li>
+      {% endif %}
+
+      {% if section.settings.cart %}
+        <li class="header-icons-item">
+          <a class="header-icons-anchor header-icons-anchor--cart" href="{{ routes.cart_url }}">
+            {% if section.settings.cart_icon != blank %}
+              <img src="{{ section.settings.cart_icon | img_url: 'master' }}" class="cart-icon">
+            {% else %}
+              {% render 'icon-cart' %}
+            {%- endif -%}
+            <span class="header-icons-anchor-cart-count {% if cart.item_count == 0 %}header-icons-anchor-cart-count--hide{% endif %}">
+              {{- cart.item_count -}}
+            </span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "header",
+  "class": "header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Font"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Family",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "oswald ",
+          "label": "Oswald"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo size",
+      "min": 30,
+      "max": 300,
+      "step": 5,
+      "default": 100,
+      "unit": "px"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "menu_icon",
+      "label": "menu_icon"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "cart_icon",
+      "label": "cart_icon"
+    },
+
+    {
+      "type": "link_list",
+      "id": "nav",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart",
+      "label": "Show cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "search",
+      "label": "Show search",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.header-nav-mobile-close-out > a').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector('body').classList.remove('nav-active');
+      document.querySelector('body').style = '';
+    });
+  });
+</script>

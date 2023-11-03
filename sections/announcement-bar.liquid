@@ -1,0 +1,79 @@
+{% if section.settings.enable_bar %}
+  <a class="announcement-bar announcement-bar--{{ section.id }}" href="{% if section.settings.url != blank %}{{ section.settings.url }}{% else %}#{% endif %}">
+    <div class="width">
+      <span>{{ section.settings.text }}</span>
+    </div>
+  </a>
+{% endif %}
+
+<style>
+  .announcement-bar--{{ section.id }} {
+    {% if section.settings.color == "inverse" %}
+      background-color: var(--inverse_button_color);
+      color: var(--inverse_button_text_color);
+    {% else %}
+      background-color: var(--button_color);
+      color: var(--button_text_color);
+    {% endif %}
+  }
+  
+  .announcement-bar--{{ section.id }} > div > span {
+    display: block;
+    text-align: center;
+    font-family: var(--body_font);
+    font-weight: var(--body_bold_font_weight);
+    font-size: var(--body_font_size);
+    padding: 0 20px;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    line-height: 2;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "label": "Enable Announcement bar",
+      "id": "enable_bar",
+      "default": true
+    },
+    {
+      "type": "select",
+      "label": "Color Scheme",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Sample Text Will goes here</p>"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL",
+      "info": "If you want to link your banner."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}

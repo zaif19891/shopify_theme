@@ -1,0 +1,334 @@
+<style>
+  .section-template--{{ section.id }}.main-grid-wrapper > div {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.images_on_mobile }}, 1fr);
+    column-gap: 16px;
+    row-gap: 24px;
+    padding: 24px 0;
+  }
+
+  @media (min-width: 640px) {
+    .section-template--{{ section.id }}.main-grid-wrapper > div {
+      grid-template-columns: repeat({{ section.settings.images_on_tablet }}, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .section-template--{{ section.id }}.main-grid-wrapper > div {
+      grid-template-columns: repeat({{ section.settings.images_on_desktop }}, 1fr);
+    }
+  }
+
+  .main-grid-item > div:first-child {
+    border-radius: var(--image_radius);
+    overflow: hidden;
+  }
+
+  .section-template--{{ section.id }} .main-grid-item > a > img {
+    {% if section.settings.limit_image_size == true %}
+      max-width: 100px;
+      margin: auto;
+    {% endif %}
+  }
+
+  .section-template--{{ section.id }} .main-grid-item > div > h3 {
+    margin: 8px 0;
+    text-align: {{ section.settings.text_align }};
+  }
+
+  .section-template--{{ section.id }} .main-grid-item > div > p {
+    text-align: {{ section.settings.text_align }};
+  }
+
+  {% if section.settings.color == "inverse" %}
+    .section-template--{{ section.id }}.main-grid-wrapper {
+      background-color: var(--inverse_background_color);
+      color: var(--inverse_text_color);
+    }
+  {% elsif section.settings.color == "alt" %}
+    .section-template--{{ section.id }}.main-grid-wrapper {
+      background-color: var(--background_2_color);
+      color: var(--text_color);
+    }
+  {% else %}
+    .section-template--{{ section.id }}.main-grid-wrapper {
+      background-color: var(--background_color);
+      color: var(--text_color);
+    }
+  {% endif %}
+</style>
+  
+  <div class="section-template--{{ section.id }} main-grid-wrapper">
+    <div class="width">
+      {% for block in section.blocks %}
+        <div class="main-grid-item">
+          <a href="{{ block.settings.url }}">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url }}" />
+            {% else %}
+              <img src="{{ 'img_sample_product2.png' | asset_url }}" />
+            {% endif %}
+          </a>
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Grid",
+      "class": "main-grid",
+      "settings": [
+        {
+          "type": "select",
+          "label": "Color Scheme",
+          "id": "color",
+          "default": "normal",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "alt",
+              "label": "Normal w/ background 2"
+            },
+            {
+              "value": "inverse",
+              "label": "Alternate"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            },
+            {
+              "label": "9",
+              "value": "9"
+            },
+            {
+              "label": "10",
+              "value": "10"
+            }
+          ],
+          "id": "images_on_mobile",
+          "label": "Images per row in mobile view",
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            },
+            {
+              "label": "9",
+              "value": "9"
+            },
+            {
+              "label": "10",
+              "value": "10"
+            }
+          ],
+          "id": "images_on_tablet",
+          "label": "Images per row in tablet view",
+          "default": "4"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "6",
+              "value": "6"
+            },
+            {
+              "label": "7",
+              "value": "7"
+            },
+            {
+              "label": "8",
+              "value": "8"
+            },
+            {
+              "label": "9",
+              "value": "9"
+            },
+            {
+              "label": "10",
+              "value": "10"
+            }
+          ],
+          "id": "images_on_desktop",
+          "label": "Images per row in desktop view",
+          "default": "4"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "id": "text_align",
+          "label": "Text Alignment",
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "limit_image_size",
+          "default": false,
+          "label": "Limit Image Size",
+          "info": "This option is only for icon images"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "grid_item",
+          "name": "Grid Item",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Heading",
+              "default": "Heading will goes here"
+            },
+            {
+              "type": "richtext",
+              "id": "body",
+              "label": "Body Text",
+              "default": "<p>Body Text will goes here</p>"
+            },
+            {
+              "type": "url",
+              "id":"url",
+              "label":"URL"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Grid",
+          "blocks": [
+            {
+              "type": "grid_item"
+            },
+            {
+              "type": "grid_item"
+            },
+            {
+              "type": "grid_item"
+            },
+            {
+              "type": "grid_item"
+            }
+          ]
+        }
+      ]
+    }
+  {% endschema %}
+  
+  {% stylesheet %}
+  {% endstylesheet %}
+  
+  {% javascript %}
+  {% endjavascript %}

@@ -1,0 +1,136 @@
+<style>
+  .featured-collection-grid {
+    column-gap: {{ section.settings.horizontal_spacing | append: "px" }} !important;
+    row-gap: {{ section.settings.vertical_spacing | append: "px" }} !important;
+  }
+
+  .featured-collection-grid .product-grid-item--standard img {
+    border-radius: var(--image_radius);
+  }
+</style>
+
+<div class="featured-collection featured-collection--{{ section.id }} featured-collection--{{ section.settings.color }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% elsif section.settings.spacing == 'none' %}section-spacing--none{% else %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="featured-collection-grid">
+      {% for product in section.settings.collection.products %}
+        {% unless forloop.index > section.settings.count %}
+          {% render 'product-grid-item', product: product, show_review: true, from_robust: false, show_button: false %}
+        {% endunless %}
+      {% else %}
+        {% for i in (1..4) %}
+          {% render 'product-grid-item', show_review: true, from_robust: false, show_button: false %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "label": "Horizontal Spacing",
+      "id": "horizontal_spacing",
+      "unit": "px",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "label": "Vertical Spacing",
+      "id": "vertical_spacing",
+      "unit": "px",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "label": "Background color",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "count",
+      "label": "Product count",
+      "default": 4,
+      "min": 1,
+      "max": 8,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_hover",
+      "label": "Product Hover",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  var is_product_hover = {{ section.settings.product_hover }};
+  document.addEventListener("DOMContentLoaded", function() {
+    if(is_product_hover) {
+      $(".product-grid-item").mouseenter(function() {
+        $(this).find("img:first-child").css("display", "none");
+        $(this).find("img:nth-child(2)").css("display", "block");
+      });
+      
+      $(".product-grid-item").mouseleave(function() {
+        $(this).find("img:first-child").css("display", "block");
+        $(this).find("img:nth-child(2)").css("display", "none");
+      }) 
+    }
+  });
+</script>

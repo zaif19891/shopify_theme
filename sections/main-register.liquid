@@ -1,0 +1,47 @@
+<div class="register-main register-main--{{ section.id }} auth-page">
+  <div class="width">
+    <div class="auth-page-content">
+      {% form 'create_customer', class: 'form-layout', return_to: routes.account_login_url %}
+        <h1>{{ 'Accounts.create' | t }}</h1>
+
+        {% if form.errors != blank %}
+          <div class="form-layout-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="field">
+          <label for="first-name">{{ 'Accounts.first' | t }}</label>
+          <input type="text" name="customer[first_name]">
+        </div>
+        <div class="field">
+          <label for="last-name">{{ 'Accounts.last' | t }}</label>
+          <input type="text" name="customer[last_name]">
+        </div>
+        <div class="field">
+          <label for="email">{{ 'Accounts.email' | t }}</label>
+          <input type="email" name="customer[email]">
+        </div>
+        <div class="field">
+          <label for="password">{{ 'Accounts.password' | t }}</label>
+          <input type="password" name="customer[password]">
+        </div>
+        <div class="field">
+          <input
+            class="button button--full"
+            type="submit"
+            value="{{ 'Accounts.create_short' | t }}">
+        </div>
+      {% endform %}
+
+      <ul class="auth-page-links">
+        <li>
+          <a href="{{ routes.account_login_url }}">{{ 'Accounts.already' | t }}</a>
+        </li>
+        <li>
+          <a href="{{ routes.account_register_url }}">{{ 'Accounts.create' | t }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="article-grid-column">
+  <div class="article-grid-column-inner">
+    {% assign total_articles = blogs["educate"].articles.size | minus: 4 %}
+    {% paginate blogs["educate"].articles by 12 %}
+      {% for blogId in blogs["educate"].articles %}
+        {% if forloop.index0 < total_articles and blogs["educate"].articles[forloop.index0] != blank  %}
+          <div>
+            <div>
+              <img src="{{ blogs["educate"].articles[forloop.index0].image | image_url }}" />
+            </div>
+            <div>
+              <div>
+                <a href="{{ blogs["educate"].articles[forloop.index0].handle }}">{{ blogs["educate"].articles[forloop.index0].title }}</a>
+                <p>{{ blogs["educate"].articles[forloop.index0].content }}</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <script>console.log({{ paginate | json }})</script>
+      {%- if paginate.pages > 1 -%}
+        <nav role="navigation">
+          <ol class="pagination">
+            {%- if paginate.previous-%}
+              <li>
+                <a href="{{ paginate.previous.url }}">
+                  <span aria-hidden="true">&laquo;</span>
+                  Previous <span class="visuallyhidden">page</span>
+                </a>
+              </li>
+            {%- else -%}
+              <li class="disabled">
+                <span aria-hidden="true">&laquo;</span>
+                Previous <span class="visuallyhidden">page</span>
+              </li>
+            {%- endif -%}
+    
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <li>
+                  <a href="{{ part.url }}">
+                    <span class="visuallyhidden">page</span> {{ part.title }}
+                  </a>
+                </li>
+              {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                  <li class="active" aria-current="page">
+                    <span class="visuallyhidden">page</span> {{ part.title }}
+                  </li>
+                {%- else -%}
+                  <li>
+                    <span class="visuallyhidden">page</span> {{ part.title }}
+                  </li>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+    
+            {%- if paginate.next -%}
+              <li>
+                <a href="{{ paginate.next.url }}">
+                  Next <span class="visuallyhidden">page</span>
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            {%- else -%}
+              <li class="disabled">
+                Next <span class="visuallyhidden">page</span>
+                <span aria-hidden="true">&raquo;</span>
+              </li>
+            {%- endif -%}
+          </ol>
+        </nav>
+      {%- endif -%}
+    {% endpaginate %}
+  </div>
+</div>

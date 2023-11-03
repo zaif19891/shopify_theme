@@ -1,0 +1,562 @@
+{% assign buttons_block = section.blocks | where: 'type', 'buttons' %}
+
+{% if section.settings.desktop_text_position == 'right' %}
+  {% assign cls1 = 'hero-classic--desktop-text-right' %}
+{% endif %}
+
+{% if section.settings.mobile_text_position == 'top' %}
+  {% assign cls2 = 'hero-classic--mobile-text-top' %}
+{% endif %}
+
+<div class="review-slider hero-classic--{{ section.id }} {{ cls1 }} {{ cls2 }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% elsif section.settings.spacing == 'none' %}section-spacing--none{% else %}section-spacing--bottom{% endif %}">
+  <div class="hero-classic">
+    <div class="hero-classic-slider-items">
+      {% if section.settings.mobile == blank %}
+        <img class="hero-classic-mobile" src="{{ 'img_hero_mobile.png' | asset_url }}">
+      {% else %}
+        <img class="hero-classic-mobile" src="{{ section.settings.mobile | img_url: 'master' }}">
+      {% endif %}
+
+      {% if section.settings.desktop == blank %}
+        <img class="hero-classic-desktop" src="{{ 'img_hero_desktop.png' | asset_url }}">
+      {% else %}
+        <img class="hero-classic-desktop" src="{{ section.settings.desktop | img_url: 'master' }}">
+      {% endif %}
+      <div class="hero-classic-text">
+        <div class="width">
+          <div class="hero-classic-text-inner">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'star-bar' %}
+                  <div class="star-bar">
+                    <div class="stars">
+                      <span style="width: {{ block.settings.star_size | append: 'px' }}; height: {{ block.settings.star_size | append: 'px' }};"> {% render 'icon-a-star' %} </span>
+                      <span style="width: {{ block.settings.star_size | append: 'px' }}; height: {{ block.settings.star_size | append: 'px' }};"> {% render 'icon-a-star' %} </span>
+                      <span style="width: {{ block.settings.star_size | append: 'px' }}; height: {{ block.settings.star_size | append: 'px' }};"> {% render 'icon-a-star' %} </span>
+                      <span style="width: {{ block.settings.star_size | append: 'px' }}; height: {{ block.settings.star_size | append: 'px' }};"> {% render 'icon-a-star' %} </span>
+                      <span style="width: {{ block.settings.star_size | append: 'px' }}; height: {{ block.settings.star_size | append: 'px' }};"> {% render 'icon-a-star' %} </span>
+                    </div>
+                    <span class="star-split">|</span>
+                    <div class="star-title">
+                      <p>
+                        {{ block.settings.five_star_title }}
+                      </p>
+                    </div>
+                  </div>
+                {% when 'heading-text' %}
+                  <h1>
+                    {{ block.settings.heading }}
+                  </h1>
+                {% when 'body-text' %}
+                  {% if block.settings.body != blank %}
+                    <p class="hero-classic-body">
+                      {{ block.settings.body }}
+                    </p>
+                  {% endif %}
+                {% when 'buttons' %}
+                  {% if block.settings.button_text != blank or block.settings.secondary_btn_text != blank %}
+                    <div class="hero-classic-buttons">
+                      {% if block.settings.button_text != blank %}
+                        <a href="{{ block.settings.button_url }}" class="button">
+                          <span>
+                            {{ block.settings.button_text }}
+                          </span>
+                          {% render 'icon-chevron-right' %}
+                        </a>
+                      {% endif %}
+                      {% if block.settings.secondary_btn_text != blank or block.settings.secondary_btn_icon != blank %}
+                        <a class="button hero-classic-secondary-button">
+                          <span>
+                            {{ block.settings.secondary_btn_text }}
+                          </span>
+                          {% if block.settings.secondary_btn_icon != blank %}
+                            <img src="{{ block.settings.secondary_btn_icon | image_url }}">
+                          {% endif %}
+                        </a>
+                        {% for source in block.settings.video_link.sources %}
+                          {% if source.mime_type == 'video/mp4' %}
+                            <input type="hidden" value="{{ source.url }}">
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-classic-video-modal">
+      <div class="width">
+        <div class="hero-classic-video-modal-inner">
+          <button class="hero-classic-video-modal-close">{% render 'icon-close' %}</button>
+          <video playsinline preload="none" controls>
+            <source src="" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% assign selected_font = section.settings.star_text_font %}
+
+<link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+
+<style>
+  :root {
+    --star-text-font: {{ selected_font | escape }};
+  }
+  
+  .hero-classic--{{ section.id }} {
+     padding-top: {{section.settings.padding_top}}px;
+     padding-bottom: {{section.settins.padding_bottom}}px;
+     margin-top: {{section.settings.margin_top}}px;
+     margin-bottom: {{section.settings.margin_bottom}}px;
+   }
+  
+   @media (max-width: 768px) {
+    .hero-classic--{{ section.id }} {
+       padding-top: calc({{section.settings.padding_top}}px * 0.5);
+       padding-bottom: calc({{section.settings.padding_bottom}}px * 0.5);
+       margin-top: calc({{section.settings.margin_top}}px * 0.5);
+       margin-bottom: calc({{section.settings.margin_bottom}}px * 0.5);
+    }
+   }
+  
+   {% if section.settings.make_card == true %}
+     .hero-classic {
+       padding: 0 15px;
+     }
+
+     @media (min-width: 599px) {
+       .hero-classic {
+         padding: 20px;
+       }
+     }
+
+     .hero-classic-slider-items {
+       border-radius: 20px;
+       overflow: hidden;
+     }
+   {% else %}
+     .hero-classic {
+       padding: 0;
+     }
+
+     @media (min-width: 599px) {
+       .hero-classic {
+         padding: 0;
+       }
+     }
+   {% endif %}
+
+   .hero-classic-text-inner > .hero-classic-buttons > a {
+     height: 42px;
+     gap: 0px;
+     border-radius: var(--button_radius);
+   }
+
+   .hero-classic-text-inner > .hero-classic-buttons > .button:first-child {
+     min-width: 200px !important;
+     {% if buttons_block[0].settings.secondary_btn_text == blank and buttons_block[0].settings.secondary_btn_icon != blank %}
+       padding: 0px {{ buttons_block[0].settings.button_padding | append: 'px' }} !important;
+     {% endif %}
+     {% if buttons_block[0].settings.uppercase_button == true %}
+       text-transform: uppercase;
+     {% else %}
+       text-transform: lowcase;
+     {% endif %}
+   }
+
+   .hero-classic-text-inner > .hero-classic-buttons > .button:nth-child(2) {
+     {% if buttons_block[0].settings.secondary_btn_text == blank and buttons_block[0].settings.secondary_btn_icon != blank %}
+       width: 42px;
+       padding: 0px !important;
+       gap: 0px;
+     {% else buttons_block[0].settings.secondary_btn_text != blank and buttons_block[0].settings.secondary_btn_icon != blank %}
+       gap: 6px;
+     {% endif %}
+   }
+
+   .hero-classic-text-inner > .hero-classic-buttons > .button > span {
+     font-size: var(--body_bold_font_size);
+     font-weight: bold;
+   }
+
+   .hero-classic-buttons {
+     {% if buttons_block[0].settings.secondary_btn_text == blank and buttons_block[0].settings.secondary_btn_icon != blank %}
+       grid-template-columns: repeat(2, minmax(max-content, min-content));
+     {% else buttons_block[0].settings.secondary_btn_text != blank and buttons_block[0].settings.secondary_btn_icon != blank %}
+       grid-template-columns: repeat(2, 1fr);
+     {% endif %}
+     column-gap: 5px;
+   }
+
+   @media (max-width: 575px) {
+     .hero-classic-buttons {
+       grid-template-columns: {% if buttons_block[0].settings.align_on_same_line == true %}repeat(2, minmax(max-content, min-content));{% else %}repeat(1, 1fr);{% endif %}
+       column-gap: 8px;
+     }
+   }
+
+  .star-bar {
+    padding: 4px 12px;
+  }
+
+  {% if section.settings.section_color == 'inverse' %}
+    .hero-classic-text-inner > .hero-classic-buttons > a {
+      border-color: var(--inverse_border_color);
+    }
+  
+    .star-bar, .hero-classic-text-inner > .hero-classic-buttons > a {
+      background-color: var(--inverse_button_color); 
+    }
+
+    .star-split, .hero-classic-text-inner > .hero-classic-buttons > a > span, .hero-classic-text-inner > .hero-classic-buttons > a > svg {
+      color: var(--inverse_button_text_color);
+    }
+
+    .star-title {
+      color: var(--inverse_button_text_color);
+    }
+
+    .hero-classic-text-inner h1, .hero-classic-body {
+      color: var(--inverse_text_color);
+    }
+  {% else %}
+    .hero-classic-text-inner > .hero-classic-buttons > a {
+      border-color: var(--border_color);
+    }
+  
+    .star-bar, .hero-classic-text-inner > .hero-classic-buttons > a {
+      background-color: var(--button_color);
+    }
+
+    .star-split, .hero-classic-text-inner > .hero-classic-buttons > a > span, .hero-classic-text-inner > .hero-classic-buttons > a > svg {
+      color: var(--button_text_color);
+    }
+
+    .star-title {
+      color: var(--button_text_color);
+    }
+
+    .hero-classic-text-inner h1, .hero-classic-body {
+      color: var(--text_color);
+    }
+  {% endif %}
+
+  .star-split {
+     font-size: var(--body_font_size);
+     font-weight: var(--body_font_weight);
+     padding: 0 3px;
+  }
+
+   .star-title {
+     font-family: var(--body_font) !important;
+     font-size: var(--body_font_size);
+     font-weight: var(--body_font_weight);
+   }
+  
+   @media (min-width: 599px) {
+     .star-split {
+       font-size: var(--body_font_size_desktop);
+       padding: 0 5px 0 5px;
+     }
+
+     .star-title {
+       font-size: var(--body_font_size_desktop);
+     }
+   }
+
+   .hero-classic-secondary-button > img {
+     width: 20px;
+   }
+
+   @media (max-width: 960px) {
+     .hero-classic-buttons {
+       justify-content: center;
+     }
+   }
+
+   .hero-classic-text-inner h1 {
+     font-size: var(--headings_font_size);
+     font-family: var(--headings_font);
+     font-weight: var(--headings_font_weight);
+   }
+
+   .hero-classic-body {
+     font-size: var(--body_font_size);
+     font-family: var(--body_font);
+     font-weight: var(--body_font_weight);
+   }
+
+   @media (min-width: 599px) {
+     .hero-classic-text-inner h1 {
+       font-size: var(--headings_font_size_desktop);
+     }
+     .hero-classic-body {
+       font-size: var(--body_font_size_desktop);
+     }
+   }
+</style>
+
+{% schema %}
+{
+  "name": "Hero classic",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_color",
+      "label": "Color Scheme",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "label": "Desktop background",
+      "id": "desktop",
+      "type": "image_picker"
+    },
+    {
+      "label": "Mobile background",
+      "id": "mobile",
+      "type": "image_picker"
+    },
+    {
+      "type": "checkbox",
+      "label": "Make card",
+      "default": true,
+      "id": "make_card",
+      "info": "Set padding to entire section"
+    },
+    {
+      "label": "Desktop text position",
+      "id": "desktop_text_position",
+      "type": "select",
+      "default": "left",
+      "options": [
+        {
+          "label": "Right",
+          "value": "right"
+        },
+        {
+          "label": "Left",
+          "value": "left"
+        }
+      ]
+    },
+    {
+      "label": "Mobile text position",
+      "id": "mobile_text_position",
+      "type": "select",
+      "default": "top",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 400,
+      "id": "text_width",
+      "label": "Text width"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Star bar",
+      "type": "star-bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "five_star_title",
+          "default": "Texts will go here",
+          "label": "Star title"
+        },
+        {
+          "type": "range",
+          "min": 0,
+          "max": 30,
+          "unit": "px",
+          "default": 16,
+          "label": "Star Size",
+          "id": "star_size"
+        }
+      ]
+    },
+    {
+      "name": "Heading Text",
+      "type": "heading-text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "The No-Code Shopify Theme.",
+          "label": "Headline"
+        }
+      ]
+    },
+    {
+      "name": "Body Text",
+      "type": "body-text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "body",
+          "default": "It boosts conversions. Looks great on mobile, and empowers you to FINALLY build a site that represents your brand.",
+          "label": "Body text"
+        }
+      ]
+    },
+    {
+      "name": "Buttons",
+      "type": "buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "default": "Buy It Now for Just $997",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url"
+        },
+        {
+          "type": "text",
+          "id": "secondary_btn_text",
+          "label": "Secondary Button",
+          "default": "Secondary Button"
+        },
+        {
+          "type": "image_picker",
+          "id": "secondary_btn_icon",
+          "label": "Secondary Button Icon"
+        },
+        {
+          "type": "video",
+          "id": "video_link",
+          "label": "Video"
+        },
+        {
+          "type": "range",
+          "min": 0,
+          "max": 20,
+          "unit": "px",
+          "default": 10,
+          "label": "Set Button Curve",
+          "id": "button_border_radius"
+        },
+        {
+          "type": "checkbox",
+          "label": "Align Buttons to be on same line",
+          "id": "align_on_same_line",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "label": "Button text to uppercase",
+          "id": "uppercase_button",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "button_padding",
+          "label": "Button padding",
+          "default": 20,
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero classic",
+      "blocks": [
+        {
+          "type": "star-bar"
+        },
+        {
+          "type": "heading-text"
+        },
+        {
+          "type": "body-text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    $('.hero-classic-secondary-button').click(function () {
+      $('.hero-classic-video-modal').addClass('hero-classic-video-modal--active');
+      console.log($(this).next().val());
+      const video = $('.hero-classic-video-modal video');
+      $('.hero-classic-video-modal video source').attr('src', $(this).next().val());
+      video.get(0).load();
+      video.get(0).play();
+    });
+
+    $('.hero-classic-video-modal-close').click(function () {
+      const video = $('.hero-classic-video-modal video');
+      video.get(0).pause();
+      $('.hero-classic-video-modal').removeClass('hero-classic-video-modal--active');
+    });
+  });
+</script>

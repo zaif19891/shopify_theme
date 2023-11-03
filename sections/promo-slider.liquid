@@ -1,0 +1,130 @@
+<style>
+  .section-promo-slider--{{ section.id }} {
+    background-color: {{ section.settings.promo_slider_bg }};
+    overflow: visible;
+  }
+
+  {% case section.settings.visibility %}
+      {% when 'visible' %}
+        .section-promo-slider--{{ section.id }} {
+          display: block;
+        }
+      {% when 'mobile' %}
+        .section-promo-slider--{{ section.id }} {
+          display: none;
+        }
+
+        @media (max-width: 575px) {
+          .section-promo-slider--{{ section.id }} {
+            display: block;
+          }
+        }
+      {% when 'desktop' %}
+        .section-promo-slider--{{ section.id }} {
+          display: block;
+        }
+    
+        @media (max-width: 575px) {
+          .section-promo-slider--{{ section.id }} {
+            display: none;
+          }
+        }
+    {% endcase %}
+  
+  .promo-slider-items {
+    background-color: {{ section.settings.promo_slider_bg }};
+    display: block;
+    padding: 4px 0;
+    width: 100%;
+  }
+  
+  .promo-slider-items span {
+    color: {{ section.settings.promo_slider_txt_color }};
+    display: inline-block;
+    text-align: center;
+    font-family: var(--body_font);
+    font-weight: var(--body_font_weight);
+    font-size: 14px;
+    width: 100%;
+  }
+</style>
+
+<div class="section-promo-slider--{{ section.id }}">
+<!--   <marquee scrollamount="8"> -->
+    <div class="promo-slider-items">
+      <a class="promo-slider-item" href="{% if section.settings.promo_slider_link != blank %}{{ section.settings.promo_slider_link }}{% endif %}">
+        <div>
+          {% if block.settings.promo_slider_image == blank %}
+            <img src="{{ "icon_supima_black.png" | asset_url }}" />
+          {% else %}
+            <img src="{{ block.settings.promo_slider_image | image_url }}" />
+          {% endif %}
+        </div>
+        <span>
+          {{ section.settings.promo_slider_text }}
+        </span>
+      </a>
+    </div>
+<!--   </marquee> -->
+</div>
+
+{% schema %}
+  {
+    "name": "Promo Slider",
+    "settings": [
+      {
+        "type": "select",
+        "id": "visibility",
+        "label": "Visibility",
+        "options": [
+          {
+            "label": "Always Visible",
+            "value": "visible"
+          },
+          {
+            "label": "Visible on mobile",
+            "value": "mobile"
+          },
+          {
+            "label": "Visible on desktop",
+            "value": "desktop"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "promo_slider_bg",
+        "label": "Promo Slider Background",
+        "default": "#f7d054"
+      },
+      {
+        "type": "color",
+        "id": "promo_slider_txt_color",
+        "label": "Text Color",
+        "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "promo_slider_text",
+        "label": "Text",
+        "default": "Sample Slider Text"
+      },
+      {
+        "type": "url",
+        "id": "promo_slider_link",
+        "label": "Link To"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo Slider"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

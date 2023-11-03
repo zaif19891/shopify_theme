@@ -1,0 +1,270 @@
+<style>
+  .main-custom-article-inner {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+  }
+
+  .main-custom-article-main {
+    max-width: 1024px;
+    width: 100%;
+  }
+
+  .main-custom-article-main > div:first-child {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgb(229 231 235);
+  }
+
+  .main-custom-article-main > div > h1 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .main-custom-article-main > div > h1 {
+      margin-top: 2.5rem;
+    }
+  }
+
+  .main-custom-article-side {
+    max-width: 340px;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .main-custom-article-inner {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .main-custom-article-side > .main-custom-article-side-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .main-custom-article-side > .main-custom-article-side-item > div {
+    width: 100%;
+  }
+
+  .main-custom-article-side > .main-custom-article-side-item > div > a {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .main-custom-article-side-recent__article {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .main-custom-article-side-recent__article > div:first-child {
+    margin-right: 1rem;
+  }
+
+  .main-custom-article-side-recent__article > div > img {
+    border-radius: 8px;
+    max-width: 70px;
+  }
+
+  .main-custom-article-side-recent__article > div > h3 > a {
+    text-decoration: none;
+    color: black;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Article",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Color Scheme",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_block",
+      "name": "Collection Block",
+      "settings": [
+        {
+          "type": "collection",
+          "label": "Select Collection",
+          "id": "sidebar_collection"
+        }
+      ],
+      "limit": 1
+    },
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Select Image",
+          "id": "sidebar_image"
+        },
+        {
+          "type": "text",
+          "label": "Button",
+          "default": "Call To Action",
+          "id": "title"
+        },
+        {
+          "type": "url",
+          "label": "Link To",
+          "default": "/collections/all",
+          "id": "image_block_link"
+        }
+      ],
+      "limit": 1
+    },
+    {
+      "type": "recent_article_block",
+      "name": "Recent Articles",
+      "settings": [
+        {
+          "type": "range",
+          "min": 1,
+          "max": 10,
+          "default": 4,
+          "label": "Number of articles",
+          "id": "articles"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Article",
+      "blocks": [
+        {
+          "type": "collection_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+<div class="section-template--{{ section.id }} main-custom-article {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="main-custom-article-inner">
+      <div class="main-custom-article-main">
+        <div>
+          <div>
+            {% if block.settings.image %}
+              <img src="{{ article.image | image_url }}">
+            {% else %}
+              <img src="{{ 'img_sample_image_or_text.png' | asset_url }}">
+            {% endif %}
+          </div>
+          <h1>
+            {{ article.title }}
+          </h1>
+          <p>
+            {{ article.published_at | date: '%B %d, %Y' }}
+          </p>
+        </div>
+        <div>
+          <p>
+            {{ article.content }}
+          </p>
+        </div>
+      </div>
+      <div class="main-custom-article-side">
+        {% for block in section.blocks %}
+          <div class="main-custom-article-side-item">
+            {% case block.type %}
+              {% when 'collection_block' %}
+                <div>
+                  <img src="{{ block.settings.sidebar_collection.featured_image | image_url }}">
+                </div>
+                <div>
+                  <a href="{{ block.settings.sidebar_collection.url }}">Shop Now</a>
+                </div>
+              {% when 'image_block' %}
+                <div>
+                  <img src="{{ block.settings.sidebar_image | image_url }}">
+                </div>
+                <div>
+                  <a href="{{ block.settings.image_block_link }}">{{ block.settings.title }}</a>
+                </div>
+              {% when 'recent_article_block' %}
+                <div>
+                  <h2>Recent Articles</h2>
+                  {% assign current_handles = article.handle | split: '/' %}
+                  {% assign selected_articles = blogs[current_handles[0]].articles | sort: 'published_at' %}
+                  {% for recent_article in selected_articles %}
+                    {% if forloop.index0 < block.settings.articles %}
+                      <div class="main-custom-article-side-recent__article">
+                        <div>
+                          <img src="{{ recent_article.image | image_url }}">
+                        </div>
+                        <div>
+                          <h3>
+                            <a href="{{ recent_article.url }}">{{ recent_article.title }}</a>
+                          </h3>
+                          <p>{{ recent_article.published_at | date: '%B %d, %Y' }}</p>
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+            {% endcase %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% javascript %}
+{% endjavascript %}

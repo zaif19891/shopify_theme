@@ -1,0 +1,341 @@
+{
+  "sections": {
+    "68e4f0fd-1c07-4716-83f6-dd946538d9ac": {
+      "type": "ig-slider",
+      "blocks": {
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-video_item-1": {
+          "type": "video_item",
+          "settings": {
+            "title": "Testimonial"
+          }
+        },
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-1": {
+          "type": "product_item",
+          "settings": {
+            "title": "Product Title",
+            "url": ""
+          }
+        },
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-video_item-2": {
+          "type": "video_item",
+          "settings": {
+            "title": "Testimonial"
+          }
+        },
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-2": {
+          "type": "product_item",
+          "settings": {
+            "title": "Product Title",
+            "url": ""
+          }
+        },
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-3": {
+          "type": "product_item",
+          "settings": {
+            "title": "Product Title",
+            "url": ""
+          }
+        },
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-4": {
+          "type": "product_item",
+          "settings": {
+            "title": "Product Title",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-video_item-1",
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-1",
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-video_item-2",
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-2",
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-3",
+        "template--20054273950006__68e4f0fd-1c07-4716-83f6-dd946538d9ac-product_item-4"
+      ],
+      "disabled": true,
+      "settings": {
+        "usage": "mobile_only",
+        "border_size": 2
+      }
+    },
+    "c758b147-fcc7-400c-87c6-ddc5be1c073f": {
+      "type": "promo-slider",
+      "settings": {
+        "visibility": "mobile",
+        "promo_slider_bg": "#000000",
+        "promo_slider_txt_color": "#ffffff",
+        "promo_slider_text": "Save Time & Money. No-Code Necessary.",
+        "promo_slider_link": "shopify:\/\/pages\/faq"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "a0b7b2aa-cabc-43d2-8e13-539144298bc9": {
+          "type": "title",
+          "settings": {}
+        },
+        "ab5495c3-1922-4f25-9ef1-8a51ef0267d8": {
+          "type": "price",
+          "settings": {
+            "compared_price": false
+          }
+        },
+        "f2b0f2eb-046f-460e-a5cd-44ddf005a312": {
+          "type": "quantity",
+          "disabled": true,
+          "settings": {}
+        },
+        "99da7050-47eb-4945-b0c5-78af72d0d554": {
+          "type": "description",
+          "settings": {}
+        },
+        "91878ec6-ac2e-42ba-93fe-e09ead7a39a9": {
+          "type": "variants",
+          "settings": {}
+        },
+        "99fe5645-e03b-43ff-8997-8603b259e960": {
+          "type": "buy",
+          "settings": {
+            "dynamic": true,
+            "btn_color_add_btn": "#ffd712",
+            "btn_color_buy_btn": "#000000",
+            "add_btn_txt_color": "#000000",
+            "buy_btn_txt_color": "#ffffff",
+            "font_size": 18,
+            "transform_uppercase": false
+          }
+        },
+        "610ef941-fb1c-4787-8323-9a1c6837baa7": {
+          "type": "collapsable-row",
+          "disabled": true,
+          "settings": {
+            "heading": "Is Optimo really just $99\/month?",
+            "icon_size": 30,
+            "body": "<p>Yes, it's true! I thought about pricing it only at $997 for a 1 time payment, but then I was like...\"Nah, let's give 'em a break!\" So, here you are. Getting the deal of the century.<br\/><\/p>"
+          }
+        },
+        "20d6c736-c2f1-40f6-83f2-1f9845c1a0bb": {
+          "type": "collapsable-row",
+          "disabled": true,
+          "settings": {
+            "heading": "What if I'm not a tech wizard?",
+            "icon_size": 30,
+            "body": "<p>No worries! Optimo is so user-friendly, even your grandma could set it up. And if she's busy, we've got a team of dedicated devs and concise 1-minute tutorials to help you out.<\/p>"
+          }
+        },
+        "c1657218-bbfd-4063-ae91-ed9a341afc6c": {
+          "type": "collapsable-row",
+          "disabled": true,
+          "settings": {
+            "heading": "Will my Mobile site look good?",
+            "icon_size": 30,
+            "body": "<p>Will a bear do its business in the woods? Absolutely! Optimo is all about that \"mobile-first\" life. Your site will look so good on mobile, your customers won't be able to resist.<\/p>"
+          }
+        },
+        "8d0d01dc-8e00-4583-b405-cafb6dd7d72c": {
+          "type": "three",
+          "disabled": true,
+          "settings": {
+            "image1_width": 50,
+            "text1": "Mobile First Ui\/Ux Design",
+            "image2_width": 50,
+            "text2": "Design Updates Each Month",
+            "image3_width": 50,
+            "text3": "Built-in CRO Best Practices"
+          }
+        },
+        "6508f4dc-b85e-4acb-a286-acc209baefcf": {
+          "type": "trust",
+          "settings": {}
+        },
+        "4c29635a-43a7-4336-ac20-ccdd1989bddc": {
+          "type": "review",
+          "settings": {
+            "bg_color": "#f9f9f9",
+            "txt_color": "#000000",
+            "star_color": "#ffd712",
+            "border_color": "#000000",
+            "enable_border": false,
+            "review": "The customer service team was  incredibly helpful and responsive when I had a question about my order.",
+            "reviewer": "Luke Hawkins",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "a0b7b2aa-cabc-43d2-8e13-539144298bc9",
+        "ab5495c3-1922-4f25-9ef1-8a51ef0267d8",
+        "f2b0f2eb-046f-460e-a5cd-44ddf005a312",
+        "99da7050-47eb-4945-b0c5-78af72d0d554",
+        "91878ec6-ac2e-42ba-93fe-e09ead7a39a9",
+        "99fe5645-e03b-43ff-8997-8603b259e960",
+        "610ef941-fb1c-4787-8323-9a1c6837baa7",
+        "20d6c736-c2f1-40f6-83f2-1f9845c1a0bb",
+        "c1657218-bbfd-4063-ae91-ed9a341afc6c",
+        "8d0d01dc-8e00-4583-b405-cafb6dd7d72c",
+        "6508f4dc-b85e-4acb-a286-acc209baefcf",
+        "4c29635a-43a7-4336-ac20-ccdd1989bddc"
+      ],
+      "settings": {
+        "expandable_description": true,
+        "sale_price_color": "#ff0000",
+        "arrow_color": "#000000",
+        "buy_button_font": "work_sans_n6",
+        "padding_top": 14,
+        "padding_bottom": 20
+      }
+    },
+    "2f57576f-a77d-4919-a887-68c744c81a6e": {
+      "type": "image-icons",
+      "blocks": {
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-1": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "title": "Your text will go here"
+          }
+        },
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-2": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "title": "Your text will go here"
+          }
+        },
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-3": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "title": "Your text will go here"
+          }
+        },
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-4": {
+          "type": "icon",
+          "settings": {
+            "title": "Your text will go here"
+          }
+        },
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-5": {
+          "type": "icon",
+          "settings": {
+            "title": "Your text will go here"
+          }
+        },
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-6": {
+          "type": "icon",
+          "settings": {
+            "title": "Your text will go here"
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-1",
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-2",
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-3",
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-4",
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-5",
+        "template--20054273950006__2f57576f-a77d-4919-a887-68c744c81a6e-icon-6"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "margin_top": 12,
+        "margin_bottom": 12,
+        "icon_size": 40
+      }
+    },
+    "judgeme_section_review_widget_a691": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "judgeme_section_review_widget_8444": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "judgeme_section_review_widget_2ca7": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "07e232ff-e97a-46d3-b1ab-b77d6cb0ee1e": {
+      "type": "intro-text",
+      "disabled": true,
+      "settings": {
+        "color": "normal",
+        "spacing": "both",
+        "small_heading": "Subheading Goes Here",
+        "heading": "Heading Text About A Product Goes Here",
+        "text": "<p>Content about the product below goes here. Product features and benefits and anything else that helps sell it would be good. <\/p>"
+      }
+    },
+    "929bbe77-0ff5-4d8d-bae8-f8d59eae2dc0": {
+      "type": "faqs",
+      "blocks": {
+        "910926a1-d92a-4ffb-8ac3-46d930200502": {
+          "type": "section",
+          "settings": {
+            "heading": "FAQ #1 Goes Here",
+            "body": "<p>Answer Goes Here<\/p>"
+          }
+        },
+        "931cf82d-a673-430c-960e-35ea6c436ba3": {
+          "type": "section",
+          "settings": {
+            "heading": "FAQ #2 Goes Here",
+            "body": "<p>Answer Goes Here<\/p>"
+          }
+        },
+        "2f20ef4a-cd2b-4aa6-8e2a-fa5354b4e977": {
+          "type": "section",
+          "settings": {
+            "heading": "FAQ #3 Goes Here",
+            "body": "<p>Answer Goes Here<\/p>"
+          }
+        },
+        "01ec38bb-5d11-4222-9eef-ed232847b645": {
+          "type": "section",
+          "settings": {
+            "heading": "FAQ #4 Goes Here",
+            "body": "<p>Answer Goes Here<\/p>"
+          }
+        },
+        "b42a39bf-0f25-4c7c-89e8-53c476f15d33": {
+          "type": "section",
+          "settings": {
+            "heading": "FAQ #5 Goes Here",
+            "body": "<p>Answer Goes Here<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "910926a1-d92a-4ffb-8ac3-46d930200502",
+        "931cf82d-a673-430c-960e-35ea6c436ba3",
+        "2f20ef4a-cd2b-4aa6-8e2a-fa5354b4e977",
+        "01ec38bb-5d11-4222-9eef-ed232847b645",
+        "b42a39bf-0f25-4c7c-89e8-53c476f15d33"
+      ],
+      "disabled": true,
+      "settings": {
+        "spacing": "both",
+        "faqs": "FAQ's",
+        "heading_size": "medium",
+        "color": "normal"
+      }
+    }
+  },
+  "order": [
+    "68e4f0fd-1c07-4716-83f6-dd946538d9ac",
+    "c758b147-fcc7-400c-87c6-ddc5be1c073f",
+    "main",
+    "2f57576f-a77d-4919-a887-68c744c81a6e",
+    "judgeme_section_review_widget_a691",
+    "judgeme_section_review_widget_8444",
+    "judgeme_section_review_widget_2ca7",
+    "07e232ff-e97a-46d3-b1ab-b77d6cb0ee1e",
+    "929bbe77-0ff5-4d8d-bae8-f8d59eae2dc0"
+  ]
+}

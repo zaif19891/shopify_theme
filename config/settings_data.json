@@ -1,0 +1,161 @@
+{
+  "current": {
+    "thumbnail_type": "slider",
+    "page_width": 1400,
+    "spacing": 40,
+    "body_font": "dm_sans_n4",
+    "body_bold_font": "abril_fatface_n4",
+    "headings_font": "abril_fatface_n4",
+    "heading_fontsize": 30,
+    "uppercase": false,
+    "product_name_font": "dm_sans_n4",
+    "text_color": "#000000",
+    "background_color": "#ffffff",
+    "background_2_color": "#ffffff",
+    "accent_color": "#ffcc00",
+    "accent_text_color": "#ffcc00",
+    "border_color": "#000000",
+    "button_color": "#ffcc00",
+    "button_text_color": "#000000",
+    "star_color": "#ffcc00",
+    "checkmark_color": "#000000",
+    "inverse_text_color": "#ffffff",
+    "inverse_background_color": "#4d4d4d",
+    "inverse_accent_color": "#000000",
+    "inverse_accent_text_color": "#ffffff",
+    "inverse_border_color": "#ffffff",
+    "inverse_button_color": "#000000",
+    "inverse_button_text_color": "#ffffff",
+    "inverse_star_color": "#dd1d1d",
+    "inverse_checkmark_color": "#ffffff",
+    "button_style": "rounded",
+    "image_radius": 20,
+    "field_radius": 8,
+    "theme_media_type": "round",
+    "cart_drawer": true,
+    "grid_item_style": "standard",
+    "grid_x_spacing": 50,
+    "grid_y_spacing": 50,
+    "favicon": "shopify:\/\/shop_images\/Logo_1.png",
+    "social_twitter_link": "@KingdomArmor_",
+    "checkout_header_image": "shopify:\/\/shop_images\/New_Project_24.png",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Logo_1.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "large",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_color": "#fffae5",
+    "checkout_heading_font": "Source Sans Pro",
+    "checkout_body_font": "Source Sans Pro",
+    "checkout_accent_color": "#ffcc00",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#ffcc00",
+    "background_3_color": "#f6f6f6",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "enable_bar": true,
+          "color": "normal",
+          "text": "<p>GET 10% OFF YOUR FIRST ORDER WHEN YOU SIGN UP FOR OUR NEWSLETTER!<\/p>",
+          "url": "shopify:\/\/pages\/kingdom-chronicles-1"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "font_family": "default",
+          "font_size": "medium",
+          "bg_color": "#ffffff",
+          "text_color": "#000000",
+          "border_color": "#000000",
+          "icon_color": "#000000",
+          "badge_color": "#ffcc00",
+          "badge_text_color": "#000000",
+          "logo": "shopify:\/\/shop_images\/14a91062fd95-Logo_high_resolution.png",
+          "logo_width": 95,
+          "nav": "main-menu",
+          "cart": true,
+          "search": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "12cc5c40-6f49-4bbd-8d3a-96144125fd9e": {
+            "type": "logo-social",
+            "settings": {
+              "logo": "shopify:\/\/shop_images\/14a91062fd95-Logo_high_resolution.png",
+              "logo_width": 200,
+              "twitter": "https:\/\/twitter.com\/KingdomArmor_",
+              "facebook": "https:\/\/www.facebook.com\/kingdomarmorllc",
+              "youtube": "https:\/\/www.youtube.com\/@KingdomArmor.",
+              "instagram": "https:\/\/www.instagram.com\/kingdomarmorapparel\/"
+            }
+          },
+          "ce011e70-be89-4d49-8fa9-ab2fe3d81501": {
+            "type": "menu",
+            "disabled": true,
+            "settings": {
+              "nav": "footer"
+            }
+          },
+          "63c7fda6-7e08-4325-aa5e-8a3bbc8feeeb": {
+            "type": "menu",
+            "disabled": true,
+            "settings": {
+              "nav": "footer"
+            }
+          },
+          "b315cf8c-b773-4fdd-8d84-331ea638243a": {
+            "type": "menu",
+            "settings": {
+              "nav": "footer"
+            }
+          }
+        },
+        "block_order": [
+          "12cc5c40-6f49-4bbd-8d3a-96144125fd9e",
+          "ce011e70-be89-4d49-8fa9-ab2fe3d81501",
+          "63c7fda6-7e08-4325-aa5e-8a3bbc8feeeb",
+          "b315cf8c-b773-4fdd-8d84-331ea638243a"
+        ],
+        "custom_css": [
+          ".footer {background-color: black;}"
+        ],
+        "settings": {
+          "color": "inverse",
+          "footer_disclaimer": "",
+          "copyright": "<p>© 2023 Kingdom Armor. All Rights Reserved <\/p><p><\/p>",
+          "footer_border": true
+        }
+      },
+      "robust-cart": {
+        "type": "robust-cart",
+        "settings": {
+          "show_dynamic": true,
+          "show_continue": true,
+          "show_trust": false
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "855628211100114053": {
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "11724500921838622758": {
+        "type": "shopify:\/\/apps\/frequently-bought-together\/blocks\/app-embed-block\/b1a8cbea-c844-4842-9529-7c62dbab1b1f",
+        "disabled": false,
+        "settings": {}
+      },
+      "9094328589753815681": {
+        "type": "shopify:\/\/apps\/hextom-free-shipping-bar\/blocks\/fsb-embeded-block\/7ef5d9af-75a2-45c7-9b1b-f9240ee488e9",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "88c4395f-295f-4a84-906e-c25c800c9599": {
+      "type": "intro-text",
+      "settings": {
+        "color": "normal",
+        "spacing": "both",
+        "small_heading": "KINGDOM ARMOR",
+        "heading": "Expand the Kingdom, Spread the Discounts",
+        "text": "<p>Sign up for 10% off your first order!<\/p>"
+      }
+    },
+    "gp_section_484763444289996030": {
+      "type": "gp-section-484763444289996030",
+      "settings": {}
+    },
+    "gp_section_484763444289995660": {
+      "type": "gp-section-484763444289995660",
+      "settings": {}
+    }
+  },
+  "order": [
+    "88c4395f-295f-4a84-906e-c25c800c9599",
+    "gp_section_484763444289996030",
+    "gp_section_484763444289995660"
+  ]
+}

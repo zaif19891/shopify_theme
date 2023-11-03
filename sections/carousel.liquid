@@ -1,0 +1,620 @@
+<style>
+    {% comment %}
+    // Image carousel
+    {% endcomment %}
+    .main-carousel {
+      padding: 24px 0;
+    }
+  
+    .main-carousel-image-item--background {
+      width: 100%;
+    }
+  
+    .main-carousel-image-item--background > img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+    }
+  
+    .section-template--{{ section.id }} .main-carousel-image-item {
+      position: relative;
+      border-radius: var(--image_radius);
+      overflow: hidden;
+      margin: 0 12px;
+    }
+  
+    @media (min-width: 640px) {
+      .main-carousel-image-item {
+        margin: 0 12px 0 0;
+      }
+    }
+  
+    .main-carousel-image-item--tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  
+    .section-template--{{ section.id }} .main-carousel-image-item--tag > span {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 200px;
+    }
+  
+    .main-carousel-image-item--text {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: calc(100% - 40px);
+    }
+  
+    .section-template--{{ section.id }} .main-carousel-image-item--text > p {
+      margin-bottom: 12px;
+      width: 50%;
+      font-size: 24px;
+    }
+  
+    @media (max-width: 575px) {
+      .section-template--{{ section.id }} .main-carousel-image-item--text > p {
+        font-size: 20px;
+      }
+    }
+  
+    .section-template--{{ section.id }} .main-carousel-image-item--text > a {
+      text-decoration: none;
+      border-radius: 200px;
+      padding: 12px 24px;
+      display: inline-block;
+      box-sizing: content-box;
+      text-align: center;
+    }
+  
+    @media (max-width: 575px) {
+      .section-template--{{ section.id }} .main-carousel-image-item--text > a {
+        display: block;
+      }
+    }
+  
+    {% comment %}
+    // Product carousel
+    {% endcomment %}
+    .section-template--{{ section.id }} .main-carousel-product-item {
+      padding: 24px 12px;
+      border-radius: var(--image_radius);
+      margin: 0 12px;
+      background-color: {{ section.settings.card_background_color }};
+    }
+    
+    .section-template--{{ section.id }} .main-carousel-product-item > div > a {
+      display: block;
+      width: 100%;
+      margin: auto;
+      padding: 8px 12px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: var(--button_radius);
+    }
+    
+    .section-template--{{section.id}} .main-carousel-product-item > div:first-child {
+      border-radius: 300px;
+      overflow: hidden;
+      margin: auto;
+      width: 70%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+    
+    .section-template--{{section.id}} .main-carousel-product-item > div > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) {
+      display: grid;
+      grid-template-rows: auto 1fr 1fr;
+    }
+    
+    .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p {
+      text-align: center;
+    }
+    
+    .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p:first-child {
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    @media only screen and (max-width: 639px) {
+      .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p:first-child {
+        margin-top: 10px;
+      }
+      
+      .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p:nth-child(2) {
+        margin-bottom: 10px;
+      }
+    }
+    
+    @media only screen and (min-width: 640px) {
+      .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p:first-child {
+        margin-top: 16px;
+      }
+      
+      .section-template--{{ section.id }} .main-carousel-product-item > div:nth-child(2) > p:nth-child(2) {
+        margin-bottom: 16px;
+      }
+    }
+  
+    {% comment %}
+    // Review Item
+    {% endcomment %}
+    
+    .main-carousel-review-item {
+      background-color: {{ section.settings.card_background_color }};
+    }
+  
+    .main-carousel-review-item__product {
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  
+  <div class="section-template--{{ section.id }} width">
+    <input type="hidden" value="{{ section.settings.cards_on_mobile }}" />
+    <input type="hidden" value="{{ section.settings.cards_on_tablet }}" />
+    <input type="hidden" value="{{ section.settings.cards_on_desktop }}" />
+    <div class="main-carousel-wrapper">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "image_item" %}
+            <div class="main-carousel-image-item">
+              <div class="main-carousel-image-item--background">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | img_url: 'master' }}">
+                {% else %}
+                  <img src="{{ 'img_sample_product1.png' | asset_url }}">
+                {% endif %}
+              </div>
+              <div class="main-carousel-image-item--tag">
+                <span style="color: {{ block.settings.tag_text_color }}; background-color: {{ block.settings.tag_bg_color | color_modify: 'alpha', 0.3 }}">{{ block.settings.title }}</span>
+              </div>
+              <div class="main-carousel-image-item--text">
+                <p style="color: {{ block.settings.body_text_color }}">
+                  {{ block.settings.body }}
+                </p>
+                <a href="{% if block.settings.btn_link != blank %}{{ block.settings.btn_link }}{% else %}#{% endif %}" style="color: {{ block.settings.btn_text_color }}; background-color: {{ block.settings.btn_bg_color }}">
+                  {{ block.settings.button }}
+                </a>
+              </div>
+            </div>
+          {% when "product_item" %}
+            <div class="main-carousel-product-item">
+              {% if block.settings.product != blank %}
+                <div>
+                  <img src="{{ block.settings.product.featured_image | image_url }}">
+                </div>
+                <div>
+                  <p style="color: {{ block.settings.main_text_color }};">{{ block.settings.product.title }}</p>
+                  <p style="color: {{ block.settings.sub_text_color }};">{{ block.settings.product.price | money }}</p>
+                  <a href="{{ block.settings.product.url }}" style="color: {{ block.settings.button_text_color }}; background-color: {{ block.settings.button_bg_color }};">{{ block.settings.button_text }}</a>
+                </div>
+              {% else %}
+                <div>
+                  <img src="{{ 'img_sample_product2.png' | asset_url }}">
+                </div>
+                <div>
+                  <p style="color: {{ block.settings.main_text_color }};">Product Title</p>
+                  <p style="color: {{ block.settings.sub_text_color }};">$50.00</p>
+                  <a href="#" style="color: {{ block.settings.button_text_color }}; background-color: {{ block.settings.button_bg_color }};">Buy Now</a>
+                </div>
+              {% endif %}
+            </div>
+          {% when "review_item" %}
+            <div class="main-carousel-review-item">
+              <div class="main-carousel-review-item__top">
+                <ul style="color: {{ block.settings.star_color }}">
+                  {% for num in (1..block.settings.stars) %}
+                    <li>{% render 'icon-star' %}</li>
+                  {% endfor %}
+                </ul>
+  
+                <span class="main-carousel-review-item__top_header">{{ block.settings.title }}</span>
+  
+                <blockquote>
+                  <p>&#8220;{{ block.settings.body }}&#8221;</p>
+                </blockquote>
+  
+                <span class="main-carousel-review-item__top_date">{{ block.settings.date }}</span>
+  
+                <div class="main-carousel-review-item__top_reviewer">
+                  <span>{{ block.settings.name }}</span><span>Verified Buyer</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="main-carousel-review-item__product">
+                {% if block.settings.image == blank %}
+                  <img src="{{ 'img_sample1.png' | asset_url }}">
+                {% else %}
+                  <img src="{{ block.settings.image | image_url }}">
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Carousel",
+      "class": "main-carousel",
+      "settings": [
+        {
+          "type": "color",
+          "id": "card_background_color",
+          "label": "Card Background Color",
+          "default": "#f2f2f2"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            }
+          ],
+          "default": "1",
+          "id": "cards_on_mobile",
+          "label": "Cards To Show",
+          "info": "Cards To show on mobile view"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            }
+          ],
+          "default": "2",
+          "id": "cards_on_tablet",
+          "label": "Cards To Show",
+          "info": "Cards To show on tablet view"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            }
+          ],
+          "default": "3",
+          "id": "cards_on_desktop",
+          "label": "Cards To Show",
+          "info": "Cards To show on desktop view"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "image_item",
+          "name": "Image & Text",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Tag Text",
+              "default": "Sample Text"
+            },
+            {
+              "type": "color",
+              "id": "tag_text_color",
+              "label": "Tag Text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "tag_bg_color",
+              "label": "Tag Background Color",
+              "default": "#000"
+            },
+            {
+              "type": "richtext",
+              "id": "body",
+              "label": "Body",
+              "default": "<p>Body text will goes here</p>"
+            },
+            {
+              "type": "color",
+              "id": "body_text_color",
+              "label": "Body Text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "text",
+              "id": "button",
+              "label": "Button",
+              "default": "Call To Action"
+            },
+            {
+              "type": "url",
+              "id": "btn_link",
+              "label": "Button Link"
+            },
+            {
+              "type": "color",
+              "id": "btn_text_color",
+              "label": "Button Text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "btn_bg_color",
+              "label": "Button Background Color",
+              "default": "#000"
+            }
+          ]
+        },
+        {
+          "type": "product_item",
+          "name": "Product",
+          "settings": [
+            {
+              "type": "product",
+              "id": "product",
+              "label": "Product"
+            },
+            {
+              "type": "color",
+              "id": "main_text_color",
+              "label": "Main Text Color",
+              "default": "#000"
+            },
+            {
+              "type": "color",
+              "id": "sub_text_color",
+              "label": "Sub Text Color",
+              "default": "#000"
+            },
+            {
+              "type": "text",
+              "id": "button_text",
+              "label": "Button",
+              "default": "Call To Action"
+            },
+            {
+              "type": "color",
+              "id": "button_text_color",
+              "label": "Button Text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "button_bg_color",
+              "label": "Button Background Color",
+              "default": "#000"
+            }
+          ]
+        },
+        {
+          "type": "review_item",
+          "name": "Review",
+          "settings": [
+            {
+              "type": "image_picker",
+              "label": "Image",
+              "id": "image",
+              "info": "Reviewer Avatar"
+            },
+            {
+              "type": "color",
+              "label": "Avatar Border Color",
+              "id": "border_color",
+              "default": "#fff"
+            },
+            {
+              "type": "range",
+              "min": 1,
+              "max": 20,
+              "unit": "px",
+              "default": 4,
+              "id": "border_size",
+              "label": "Avatar Border Size"
+            },
+            {
+              "type": "range",
+              "min": 1,
+              "max": 5,
+              "default": 5,
+              "id": "stars",
+              "label": "Star"
+            },
+            {
+              "type": "color",
+              "label": "Star Color",
+              "default": "#ffd712",
+              "id": "star_color"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Heading",
+              "default": "Heading will goes here"
+            },
+            {
+              "type": "color",
+              "id": "heading_color",
+              "label": "Heading Text Color",
+              "default": "#000"
+            },
+            {
+              "type": "textarea",
+              "id": "body",
+              "label": "Body",
+              "default": "Body will goes here"
+            },
+            {
+              "type": "color",
+              "id": "body_color",
+              "label": "Body Text Color",
+              "default": "#000"
+            },
+            {
+              "type": "text",
+              "id": "date",
+              "label": "Review Timestamp",
+              "default": "2 weeks ago"
+            },
+            {
+              "type": "color",
+              "id": "date_color",
+              "label": "Review Timestamp color",
+              "default": "#000"
+            },
+            {
+              "type": "text",
+              "id": "name",
+              "label": "Reviewer Name",
+              "default": "Sample R"
+            },
+            {
+              "type": "color",
+              "id": "name_color",
+              "label": "Reviewer Name color",
+              "default": "#000"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Carousel",
+          "blocks": [
+            {
+              "type": "image_item"
+            },
+            {
+              "type": "image_item"
+            },
+            {
+              "type": "image_item"
+            }
+          ]
+        }
+      ]
+    }
+  {% endschema %}
+  
+  <script>
+    var cardsOnMobile = "{{ section.settings.cards_on_mobile }}";
+    var cardsOnTablet = "{{ section.settings.cards_on_tablet }}";
+    var cardsOnDesktop = "{{ section.settings.cards_on_desktop }}";
+    function initCarousel() {
+      $('.main-carousel-wrapper')
+        .not('.slick-initialized')
+        .slick({
+          dots: true,
+          infinite: false,
+          speed: 300,
+          adaptiveHeight: true,
+          slidesToShow: parseInt(cardsOnDesktop),
+          slidesToScroll: 1,
+          arrows: false,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: parseInt(cardsOnDesktop),
+                slidesToScroll: 1,
+                infinite: false,
+                dots: true,
+              },
+            },
+            {
+              breakpoint: 960,
+              settings: {
+                slidesToShow: parseInt(cardsOnTablet),
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 640,
+              settings: {
+                slidesToShow: parseInt(cardsOnMobile),
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+    }
+  
+    initCarousel();
+  </script>

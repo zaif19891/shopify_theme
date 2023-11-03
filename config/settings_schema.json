@@ -1,0 +1,389 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Optimo",
+    "theme_version": "1.0.0",
+    "theme_author": "Remote CMO",
+    "theme_documentation_url": "https:\/\/remotecmo.com\/optimo\/docs",
+    "theme_support_url": "https:\/\/remotecmo.com\/optimo\/support"
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "label": "Slider",
+        "type": "select",
+        "id": "thumbnail_type",
+        "default": "grid",
+        "options": [
+          {
+            "label": "Grid",
+            "value": "grid"
+          },
+          {
+            "label": "Slider",
+            "value": "slider"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "default": 1200,
+        "min": 1000,
+        "max": 2000,
+        "step": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "spacing",
+        "label": "Section spacing",
+        "default": 60,
+        "min": 20,
+        "max": 200,
+        "step": 5,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "label": "Body Font",
+        "type": "font_picker",
+        "id": "body_font",
+        "default": "assistant_n4"
+      },
+      {
+        "label": "Body Font Size",
+        "type": "select",
+        "id": "body_fontsize",
+        "default": "14",
+        "options": [
+          {
+            "label": "S",
+            "value": "13"
+          },
+          {
+            "label": "M",
+            "value": "14"
+          },
+          {
+            "label": "L",
+            "value": "15"
+          }
+        ]
+      },
+      {
+        "label": "Body Bold Font",
+        "type": "font_picker",
+        "id": "body_bold_font",
+        "default": "assistant_n7"
+      },
+      {
+        "label": "Bold Text Fontsize",
+        "type": "range",
+        "id": "bold_text_fontsize",
+        "default": 14,
+        "min": 8,
+        "max": 60,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "label": "Headings Font",
+        "type": "font_picker",
+        "id": "headings_font",
+        "default": "assistant_n7"
+      },
+      {
+        "label": "Heading Fontsize",
+        "type": "range",
+        "id": "heading_fontsize",
+        "default": 30,
+        "min": 8,
+        "max": 60,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "label": "Uppercase headings",
+        "id": "uppercase",
+        "type": "checkbox"
+      },
+      {
+        "label": "Product Name Font",
+        "type": "font_picker",
+        "id": "product_name_font",
+        "default": "assistant_n7"
+      },
+      {
+        "label": "Product Name Fontsize",
+        "type": "range",
+        "id": "product_name_fontsize",
+        "default": 20,
+        "min": 12,
+        "max": 30,
+        "step": 1,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text",
+        "default": "#111"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "background_2_color",
+        "label": "Background 2",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "accent_text_color",
+        "label": "Accent text",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Border",
+        "default": "#eeeeee"
+      },
+      {
+        "type": "color",
+        "id": "button_color",
+        "label": "Button background",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text",
+        "default": "#eeeeee"
+      },
+      {
+        "type": "color",
+        "id": "star_color",
+        "label": "Star color",
+        "default": "#FFA41C"
+      },
+      {
+        "type": "color",
+        "id": "checkmark_color",
+        "label": "Checkmark color",
+        "default": "#FFA41C"
+      },
+      {
+        "type": "header",
+        "content": "Alternate"
+      },
+      {
+        "type": "color",
+        "id": "inverse_text_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "inverse_background_color",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "inverse_accent_color",
+        "label": "Accent",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "inverse_accent_text_color",
+        "label": "Accent text",
+        "default": "#111"
+      },
+      {
+        "type": "color",
+        "id": "inverse_border_color",
+        "label": "Border",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "inverse_button_color",
+        "label": "Button background",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "inverse_button_text_color",
+        "label": "Button text",
+        "default": "#eeeeee"
+      },
+      {
+        "type": "color",
+        "id": "inverse_star_color",
+        "label": "Star color",
+        "default": "#FFA41C"
+      },
+      {
+        "type": "color",
+        "id": "inverse_checkmark_color",
+        "label": "Checkmark color",
+        "default": "#FFA41C"
+      }
+    ]
+  },
+  {
+    "name": "Misc",
+    "settings": [
+      {
+        "type": "select",
+        "id": "button_style",
+        "default": "pill",
+        "label": "Button style",
+        "options": [
+          {
+            "label": "Pill",
+            "value": "pill"
+          },
+          {
+            "label": "Rounded",
+            "value": "rounded"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "label": "Image and card radius",
+        "id": "image_radius",
+        "default": 20,
+        "step": 1,
+        "min": 0,
+        "max": 50,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "label": "Field radius",
+        "id": "field_radius",
+        "default": 8,
+        "step": 1,
+        "min": 0,
+        "max": 50,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "theme_media_type",
+        "label": "Media Type",
+        "options": [
+          {
+            "value": "round",
+            "label": "Round"
+          },
+          {
+            "value": "square",
+            "label": "Square"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cart drawer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer",
+        "label": "Enable cart drawer",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Grids",
+    "settings": [
+      {
+        "type": "select",
+        "id": "grid_item_style",
+        "label": "Grid item style",
+        "default": "card",
+        "options": [
+          {
+            "label": "Standard",
+            "value": "standard"
+          },
+          {
+            "label": "Card",
+            "value": "card"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "label": "Grid horizontal spacing",
+        "id": "grid_x_spacing",
+        "default": 20,
+        "step": 1,
+        "min": 0,
+        "max": 100,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "label": "Grid vertical spacing",
+        "id": "grid_y_spacing",
+        "default": 20,
+        "step": 1,
+        "min": 0,
+        "max": 100,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Meta",
+    "settings": [
+      {
+        "label": "Favicon",
+        "type": "image_picker",
+        "id": "favicon"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter handle"
+      }
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+<div class="article-main {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="article-main-content">
+      <h1>{{ article.title }}</h1>
+      <div class="article-main-content-body rte">
+        {{ article.content }}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Blog article",
+  "settings": [
+    {
+      "type": "select",
+      "label": "spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

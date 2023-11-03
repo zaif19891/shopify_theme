@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "gp_section_484702308534322430": {
+      "type": "gp-section-484702308534322430",
+      "settings": {}
+    },
+    "gp_section_484702308634985356": {
+      "type": "gp-section-484702308634985356",
+      "settings": {}
+    },
+    "gp_section_484702308634985726": {
+      "type": "gp-section-484702308634985726",
+      "settings": {}
+    }
+  },
+  "order": [
+    "gp_section_484702308534322430",
+    "gp_section_484702308634985356",
+    "gp_section_484702308634985726"
+  ]
+}

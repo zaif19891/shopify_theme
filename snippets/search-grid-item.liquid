@@ -1,0 +1,34 @@
+<a
+  href="{{ item.url }}"
+  class="search-grid-item search-grid-item--{{ settings.grid_item_style }}"
+>
+  {% if item.featured_image %}
+    <img src="{{ item.featured_image | img_url: 'master' }}">
+  {% elsif item.image %}
+    <img src="{{ item.image | img_url: 'master' }}">
+  {% else %}
+    <span class="grid-item-image-placeholder"></span>
+  {% endif %}
+
+  <span class="search-grid-item-body">
+    <h3>{{ item.title }}</h3>
+
+    {% if item.vendor != blank %}
+      <p>
+        {{ item.vendor }}
+      </p>
+    {% endif %}
+
+    <span class="search-grid-item-prices">
+      {% if item.compare_at_price_max > item.price %}
+        <span class="search-grid-item-compare">{{ item.compare_at_price_max | money }}</span>
+      {% endif %}
+
+      <span class="search-grid-item-price">{{ item.price | money }}</span>
+    </span>
+
+    {% if show_button %}
+      <span class="button">{{ 'General.shop_now' | t }}</span>
+    {% endif %}
+  </span>
+</a>

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+  <head> <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=Tag_ID"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'Tag_ID');
+</script>
+    {% include 'limespot' %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+    {% render 'metatags' %}
+    <style>
+      {{ settings.body_font | font_face }}
+      {{ settings.body_bold_font | font_face }}
+      {{ settings.headings_font | font_face }}
+      {{ settings.product_name_font | font_face }}
+
+      :root {
+        /* Layout */
+        --page_width: {{ settings.page_width }}px;
+
+        /* Fonts */
+        --body_font: {{ settings.body_font.family }};
+        --body_font_weight: {{ settings.body_font.weight }};
+        --body_font_size: {{ settings.body_fontsize | append: 'px' }};
+        --body_font_size_desktop: {{ settings.body_fontsize | plus: 3 | append: 'px' }};
+        --body_bold_font: {{ settings.body_bold_font.family }};
+        --body_bold_font_weight: {{ settings.body_bold_font.weight }};
+        --body_bold_font_size: {{ settings.bold_text_fontsize | append: 'px' }};
+        --headings_font: {{ settings.headings_font.family }};
+        --headings_font_weight: {{ settings.headings_font.weight }};
+        --headings_font_size: {{ settings.heading_fontsize | append: 'px' }};
+        --headings_font_size_desktop: {{ settings.heading_fontsize | plus: 3 | append: 'px' }};
+        --product_name_font: {{ settings.product_name_font.family }};
+        --product_name_font_weight: {{ settings.product_name_font.weight }};
+        --product_name_font_size: {{ settings.product_name_fontsize | append: 'px' }};
+
+        /* Colors */
+        --star_color: {{ settings.star_color }};
+        --checkmark_color: {{ settings.star_color }};
+        --text_color: {{ settings.text_color }};
+        --background_color: {{ settings.background_color }};
+        --background_2_color: {{ settings.background_2_color }};
+        --accent_color: {{ settings.accent_color }};
+        --accent_text_color: {{ settings.accent_text_color }};
+        --border_color: {{ settings.border_color }};
+        --inverse_background_color: {{ settings.inverse_background_color }};
+        --inverse_text_color: {{ settings.inverse_text_color }};
+        --inverse_border_color: {{ settings.inverse_border_color }};
+        --danger_text_color: #721c24;
+        --danger_background_color: #f8d7da;
+        --danger_border_color: #f6ced2;
+        --success_background_color: #d4edda;
+        --success_text_color: #155724;
+        --success_border_color: #cbe9d2;
+        --inverse_accent_color: {{ settings.inverse_accent_color }};
+        --inverse_accent_text_color: {{ settings.inverse_accent_text_color }};
+        --button_color: {{ settings.button_color }};
+        --button_text_color: {{ settings.button_text_color }};
+        --inverse_button_color: {{ settings.inverse_button_color }};
+        --inverse_button_text_color: {{ settings.inverse_button_text_color }};
+        --inverse_star_color: {{ settings.inverse_star_color }};
+        --inverse_checkmark_color: {{ settings.inverse_checkmark_color }};
+        /* Spacing */
+        --spacing: {{ settings.spacing }}px;
+        --grid_x_spacing: {{ settings.grid_x_spacing }}px;
+        --grid_y_spacing: {{ settings.grid_y_spacing }}px;
+
+        /* Misc */
+        --field_radius: {{ settings.field_radius }}px;
+        {% if settings.theme_media_type == "round" %}
+          --image_radius: {{ settings.image_radius }}px;
+        {% else %}
+          --image_radius: 0px;
+        {% endif %}
+        {% if settings.uppercase %}
+          --text_transform: uppercase;
+        {% else %}
+          --text_transform: none;
+        {% endif %}
+
+        {% if settings.button_style == 'pill' %}
+         --button_radius: 40px;
+        {% elsif settings.button_style == 'rounded' %}
+          --button_radius: 8px;
+        {% else %}
+          --button_radius: 0;
+        {% endif %}
+
+
+        /* Transitions */
+        --fadeOff: left 0s 0.2s, top 0s 0.2s, opacity 0.2s;
+        --fadeOn: left 0s, top 0s, opacity 0.2s;
+
+        /* Other */
+        --navDrawerOffset: 110px;
+      }
+    </style>
+    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+
+    <!-- Link to the file hosted on your server, -->
+
+    <!-- or link to the CDN -->
+    {% if customer %}{{ '//cdn.shopify.com/s/shopify/shopify_common.js' | script_tag }}{% endif %}
+
+    {{ content_for_header }}
+
+    {{ shop.metafields.loox.global_html_head }}
+
+    {{ '//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js' | script_tag }}
+    {{ '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js' | script_tag }}
+    {{ '//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js' | | script_tag }}
+    {{ '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js' | script_tag }}
+
+    {% include 'yotpo-widgets-loader-script' %}
+  {% render 'gp-head' %}
+</head>
+  <body>
+    
+    <div class="wrapper">
+      
+      {{ content_for_layout }}
+      <limespot></limespot>
+      {% section 'footer' %}
+      {% if settings.cart_drawer %}
+        {% section 'robust-cart' %}
+      {% endif %}
+      <div class="header-overlay"></div>
+    </div>
+
+    {{ 'scripts.js' | | asset_url | script_tag }}
+
+    {{ shop.metafields.loox.global_html_body }}
+    <div style="display:none;" id="af_hidepp_btn">
+      <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+    </div>
+    {% render 'recurpay' %}
+    <script>
+      function initCarousel(e) {
+        if (e.target.classList.contains('main-carousel')) {
+          let sectionId = e.detail.sectionId;
+          let cardsOnMobile = 1;
+          let cardsOnTablet = 2;
+          let cardsOnDesktop = 3;
+          if($(".section-template--" + sectionId + " > input:first-child").val() != undefined) {
+            cardsOnMobile = $(".section-template--" + sectionId + " > input:first-child").val();
+          }
+
+          if($(".section-template--" + sectionId + " > input:nth-child(2)").val() != undefined) {
+            cardsOnTablet = $(".section-template--" + sectionId + " > input:nth-child(2)").val();
+          }
+
+          if($(".section-template--" + sectionId + " > input:nth-child(3)").val() != undefined) {
+            cardsOnDesktop = $(".section-template--" + sectionId + " > input:nth-child(3)").val();
+          }
+          
+          $('.main-carousel-wrapper').each((i, obj) => {
+            $(obj)
+              .not('.slick-initialized')
+              .slick({
+                dots: false,
+                infinite: false,
+                speed: 300,
+                adaptiveHeight: true,
+                slidesToShow: parseInt(cardsOnDesktop),
+                slidesToScroll: 1,
+                responsive: [
+                  {
+                    breakpoint: 1024,
+                    settings: {
+                      slidesToShow: parseInt(cardsOnDesktop),
+                      slidesToScroll: 1,
+                      infinite: false,
+                      dots: false,
+                    },
+                  },
+                  {
+                    breakpoint: 960,
+                    settings: {
+                      slidesToShow: parseInt(cardsOnTablet),
+                      slidesToScroll: 1,
+                    },
+                  },
+                  {
+                    breakpoint: 640,
+                    settings: {
+                      slidesToShow: parseInt(cardsOnMobile),
+                      slidesToScroll: 1,
+                    },
+                  },
+                ],
+              });
+          });
+        }
+      }
+
+      function initProductCarousel(e) {
+        console.log(e.target.classList.contains('product-main-wrap'));
+        
+        if(e.target.classList.contains('product-main-wrap') || e.target.classList.contains('featured-product')) {
+           $('#main-slider').not('.slick-initialized').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: false,
+            adaptiveHeight: true,
+            infinite: false,
+            useTransform: true,
+            arrows:false,
+            speed: 400,
+            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)', 
+          });
+         
+          $('#thumbnail-slider')
+          .on('init', function(event, slick) {
+            $('#thumbnail-slider .slick-slide.slick-current').addClass('is-active');
+          })
+          .not('.slick-initialized')
+          .slick({
+            centerMode: true,
+            centerPadding: '60px',
+            slidesToShow: 6,
+            arrows: true,
+            responsive: [
+              {
+                breakpoint: 1440,
+                settings: {
+                  centerMode: true,
+                  centerPadding: '40px',
+                  slidesToShow: 5
+                }
+              },
+              {
+                breakpoint: 680,
+                settings: {
+                  centerMode: true, 
+                  centerPadding: '40px',
+                  slidesToShow: 4
+                }
+              }
+            ]
+          });
+        }
+      }
+
+      document.addEventListener('shopify:section:load', (e) => {
+        initCarousel(e);
+        initProductCarousel(e);
+      });
+
+      document.addEventListener('shopify:section:select', (e) => {
+        initCarousel(e);
+        initProductCarousel(e);
+      });
+
+      document.addEventListener('shopify:section:reorder', (e) => {
+        initCarousel(e);
+        initProductCarousel(e);
+      });
+    </script>
+  <!-- PF EDT START -->
+<script type='text/javascript'>
+{%- if content_for_header contains 'shopify-product-customizer' -%}
+    {%- if product -%}
+        {%- if product.first_available_variant -%}
+            var pfProductId = {{ product.metafields.printful.is_synced | json }};
+            var pfEdt = {{ shop.metafields.printful.is_edt_enabled | json }};
+            var pfEdtTextColor = {{ shop.metafields.printful.edt_text_color | json }};
+            var pfEdtBackgroundColor = {{ shop.metafields.printful.edt_background_color | json }};
+            var pfEdtBorderColor = {{ shop.metafields.printful.edt_border_color | json }};  
+            var pfEdtUseDefaultStyling = {{ shop.metafields.printful.edt_default_style | json }};
+            var pfEdtTextAlignment = {{ shop.metafields.printful.edt_text_alignment | json }};
+            var pfEdtFlags = {
+                US: "{{ 'US.svg' | asset_url }}",CA: "{{ 'CA.svg' | asset_url }}",ES: "{{ 'ES.svg' | asset_url }}",LV: "{{ 'LV.svg' | asset_url }}",GB: "{{ 'GB.svg' | asset_url }}",DE: "{{ 'DE.svg' | asset_url }}",FR: "{{ 'FR.svg' | asset_url }}",AU: "{{ 'AU.svg' | asset_url }}",JP: "{{ 'JP.svg' | asset_url }}",NZ: "{{ 'NZ.svg' | asset_url }}",IT: "{{ 'IT.svg' | asset_url }}",BR: "{{ 'BR.svg' | asset_url }}",KR: "{{ 'KR.svg' | asset_url }}",NL: "{{ 'NL.svg' | asset_url }}",GB: "{{ 'GB.svg' | asset_url }}",US: "{{ 'US.svg' | asset_url }}",
+            };
+        {%- else -%}
+            var pfEdt = 0;
+        {%- endif -%}
+    {%- endif -%}
+{%- endif -%}
+</script>
+<!-- PF EDT END -->
+</body>
+</html>

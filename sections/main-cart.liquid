@@ -1,0 +1,174 @@
+<div class="cart-main cart-main--{{ section.id }}">
+  <div class="width">
+    {% if cart.item_count == 0 %}
+      <div class="cart-main-empty">
+        <h1>{{ 'Cart.empty' | t }}</h1>
+        <a class="button" href="/">{{ 'Cart.continue' | t }}</a>
+      </div>
+    {% else %}
+      <div class="shipping-bar"></div>
+      {% form 'cart', cart %}
+        <div class="cart-main-full">
+          <h1>{{ 'Cart.cart' | t }}</h1>
+
+          <div class="cart-item-head">
+            <div class="cart-item-head-product">
+              <h2>{{ 'Cart.product' | t }}</h2>
+            </div>
+
+            <div class="cart-item-head-quantity">
+              <h2>{{ 'Cart.quantity' | t }}</h2>
+            </div>
+
+            <div class="cart-item-head-total">
+              <h2>{{ 'Cart.total' | t }}</h2>
+            </div>
+          </div>
+
+          {% for item in cart.items %}
+            <div class="cart-item">
+              <a href="{{item.url }}" class="cart-item-image">
+                <img src="{{ item.image | img_url: 'master' }}">
+              </a>
+
+              <div class="cart-item-text">
+                <div class="cart-item-text-product">
+                  <h3 class="cart-item-text-product-title">
+                    <a href="{{item.url }}">{{ item.product.title }}</a>
+                  </h3>
+                  <span class="cart-item-text-product-price">{{ item.line_price | money }}</span>
+                  {% comment %}Product options / properties{% endcomment %}
+                  {% assign property_size = item.properties | size %}
+                  {% unless item.product.has_only_default_variant and property_size == 0 %}
+                    <ul class="cart-item-text-product-properties">
+                      {% for option in item.options_with_values %}
+                        <li>{{ option.name }}: {{ option.value }}</li>
+                      {% endfor %}
+
+                      {% if property_size > 0 %}
+                        {% for p in item.properties %}
+                          {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                          {% unless p.last == blank or first_character_in_key == '_' %}
+                            <li>{{ p.first }}: {{ p.last }}</li>
+                          {% endunless %}
+                        {% endfor %}
+                      {% endif %}
+                    </ul>
+                  {% endunless %}
+                </div>
+
+                <div class="cart-item-text-quantity">
+                  <div class="quantity-selector">
+                    <button
+                      class="quantity-selector-button quantity-selector-button--down"
+                      data-line-id="{{ item.key }}"
+                      data-line-quantity="{{ item.quantity }}">
+                      {% render 'icon-minus' %}
+                    </button>
+                    <input
+                      type="text"
+                      readonly
+                      value="{{ item.quantity }}"
+                      class="quantity-selector-input">
+                    <button
+                      class="quantity-selector-button quantity-selector-button--up"
+                      data-line-id="{{ item.key }}"
+                      data-line-quantity="{{ item.quantity }}">
+                      {% render 'icon-plus' %}
+                    </button>
+                  </div>
+
+                  <a
+                    data-line-id="{{ item.key }}"
+                    data-line-quantity="{{ item.quantity }}"
+                    class="cart-item-text-remove"
+                    href="{{ item.url_to_remove }}">
+                    {% render 'icon-trash' %}
+                  </a>
+                </div>
+
+                <div class="cart-item-text-total">
+                  {{ item.line_price | money }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          <div class="cart-totals">
+            <div class="cart-total">
+              <h3>{{ 'Cart.discounts' | t }}</h3>
+              <span>{{ cart.total_discounts | money }}</span>
+            </div>
+
+            <div class="cart-total">
+              <h3>{{ 'Cart.subtotal' | t }}</h3>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+
+            <p>{{ 'Cart.calculated_long' | t }}</p>
+          </div>
+
+          <footer class="cart-footer">
+            <button
+              class="button"
+              type="submit"
+              name="checkout">{{ 'Cart.checkout' | t }}</button>
+          </footer>
+        </div>
+      {% endform %}
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    function addEventListeners() {
+      document.querySelectorAll('.cart-main--  {{ section.id }} .quantity-selector-button, .cart-main--  {{ section.id }} .cart-main--{{ section.id }}.cart-item-text-remove').forEach((el) => {
+        el.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          const lineId = el.getAttribute('data-line-id');
+          const currentQuantity = Number(el.getAttribute('data-line-quantity'));
+          const cartChangeUrl = '{{ routes.cart_change_url }}';
+          const cartUrl = '{{ routes.cart_url }}';
+          let newQuantity = currentQuantity + 1;
+
+          if (el.classList.contains('cart-item-text-remove')) {
+            newQuantity = 0;
+          } else if (el.classList.contains('quantity-selector-button--down')) {
+            newQuantity = currentQuantity - 1;
+          }
+
+          await fetch(cartChangeUrl, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+              {id: lineId, quantity: newQuantity}
+            )
+          });
+
+          const sectionDiv = document.querySelector('.cart-main--  {{ section.id }} .width');
+          const resRaw = await fetch(`?section_id={{ section.id }}`);
+          const newSection = await resRaw.text();
+          const dom = document.createElement('div');
+
+          dom.innerHTML = newSection;
+          sectionDiv.innerHTML = dom.querySelector('.width').innerHTML;
+
+          addEventListeners();
+        });
+      });
+    }
+
+    addEventListeners();
+  })();
+</script>
+{% schema %}
+  {
+    "name": "Cart main",
+    "settings": []
+  }
+{% endschema %}

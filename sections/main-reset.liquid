@@ -1,0 +1,31 @@
+<div class="reset-main register-main--{{ section.id }} auth-page">
+  <div class="width">
+    <div class="auth-page-content">
+      {% form 'reset_customer_password', class: 'form-layout' %}
+        <h1>{{ 'Accounts.reset' | t }}</h1>
+
+        {% if form.errors != blank %}
+          <div class="form-layout-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+        <div class="field">
+          <label for="password">{{ 'Accounts.password' | t }}</label>
+          <input type="password" name="customer[password]">
+        </div>
+
+        <div class="field">
+          <label for="password_confirmation">{{ 'Accounts.password_confirm' | t }}</label>
+          <input type="password" name="customer[password_confirmation]">
+        </div>
+
+        <div class="field">
+          <input
+            class="button button--full"
+            type="submit"
+            value="{{ 'Accounts.reset' | t }}">
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>

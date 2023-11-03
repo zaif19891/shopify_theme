@@ -1,0 +1,237 @@
+<style>
+  .collections-main--{{ section.id }} .collection-slider .collection-slider-item > a > span {
+    font-size: {{ section.settings.text_size | append: "px" }};
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+    background-color: {{ section.settings.slider_bg_color }};
+    color: {{ section.settings.slider_txt_color }};
+    border: 1px solid {{ section.settings.slider_border_color }};
+  }
+
+  .collections-main--{{ section.id }} .collection-slider-header > span {
+    font-size: {{ section.settings.header_size | append: "px" }};
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .collections-body-grid .product-grid-item--standard img {
+    {% if settings.theme_media_type == "rounded" %}
+      border-radius: var(--image_radius);
+    {% endif %}
+  }
+</style>
+
+<div class="collections-main collections-main--{{ section.id }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% elsif section.settings.spacing == 'none' %}section-spacing--none{% else %}section-spacing--bottom{% endif %}">
+  <header class="collections-top collections-top--has-image">
+    <div class="width">
+      <div class="collections-top-flex">
+        <div class="collections-top-text"></div>
+
+        <div class="collections-top-image">
+          {% if section.settings.banner_image != blank %}
+            <img src="{{ section.settings.banner_image | image_url }}">
+          {% else %}
+            <img src="{{ 'img_sample_banner.png' | asset_url }}">
+          {% endif %}
+        </div>
+        {% render 'collection-slider', section: section %}
+      </div>
+    </div>
+  </header>
+
+  <div class="collections-body">
+    <div class="width">
+      {% paginate collections['all-products'].products by 24 %}
+        <div class="collections-body-grid">
+          {% for c_product in collections['all-products'].products %}
+            {% render 'product-grid-item',
+              product: c_product,
+              show_review: true,
+              from_robust: false,
+              show_button: false,
+              sale_price_color: section.settings.sale_price_color,
+              show_sale_price: section.settings.compared_price
+            %}
+          {% endfor %}
+        </div>
+
+        <div class="pagination">
+          <div class="pagination-inner">
+            {{ paginate | default_pagination }}
+          </div>
+        </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+<script>
+  Shopify.queryParams = {};
+  var is_product_hover = {{ section.settings.product_hover }};
+
+  if (location.search.length) {
+    var params = location.search.substr(1).split('&');
+    for (var i = 0; i < params.length; i++) {
+      var keyValue = params[i].split('=');
+      if (keyValue.length) {
+        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if(is_product_hover) {
+      $(".product-grid-item").mouseenter(function() {
+        $(this).find("img:first-child").css("display", "none");
+        $(this).find("img:nth-child(2)").css("display", "block");
+      });
+
+      $(".product-grid-item").mouseleave(function() {
+        $(this).find("img:first-child").css("display", "block");
+        $(this).find("img:nth-child(2)").css("display", "none");
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection List",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "compared_price",
+      "label": "Show Compared Price",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_hover",
+      "label": "Product Hover",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "text",
+      "id": "slider_header",
+      "label": "Slider Header"
+    },
+    {
+      "type": "range",
+      "id": "header_size",
+      "label": "Slider Header fontsize",
+      "min": 12,
+      "max": 30,
+      "default": 16,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Slider Text fontsize",
+      "min": 12,
+      "max": 30,
+      "default": 14,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_uppercase",
+      "label": "Transform Uppercase",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "slider_bg_color",
+      "label": "Slider Item Background",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "slider_txt_color",
+      "label": "Slider Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "slider_border_color",
+      "label": "Slider Item Border Color",
+      "default": "#E5E7EB"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_slider_item",
+      "name": "Slider Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Sample Label",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "item_link",
+          "default": "/collections",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection List",
+      "blocks": [
+        {
+          "type": "collection_slider_item"
+        },
+        {
+          "type": "collection_slider_item"
+        },
+        {
+          "type": "collection_slider_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

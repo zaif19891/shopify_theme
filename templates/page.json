@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "5576772b-c3ba-4997-aa71-79d21f1aebf9": {
+      "type": "hero-blocked",
+      "blocks": {
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-heading-1": {
+          "type": "heading",
+          "settings": {
+            "title": "Heading will goes here",
+            "heading_font_size": 14,
+            "heading_border_radius": 16,
+            "heading_text_color": "#ffffff",
+            "heading_bg_color": "#000000"
+          }
+        },
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-body_text-1": {
+          "type": "body_text",
+          "settings": {
+            "title": "<p>Body Text will goes here<\/p>",
+            "body_font_size": 14,
+            "body_text_color": "#ffffff",
+            "body_bg_color": "#000000"
+          }
+        },
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/146.jpg"
+          }
+        },
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-button-1": {
+          "type": "button",
+          "settings": {
+            "button_text": "Call To Action",
+            "button_text_color": "#ffffff",
+            "button_bg_color": "#000000",
+            "button_deco_color": "#000000",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-heading-1",
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-body_text-1",
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-image-1",
+        "template--21344317505847__5576772b-c3ba-4997-aa71-79d21f1aebf9-button-1"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "custom_css": [],
+      "settings": {}
+    }
+  },
+  "order": [
+    "5576772b-c3ba-4997-aa71-79d21f1aebf9",
+    "main"
+  ]
+}

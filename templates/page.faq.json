@@ -1,0 +1,161 @@
+{
+  "sections": {
+    "ae58534f-c592-4422-a49d-d22d7524bcf2": {
+      "type": "intro-text",
+      "settings": {
+        "color": "normal",
+        "spacing": "both",
+        "small_heading": "",
+        "heading": "FAQ's",
+        "text": "<p>Get the answers you need. <\/p>"
+      }
+    },
+    "0fe5aa32-dcf6-4df0-bd49-961de96ea673": {
+      "type": "tabbed-content",
+      "blocks": {
+        "56247635-ead3-4bfe-941c-fb3296dd346c": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Theme Info",
+            "heading": "<p>FAQ #1 Theme Info<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "5af1d8a2-b170-4d67-b1a9-9d11eaee2648": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Theme Info",
+            "heading": "<p>FAQ #2 Theme Info<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "5a1c4ee3-3cbb-43a1-b7a2-d6652b2b8ed2": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Theme Info",
+            "heading": "<p>FAQ #3 Theme Info<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "d5b9bc70-ef32-486e-ac6d-fc7fb7a7b6d2": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Theme Info",
+            "heading": "<p>FAQ #4 Theme Info<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "1d73d3ba-633f-48c4-b62e-892c52e0af18": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Theme Info",
+            "heading": "<p>FAQ #5 Theme Info<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "2f37e04f-60aa-4c53-bfa6-a2b888f8568f": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Products",
+            "heading": "<p>FAQ #6 Products<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "a79e5566-b8d0-4074-8d3e-874f6e65813b": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Products",
+            "heading": "<p>FAQ #7 Products<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "c1b2b616-2917-4b9f-a5c1-1d1340f46a4a": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Products",
+            "heading": "<p>FAQ #8 Products<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "ac77f42b-96ea-41f9-af3f-0ad4c4b600e4": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Products",
+            "heading": "<p>FAQ #9 Products<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "e55fdc92-4cea-4a65-a9b2-08d65d925cfd": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "Products",
+            "heading": "<p>FAQ #10 Products<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "6c762bf5-37c6-4468-9361-04f2630f111b": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "General",
+            "heading": "<p>FAQ #11 General<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "6fa0fd80-8b3f-455b-9015-bc8caaddabb9": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "General",
+            "heading": "<p>FAQ #12 General<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "b1003b2f-0d91-4fb6-bbd9-5268f47cb4aa": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "General",
+            "heading": "<p>FAQ #13 General<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "88176bb9-dca1-420f-9e1f-f97cb1e0748d": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "General",
+            "heading": "<p>FAQ #14 General<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        },
+        "12a4cebb-7746-45da-9cf3-80fef2fd33ae": {
+          "type": "tab_item",
+          "settings": {
+            "tab_label": "General",
+            "heading": "<p>FAQ #15 General<\/p>",
+            "tab_item_content": "<p>Sample Content<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "56247635-ead3-4bfe-941c-fb3296dd346c",
+        "5af1d8a2-b170-4d67-b1a9-9d11eaee2648",
+        "5a1c4ee3-3cbb-43a1-b7a2-d6652b2b8ed2",
+        "d5b9bc70-ef32-486e-ac6d-fc7fb7a7b6d2",
+        "1d73d3ba-633f-48c4-b62e-892c52e0af18",
+        "2f37e04f-60aa-4c53-bfa6-a2b888f8568f",
+        "a79e5566-b8d0-4074-8d3e-874f6e65813b",
+        "c1b2b616-2917-4b9f-a5c1-1d1340f46a4a",
+        "ac77f42b-96ea-41f9-af3f-0ad4c4b600e4",
+        "e55fdc92-4cea-4a65-a9b2-08d65d925cfd",
+        "6c762bf5-37c6-4468-9361-04f2630f111b",
+        "6fa0fd80-8b3f-455b-9015-bc8caaddabb9",
+        "b1003b2f-0d91-4fb6-bbd9-5268f47cb4aa",
+        "88176bb9-dca1-420f-9e1f-f97cb1e0748d",
+        "12a4cebb-7746-45da-9cf3-80fef2fd33ae"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "ae58534f-c592-4422-a49d-d22d7524bcf2",
+    "0fe5aa32-dcf6-4df0-bd49-961de96ea673"
+  ]
+}

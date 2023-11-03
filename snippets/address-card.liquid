@@ -1,0 +1,180 @@
+<div class="account-main-address-card" data-address>
+  {% if address == customer.default_address %}
+    <div class="account-main-address-card-badge">{{ 'Addresses.default' | t }}</div>
+  {% endif %}
+
+  {{ address | format_address }}
+
+  <div class="account-main-address-card-actions">
+    <button
+      class="button"
+      type="button"
+      id="EditFormButton_{{ address.id }}"
+      data-address-id="{{ address.id }}"
+      data-modal-trigger="m{{ address.id }}"
+    >
+      {{ 'Addresses.edit' | t }}
+    </button>
+
+    <button
+      class="button delete-address"
+      type="button"
+      data-target="{{ address.url }}"
+    >
+      {{ 'Addresses.delete' | t }}
+    </button>
+  </div>
+</div>
+
+<div class="account-modal" data-modal="m{{ address.id }}">
+  <div class="account-modal-inner">
+    <h2>{{ 'Addresses.edit_address' | t }}</h2>
+    {%- form 'customer_address', address, class: 'form-layout' -%}
+      <div class="field">
+        <label for="AddressFirstName_{{ form.id }}">{{ 'Addresses.first_name' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressFirstName_{{ form.id }}"
+          name="address[first_name]"
+          value="{{ form.first_name }}"
+          autocomplete="given-name"
+          placeholder="{{ 'Addresses.first_name' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressLastName_{{ form.id }}">{{ 'Addresses.last_name' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressLastName_{{ form.id }}"
+          name="address[last_name]"
+          value="{{ form.last_name }}"
+          autocomplete="family-name"
+          placeholder="{{ 'Addresses.last_name' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCompany_{{ form.id }}">{{ 'Addresses.company' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressCompany_{{ form.id }}"
+          name="address[company]"
+          value="{{ form.company }}"
+          autocomplete="organization"
+          placeholder="{{ 'Addresses.company' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressAddress1_{{ form.id }}">{{ 'Addresses.address1' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressAddress1_{{ form.id }}"
+          name="address[address1]"
+          value="{{ form.address1 }}"
+          autocomplete="address-line1"
+          placeholder="{{ 'Addresses.address1' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressAddress2_{{ form.id }}">{{ 'Addresses.address2' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressAddress2_{{ form.id }}"
+          name="address[address2]"
+          value="{{ form.address2 }}"
+          autocomplete="address-line2"
+          placeholder="{{ 'Addresses.address2' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCity_{{ form.id }}">{{ 'Addresses.city' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressCity_{{ form.id }}"
+          name="address[city]"
+          value="{{ form.city }}"
+          autocomplete="address-level2"
+          placeholder="{{ 'Addresses.city' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCountry_{{ form.id }}">
+          {{ 'Addresses.country' | t }}
+        </label>
+
+        <select
+          id="AddressCountry_{{ form.id }}"
+          name="address[country]"
+          data-address-country-select
+          data-default="{{ form.country }}"
+          data-form-id="{{ form.id }}"
+          autocomplete="country"
+        >
+          {{ all_country_option_tags }}
+        </select>
+      </div>
+
+      <div class="field" id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
+        <label for="AddressProvince_{{ form.id }}">
+          {{ 'Addresses.province' | t }}
+        </label>
+        <select
+          id="AddressProvince_{{ form.id }}"
+          name="address[province]"
+          data-default="{{ form.province }}"
+          autocomplete="address-level1"
+        ></select>
+      </div>
+
+      <div class="field">
+        <label for="AddressZip_{{ form.id }}">{{ 'Addresses.zip' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressZip_{{ form.id }}"
+          name="address[zip]"
+          value="{{ form.zip }}"
+          autocapitalize="characters"
+          autocomplete="postal-code"
+          placeholder="{{ 'Addresses.zip' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressPhone_{{ form.id }}">{{ 'Addresses.phone' | t }}</label>
+
+        <input
+          type="tel"
+          id="AddressPhone_{{ form.id }}"
+          name="address[phone]"
+          value="{{ form.phone }}"
+          autocomplete="tel"
+          placeholder="{{ 'Addresses.phone' | t }}"
+        >
+      </div>
+
+      <div class="field checkbox">
+        {{ form.set_as_default_checkbox }}
+        <label for="address_default_address_{{ form.id }}">
+          {{ 'Addresses.set_default' | t }}
+        </label>
+      </div>
+
+      <div>
+        <button class="button">{{ 'Addresses.update' | t }}</button>
+        <button style="margin-left: 20px;" type="reset">{{ 'Addresses.cancel' | t }}</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>

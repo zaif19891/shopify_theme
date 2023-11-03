@@ -1,0 +1,96 @@
+<style>
+  .product-grid-item-compare {
+    color: {{ sale_price_color }};
+  }
+</style>
+
+{% if product != blank %}
+  <a
+    href="{% if from_robust == false %}{{ product.url | within: collection }}{% else %}#{% endif %}"
+    class="product-grid-item product-grid-item--{{ settings.grid_item_style }}"
+  >
+    {% if product.featured_image != blank %}
+      <img src="{{ product.featured_image | img_url: 'master' }}">
+      {% if product.images.size > 1 %}
+        <img src="{{ product.images[1] | image_url }}" style="display: none;">
+      {% else %}
+        <img src="{{ product.featured_image | img_url: 'master' }}" style="display: none;">
+      {% endif %}
+    {% else %}
+      <img src="{{ 'default.png' | asset_url }}">
+      <img src="{{ 'default.png' | asset_url }}" style="display: none;">
+    {% endif %}
+
+    <span class="product-grid-item-body">
+      {% if from_robust == true %}
+        {% if product.vendor != blank %}
+          <p>
+            {{ product.vendor }}
+          </p>
+        {% endif %}
+        <h3>{{ product.title }}</h3>
+        <span class="product-grid-item-prices">
+          <span class="product-grid-item-price">{{ product.price | money }}</span>
+        </span>
+        <span class="btn-robust">Add</span>
+      {% else %}
+        {% if product.vendor != blank %}
+          <p>
+            {{ product.vendor }}
+          </p>
+        {% endif %}
+        <h3>{{ product.title }}</h3>
+        {% render 'judgeme_widgets',
+          widget_type: 'judgeme_preview_badge',
+          jm_style: '',
+          concierge_install: false,
+          product: product
+        %}
+
+        <span class="product-grid-item-prices">
+          {% if product.compare_at_price_max > product.price and show_sale_price == true %}
+            <span class="product-grid-item-compare">{{ product.compare_at_price_max | money }}</span>
+          {% endif %}
+
+          <span class="product-grid-item-price">{{ product.price | money }}</span>
+        </span>
+        {% if show_button %}
+          <span class="button">{{ 'General.shop_now' | t }}</span>
+        {% endif %}
+      {% endif %}
+    </span>
+  </a>
+{% else %}
+  <a
+    href="#"
+    class="product-grid-item product-grid-item--{{ settings.grid_item_style }}"
+  >
+    <img src="{{ 'default.png' | asset_url }}">
+    <img src="{{ 'default.png' | asset_url }}" style="display: none;">
+
+    <span class="product-grid-item-body">
+      {% if from_robust == true %}
+        <p>
+          {{ 'default_values.texts.product_feature' | t }}
+        </p>
+        <h3>{{ 'default_values.texts.product_name' | t }}</h3>
+        <span class="product-grid-item-prices">
+          <span class="product-grid-item-price">{{ 1000 | money }}</span>
+        </span>
+        <span class="btn-robust">Add</span>
+      {% else %}
+        <p>
+          {{ 'default_values.texts.product_feature' | t }}
+        </p>
+        <h3>{{ 'default_values.texts.product_name' | t }}</h3>
+
+        <span class="product-grid-item-prices">
+          <span class="product-grid-item-price">{{ 1000 | money }}</span>
+        </span>
+        {% if show_button %}
+          <span class="button">{{ 'General.shop_now' | t }}</span>
+        {% endif %}
+      {% endif %}
+    </span>
+  </a>
+{% endif %}

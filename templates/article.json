@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "9bf1ea19-dfba-4632-a4dc-85fd74ec827c": {
+      "type": "main-custom-article",
+      "blocks": {
+        "35b1aef1-7190-4c83-b94a-2f59e3a37d49": {
+          "type": "collection_block",
+          "settings": {
+            "sidebar_collection": "all-products"
+          }
+        },
+        "8affab3a-9f86-4567-9eed-24a1ac02006f": {
+          "type": "image_block",
+          "settings": {
+            "sidebar_image": "shopify:\/\/shop_images\/Fango-issue6-square_1024x1024_1024x1024_b8563641-d822-4cd5-bf43-04728df4d418.webp",
+            "title": "Sign Up"
+          }
+        },
+        "e819746d-dfab-4d1b-a114-1aa04a30eef3": {
+          "type": "recent_article_block",
+          "settings": {
+            "articles": 4
+          }
+        }
+      },
+      "block_order": [
+        "35b1aef1-7190-4c83-b94a-2f59e3a37d49",
+        "8affab3a-9f86-4567-9eed-24a1ac02006f",
+        "e819746d-dfab-4d1b-a114-1aa04a30eef3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "9bf1ea19-dfba-4632-a4dc-85fd74ec827c"
+  ]
+}

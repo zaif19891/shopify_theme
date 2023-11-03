@@ -1,0 +1,489 @@
+{
+  "sections": {
+    "8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684": {
+      "type": "ig-slider",
+      "blocks": {
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-1": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/hoodie.png",
+            "title": "Hoodie",
+            "url": "shopify:\/\/collections\/hoodie-crewneck"
+          }
+        },
+        "9cd92848-a3ff-45d3-8293-21c99ce2dd7a": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/tshirt.png",
+            "title": "T-Shirt",
+            "url": "shopify:\/\/collections\/t-shirts"
+          }
+        },
+        "8d01f9ce-8bc9-4bdc-891b-760fe2f0b10b": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/sweater.png",
+            "title": "Sweater",
+            "url": "shopify:\/\/collections"
+          }
+        },
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-2": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bottom.png",
+            "title": "Bottom",
+            "url": "shopify:\/\/collections\/bottoms"
+          }
+        },
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-3": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bestseller.png",
+            "title": "Best Seller",
+            "url": "shopify:\/\/collections\/all"
+          }
+        },
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-4": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/newarrival.png",
+            "title": "New Arrival",
+            "url": "shopify:\/\/collections\/all"
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-1",
+        "9cd92848-a3ff-45d3-8293-21c99ce2dd7a",
+        "8d01f9ce-8bc9-4bdc-891b-760fe2f0b10b",
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-2",
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-3",
+        "template--20054273294646__8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684-product_item-4"
+      ],
+      "settings": {
+        "usage": "mobile_only",
+        "border_size": 2
+      }
+    },
+    "1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8": {
+      "type": "hero-classic",
+      "blocks": {
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-0": {
+          "type": "star-bar",
+          "settings": {
+            "five_star_title": "Happy Customers",
+            "star_size": 16
+          }
+        },
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-1": {
+          "type": "heading-text",
+          "settings": {
+            "heading": "Armor up in faith, hit the streets in style"
+          }
+        },
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-2": {
+          "type": "body-text",
+          "settings": {
+            "body": "Explore our collections and find the perfect piece that resonates with your heart & soul."
+          }
+        },
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-3": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "SHOP NOW",
+            "button_url": "shopify:\/\/products\/optimo",
+            "secondary_btn_text": "",
+            "secondary_btn_icon": "shopify:\/\/shop_images\/icon_video_play_black.png",
+            "button_border_radius": 10,
+            "align_on_same_line": true,
+            "uppercase_button": false,
+            "button_padding": 20
+          }
+        }
+      },
+      "block_order": [
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-0",
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-1",
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-2",
+        "template--19840411664694__1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8-168958044129a14077-3"
+      ],
+      "custom_css": [
+        "h1,.hero-classic-body {color: white;}",
+        ".hero-classic-text-inner {max-width: 450px;}"
+      ],
+      "settings": {
+        "spacing": "none",
+        "section_color": "normal",
+        "desktop": "shopify:\/\/shop_images\/144.jpg",
+        "mobile": "shopify:\/\/shop_images\/144.jpg",
+        "make_card": false,
+        "desktop_text_position": "left",
+        "mobile_text_position": "top",
+        "text_width": 400
+      }
+    },
+    "73b340c3-6dc3-42f5-9a73-982bb33a0f6a": {
+      "type": "intro-text",
+      "settings": {
+        "color": "normal",
+        "spacing": "both",
+        "small_heading": "",
+        "heading": "Shop by Category",
+        "text": ""
+      }
+    },
+    "45b904b3-e45b-4d5a-8243-e47ac643a830": {
+      "type": "grid",
+      "blocks": {
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-1": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/hoodie.png",
+            "title": "Hoodie",
+            "body": "",
+            "url": "shopify:\/\/collections\/hoodie-crewneck"
+          }
+        },
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-2": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/tshirt.png",
+            "title": "T-Shirt",
+            "body": "",
+            "url": "shopify:\/\/collections\/t-shirts"
+          }
+        },
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-3": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/sweater.png",
+            "title": "Sweater",
+            "body": "",
+            "url": "shopify:\/\/collections"
+          }
+        },
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-4": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bottom.png",
+            "title": "Bottom",
+            "body": "",
+            "url": "shopify:\/\/collections\/bottoms"
+          }
+        },
+        "b5a8c23e-43b1-4775-9011-a183f6da9dbd": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/newarrival.png",
+            "title": "New Arrival",
+            "body": "",
+            "url": "shopify:\/\/collections"
+          }
+        },
+        "c62685c6-f711-4832-abe0-f14c4fcdadbe": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bestseller.png",
+            "title": "Best Seller",
+            "body": "",
+            "url": "shopify:\/\/collections"
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-1",
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-2",
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-3",
+        "template--20054273294646__45b904b3-e45b-4d5a-8243-e47ac643a830-grid_item-4",
+        "b5a8c23e-43b1-4775-9011-a183f6da9dbd",
+        "c62685c6-f711-4832-abe0-f14c4fcdadbe"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color": "normal",
+        "images_on_mobile": "2",
+        "images_on_tablet": "3",
+        "images_on_desktop": "3",
+        "text_align": "center",
+        "limit_image_size": true
+      }
+    },
+    "f1e3acaf-c0d6-4483-b923-1b7aaff4a649": {
+      "type": "intro-text",
+      "settings": {
+        "color": "alt",
+        "spacing": "top",
+        "small_heading": "",
+        "heading": "Shop Apparel",
+        "text": ""
+      }
+    },
+    "1ddd250b-223c-4adf-934e-bbee463f458a": {
+      "type": "hero-blocked",
+      "blocks": {
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-heading-1": {
+          "type": "heading",
+          "settings": {
+            "title": "The Shopify Theme that gets better every month.",
+            "heading_font_size": 14,
+            "heading_border_radius": 16,
+            "heading_text_color": "#ffffff",
+            "heading_bg_color": "#000000"
+          }
+        },
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-body_text-1": {
+          "type": "body_text",
+          "settings": {
+            "title": "<p>Its cutting-edge design and intuitive interface make it a favorite choice for both startups and established brands looking to create an engaging online store. With multiple pre-built layouts and style options, Optimo allows businesses to shape their store's appearance to match their brand identity, offering a seamless and captivating shopping experience. Its cutting-edge design and intuitive interface make it a favorite choice for both startups and established brands looking to create an engaging online store. With multiple pre-built layouts and style options, Optimo allows businesses to shape their store's appearance to match their brand identity, offering a seamless and captivating shopping experience.<\/p>",
+            "body_font_size": 14,
+            "body_text_color": "#ffffff",
+            "body_bg_color": "#000000"
+          }
+        },
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-image-1": {
+          "type": "image",
+          "settings": {}
+        },
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-button-1": {
+          "type": "button",
+          "settings": {
+            "button_text": "Get The Theme",
+            "button_text_color": "#ffffff",
+            "button_bg_color": "#000000",
+            "button_deco_color": "#000000",
+            "button_link": "shopify:\/\/products\/optimo"
+          }
+        }
+      },
+      "block_order": [
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-heading-1",
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-body_text-1",
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-image-1",
+        "template--20054273294646__1ddd250b-223c-4adf-934e-bbee463f458a-button-1"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "eabcb187-0d81-44f8-900f-78388749dad4": {
+      "type": "featured-collection",
+      "settings": {
+        "spacing": "both",
+        "horizontal_spacing": 26,
+        "vertical_spacing": 26,
+        "color": "alt",
+        "collection": "logo-collection",
+        "count": 4,
+        "product_hover": true
+      }
+    },
+    "27138591-9185-4f3c-8ca3-34be1551668a": {
+      "type": "image-or-text",
+      "blocks": {
+        "8ebc05a9-d8d1-4a77-9b41-7a28de0ab556": {
+          "type": "text",
+          "settings": {
+            "spacing": "both",
+            "alignment": "left",
+            "small_heading": "Kingdom Prayer Requests",
+            "heading": "Prayer Is Our Weapon, Let Us Pray For You:",
+            "body": "<p>At Kingdom Armor, we believe in the strength of faith and the power of prayer. We are a community of believers, and we are here to support you in your faith journey. If you have a prayer request, we invite you to share it with us. Your concerns and hopes are important to us, and we believe in the strength of collective prayer. Let us stand together in faith and lift your intentions up to the heavens. Your prayer matters, and we are here to join you in seeking solace, guidance, and blessings through the power of prayer. Share your request with Kingdom Armor, and let our community be a source of support and love in your time of need.<\/p>",
+            "button_text": "Submit Prayer Request",
+            "button_url": "shopify:\/\/pages\/oct-27-11-42-25-contact-form"
+          }
+        },
+        "b534ccc7-6a83-4413-874c-69515a0be31b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/96.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "8ebc05a9-d8d1-4a77-9b41-7a28de0ab556",
+        "b534ccc7-6a83-4413-874c-69515a0be31b"
+      ],
+      "custom_css": [
+        "h2 {color: #ffd100;}"
+      ],
+      "settings": {
+        "spacing": "both",
+        "color": "normal",
+        "contained": false,
+        "block_spacing": 60
+      }
+    },
+    "5209a2a2-e78b-48a7-b986-1fb99789cb40": {
+      "type": "heading-text",
+      "settings": {
+        "spacing": "both",
+        "color": "inverse",
+        "text": "Our Collections"
+      }
+    },
+    "a5d9d414-2060-4b9a-a632-c8767dc35885": {
+      "type": "image-or-text",
+      "blocks": {
+        "06fcd558-0ba1-4f08-aca3-acef9d22660c": {
+          "type": "link-card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/champion-backpack-heather-grey-black-front-6526629f6f1fa.png",
+            "url": "shopify:\/\/collections\/accessories",
+            "heading": "ACCESSORIES",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "2bc6aad5-251b-4fe6-a2a0-daf2f756f013": {
+          "type": "link-card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/oversized-faded-t-shirt-faded-black-front-652660d0c900f.png",
+            "url": "shopify:\/\/collections\/t-shirts",
+            "heading": "PREMIUM T-SHIRTS",
+            "button_text": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": [
+        "06fcd558-0ba1-4f08-aca3-acef9d22660c",
+        "2bc6aad5-251b-4fe6-a2a0-daf2f756f013"
+      ],
+      "settings": {
+        "spacing": "both",
+        "color": "normal",
+        "contained": false,
+        "block_spacing": 60
+      }
+    },
+    "6554cc7b-1849-4328-acad-e322fc28196e": {
+      "type": "image-or-text",
+      "blocks": {
+        "161a99af-9647-49b9-bd1e-1cbe5b35cf79": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/69.jpg"
+          }
+        },
+        "198dab39-fd4c-4a8b-840a-a5e28c5005f7": {
+          "type": "text",
+          "settings": {
+            "spacing": "both",
+            "alignment": "left",
+            "small_heading": "Kingdom Armor Newsletter",
+            "heading": "Join the Kingdom Armor Chronicles",
+            "body": "<p>At Kingdom Armor, we're more than just a clothing brand – we're a community of faithful hearts seeking inspiration and connection. Our newsletter is your direct gateway to the heart of the Kingdom, where we share not only the latest faith-based fashion trends but also the heartbeat of Christian events, concerts, and praise reports. Join our Kingdom Armor community and become part of a movement that spreads God's light in the heart of urban life. Together, we're armored with the Word of God and ready to make a positive impact in the world. Welcome to the Kingdom Armor family! <\/p><p>  #FaithInFashion #KingdomArmor #SpreadTheWord<\/p>",
+            "button_text": "Join Newsletter",
+            "button_url": "shopify:\/\/pages\/kingdom-chronicles-1"
+          }
+        }
+      },
+      "block_order": [
+        "161a99af-9647-49b9-bd1e-1cbe5b35cf79",
+        "198dab39-fd4c-4a8b-840a-a5e28c5005f7"
+      ],
+      "custom_css": [
+        "h2 {color: #ffd100;}"
+      ],
+      "settings": {
+        "spacing": "both",
+        "color": "normal",
+        "contained": false,
+        "block_spacing": 60
+      }
+    },
+    "3f3035d6-3ac9-4c02-b818-63aa41600e40": {
+      "type": "heading-text",
+      "settings": {
+        "spacing": "top",
+        "color": "normal",
+        "text": "Customer Reviews"
+      }
+    },
+    "086d1ac5-2174-4263-b13a-9d10a58c2537": {
+      "type": "image-or-text",
+      "blocks": {
+        "e088b976-829d-4762-b701-b0092c3bf79d": {
+          "type": "review",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/reviews-img2.png",
+            "stars": 5,
+            "review": "A perfect balance between fashion and faith.  It's like wearing a little piece of encouragement with you wherever you go.",
+            "reviewer": "Trevor Williams",
+            "text_box_background": "#fffae5"
+          }
+        },
+        "26c577f3-14da-4357-91e3-cdba53ea0c89": {
+          "type": "review",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/reviews-img1.png",
+            "stars": 5,
+            "review": "I'm not only a satisfied customer, but I'm also proud to support a company that uses it's platform to spread positive messages and share the love of Christ. I will definitely be a repeat customer and recommend Kingdom Armor to anyone looking for fashionable, faith-based clothing.",
+            "reviewer": "Chante Ross",
+            "text_box_background": "#fffae5"
+          }
+        }
+      },
+      "block_order": [
+        "e088b976-829d-4762-b701-b0092c3bf79d",
+        "26c577f3-14da-4357-91e3-cdba53ea0c89"
+      ],
+      "settings": {
+        "spacing": "both",
+        "color": "normal",
+        "contained": false,
+        "block_spacing": 100
+      }
+    },
+    "36c4061f-b658-4892-9adb-3ad74bd58180": {
+      "type": "faqs",
+      "blocks": {
+        "c06b412f-29f3-4557-b72f-447cb6e07ae9": {
+          "type": "section",
+          "settings": {
+            "heading": "How long will it take to receive my order?",
+            "body": "<p>Our products are made especially for you as soon as you place an order, which is why it takes us a bit longer to deliver it to you. Making products on demand instead of in bulk helps reduce overproduction, so thank you for making thoughtful purchasing decisions!<\/p>"
+          }
+        },
+        "a2bc8c59-a878-44ac-84c3-fb5e33f0f991": {
+          "type": "section",
+          "settings": {
+            "heading": "Where are Kingdom Armor products manufactured?",
+            "body": "<p>We print our products with care at our fulfillment centers in North America and Europe, as well as our partner facilities across the globe.<\/p>"
+          }
+        },
+        "1bdd2c90-51c7-420b-84b0-73ce70a5afe9": {
+          "type": "section",
+          "settings": {
+            "heading": "My question is not listed. What do I do?",
+            "body": "<p>We are here to help! Email kingdomarmorapparel@gmail.com and our Texas based team will get back to you as quickly as possible.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "c06b412f-29f3-4557-b72f-447cb6e07ae9",
+        "a2bc8c59-a878-44ac-84c3-fb5e33f0f991",
+        "1bdd2c90-51c7-420b-84b0-73ce70a5afe9"
+      ],
+      "settings": {
+        "spacing": "bottom",
+        "faqs": "FAQ's",
+        "heading_size": "medium",
+        "color": "normal"
+      }
+    }
+  },
+  "order": [
+    "8ee6cddb-e92a-4fbe-8f1f-624b0d7a1684",
+    "1b401d9f-e7a5-4c3d-9239-5f3f3a16f1b8",
+    "73b340c3-6dc3-42f5-9a73-982bb33a0f6a",
+    "45b904b3-e45b-4d5a-8243-e47ac643a830",
+    "f1e3acaf-c0d6-4483-b923-1b7aaff4a649",
+    "1ddd250b-223c-4adf-934e-bbee463f458a",
+    "eabcb187-0d81-44f8-900f-78388749dad4",
+    "27138591-9185-4f3c-8ca3-34be1551668a",
+    "5209a2a2-e78b-48a7-b986-1fb99789cb40",
+    "a5d9d414-2060-4b9a-a632-c8767dc35885",
+    "6554cc7b-1849-4328-acad-e322fc28196e",
+    "3f3035d6-3ac9-4c02-b818-63aa41600e40",
+    "086d1ac5-2174-4263-b13a-9d10a58c2537",
+    "36c4061f-b658-4892-9adb-3ad74bd58180"
+  ]
+}

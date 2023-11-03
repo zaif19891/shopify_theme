@@ -1,0 +1,600 @@
+{% assign featured_review_block = section.blocks | where: 'type', 'review' %}
+{% assign buy_button_block = section.blocks | where: 'type', 'buy' %}
+{% assign thumbnail_type = section.settings.thumbnail_type %}
+<style>
+  @media only screen and (max-width: 639px) {
+    .section-template--{{ section.id }} #thumbnail-slider .product-main-image-thumb {
+      margin-right: 12px;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    .section-template--{{ section.id }}  #thumbnail-slider .product-main-image-thumb {
+      margin-right: 24px;
+    }
+  }
+
+  .js .slider-single > div:nth-child(1n+2) { display: none }
+  .js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
+  .slider-nav .slick-slide { cursor: pointer; }
+  ul#thumbnail-slider {
+    width: 90%;
+    margin: 10px auto;
+  }
+  .product-main-price > span.compare {
+    color: {{ sale_price_color }};
+  }
+
+  .product-main-review {
+    {% if featured_review_block.size > 0 %}
+      background-color: {{ featured_review_block[0].settings.bg_color }};
+      {% if featured_review_block[0].settings.enable_border == true %}
+        border: 1px solid {{ featured_review_block[0].settings.border_color }};
+      {% else %}
+        border: none;
+      {% endif %}
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+  }
+  .featured-product-contents{
+    text-align: center;
+  }
+  .product-main-review > ul > li > svg {
+    color: {{ featured_review_block[0].settings.star_color }};
+  }
+
+  .product-main-review p, .product-main-review span {
+    color: {{ featured_review_block[0].settings.txt_color }};
+  }
+
+  .product-main-buttons button {
+    {% if buy_button_block.size > 0 %}
+      {% if buy_button_block[0].settings.transform_uppercase == true %}
+        text-transform: uppercase;
+      {% endif %}
+      font-size: {{ buy_button_block[0].settings.font_size | append: "px" }};
+    {% else %}
+      font-size: 20px;
+    {% endif %}
+  }
+
+  .product-main-image-wrapper > span > svg {
+    width: 32px;
+    color: {{ section.settings.arrow_color }};
+  }
+</style>
+
+{% assign selectedVariant = product.selected_or_first_available_variant %}
+{% assign img = product.featured_image %}
+<div class="product-main-flex section-template--{{ section.id }}">
+  <div class="product-main-images">
+    {% comment %}
+      {% if product.featured_image != blank %}
+        {% assign img = product.featured_image %}
+        <img class="product-main-image" src="{{ img | img_url: 'master' }}">
+      {% endif %}
+    {% endcomment %}
+    {% comment %} {{ settings.thumbnail_type }} {% endcomment %}
+    {%- if settings.thumbnail_type == 'grid' -%}
+      <div class="product-main-image-wrapper">
+        <img class="product-main-image" src="{{ img | img_url: 'master' }}">
+
+        <span>{% render 'icon-chevron-left' %}</span>
+        <span>{% render 'icon-chevron-right' %}</span>
+      </div>
+      <ul class="product-main-image-thumbs">
+        {% for image in product.images %}
+          <li class="product-main-image-thumb {% if img == image %}product-main-image-thumb--selected{% endif %}">
+            <img src="{{ image | img_url: 'master' }}">
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      {% if settings.thumbnail_type == 'slider' %}
+        <ul id="main-slider">
+          {% for image in product.images %}
+            <li class="product-main-image-thumb {% if img == image %}product-main-image-thumb--selected{% endif %}">
+              <img src="{{ image | img_url: 'master' }}">
+            </li>
+          {% endfor %}
+        </ul>
+        <ul id="thumbnail-slider">
+          {% for image in product.images %}
+            <li class="product-main-image-thumb {% if img == image %}product-main-image-thumb--selected{% endif %}">
+              <img src="{{ image | img_url: 'master' }}">
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {%- if product.id != blank -%}
+    {% form 'product', product, data-productid: product.id, class: 'product-main-form' %}
+      <div class="product-main-json" data-json="{{ product | json | escape }}"></div>
+      <input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ selectedVariant.id }}">
+      <div class="product-main-content">
+        {% for block in section.blocks %}
+          {% if block.type == 'title' %}
+            <h1 class="product-main-title">{{ product.title }}</h1>
+            {% render 'judgeme_widgets',
+              widget_type: 'judgeme_preview_badge',
+              jm_style: '',
+              concierge_install: false,
+              product: product
+            %}
+          {% elsif block.type == '@app' %}
+            {% render block %}
+          {% elsif block.type == 'price' %}
+            <div class="product-main-price">
+              <span class="">{{ selectedVariant.price | money }}</span>
+              {% if block.settings.compared_price == true %}
+                <span class="compare">{{ selectedVariant.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+
+            <div class="product-main-dynamic-terms">
+              {{ form | payment_terms }}
+            </div>
+          {% elsif block.type == 'description' %}
+            <div class="product-main-description {% if section.settings.expandable_description == true %}product-main-description--expandable{% endif %}">
+              <div class="product-main-description-inner rte">
+                {{ product.description }}
+              </div>
+
+              {% if section.settings.expandable_description == true %}
+                <div class="product-main-description-read">
+                  <h3>Read more</h3>
+                </div>
+              {% endif %}
+            </div>
+          {% elsif block.type == 'variants' %}
+            {% if product.variants.size > 1 %}
+              <div class="product-main-options">
+                {% for option in product.options_with_values %}
+                  {{option}} "  "
+                  <div class="product-main-option">
+                    <span>{{ option.name }}:</span>
+                    {% for value in option.values %}
+                      {% comment %} <div class="product-main-option-value" style="display: flex;">
+                        <input
+                          {% if option.selected_value == value %}
+                            checked
+                          {% endif %}
+                          type="radio"
+                          class="product-main-option-value-radio"
+                          name="{{ option.name }}"
+                          value="{{ value }}"
+                          id="{{ option.name | handleize }}-{{ value }}"
+                        >
+                        <label
+                          for="{{ option.name | handleize }}-{{ value }}"
+                          style="{% if option.name == 'Color' %}background-color: {{ value }};{% endif %}"
+                          class="{% if option.name == 'Color' %}product-variant-color-swatch{% endif %}"
+                        >
+                          {% if option.name != 'Color' %}
+                            {{ value }}
+                          {% endif %}
+                        </label>
+                      </div> {% endcomment %}
+                      {{value}}
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% elsif block.type == 'buy' %}
+            <div class="product-main-buttons">
+              {% if selectedVariant.available %}
+                <button class="product-main-add button button--full" name="add" type="submit">
+                  {% render 'icon-cart-bold' %}
+                  {{ 'General.add_to_cart' | t }}
+                </button>
+              {% else %}
+                <button disabled class="product-main-add button button--full" name="add" type="submit">
+                  {{ 'General.out_of_stock' | t }}
+                </button>
+              {% endif %}
+
+              {% if block.settings.dynamic %}
+                <div class="product-main-dynamic-checkout">
+                  {{ form | payment_button }}
+                </div>
+              {% endif %}
+            </div>
+          {% elsif block.type == 'review' %}
+            <div class="product-main-review">
+              <ul>
+                {% for num in (1..block.settings.stars) %}
+                  <li>{% render 'icon-star' %}</li>
+                {% endfor %}
+              </ul>
+
+              <blockquote>
+                <p>&#8220;{{ block.settings.review }}&#8221;</p>
+              </blockquote>
+
+              <div class="product-main-review-flex">
+                <span>{{ block.settings.reviewer }}</span>
+              </div>
+            </div>
+          {% elsif block.type == 'three' %}
+            <div class="product-main-three">
+              {% if block.settings.text1 != blank or block.settings.image1 != blank %}
+                <div class="product-main-three-item">
+                  {% if block.settings.image1 != blank %}
+                    <img
+                      width="{{ block.settings.image1_width }}"
+                      src="{{ block.settings.image1 | img_url }}"
+                    >
+                  {% else %}
+                    <img
+                      width="{{ block.settings.image1_width }}"
+                      src="{{ 'icon_supima.png' | asset_url }}"
+                    >
+                  {% endif %}
+
+                  {% if block.settings.text1 != blank %}
+                    <p>{{ block.settings.text1 }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if block.settings.text2 != blank or block.settings.image2 != blank %}
+                <div class="product-main-three-item">
+                  {% if block.settings.image2 != blank %}
+                    <img
+                      width="{{ block.settings.image2_width }}"
+                      src="{{ block.settings.image2 | img_url }}"
+                    >
+                  {% else %}
+                    <img
+                      width="{{ block.settings.image1_width }}"
+                      src="{{ 'icon_supima.png' | asset_url }}"
+                    >
+                  {% endif %}
+
+                  {% if block.settings.text2 != blank %}
+                    <p>{{ block.settings.text2 }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if block.settings.text3 != blank or block.settings.image3 != blank %}
+                <div class="product-main-three-item">
+                  {% if block.settings.image3 != blank %}
+                    <img
+                      width="{{ block.settings.image3_width }}"
+                      src="{{ block.settings.image3 | img_url }}"
+                    >
+                  {% else %}
+                    <img
+                      width="{{ block.settings.image1_width }}"
+                      src="{{ 'icon_supima.png' | asset_url }}"
+                    >
+                  {% endif %}
+
+                  {% if block.settings.text3 != blank %}
+                    <p>{{ block.settings.text3 }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% elsif block.type == 'collapsable-row' %}
+            <div class="product-main-collapsable">
+              <header class="product-main-collapsable-header">
+                {% if block.settings.icon != blank %}
+                  <img
+                    width="{{ block.settings.icon_size }}"
+                    src="{{ block.settings.icon | img_url: 'master' }}"
+                  >
+                {% else %}
+                  <img
+                    width="{{ block.settings.icon_size }}"
+                    src="{{ 'icon_badge.png' | asset_url }}"
+                  >
+                {% endif %}
+                <h3>{{ block.settings.heading }}</h3>
+                {% render 'icon-chevron-up' %}
+              </header>
+
+              <div class="product-main-collapsable-body">
+                <div class="product-main-collapsable-body-inner rte">
+                  {{ block.settings.body }}
+                </div>
+              </div>
+            </div>
+          {% elsif block.type == 'trust' %}
+            <div class="product-main-trust">
+              <div class="product-main-trust-left">
+                <p>
+                  {% render 'icon-trust' %}
+                  <span>Secure &amp; Trusted Checkout with</span>
+                </p>
+              </div>
+
+              <div class="product-main-trust-right">
+                <ul>
+                  <li><img src="{{ 'icon_visa_white.png' | file_url }}" width="38"></li>
+                  <li><img src="{{ 'icon_master_card_white.png' | file_url }}" width="38"></li>
+                  <li><img src="{{ 'icon_american_express_white.png' | file_url }}" width="38"></li>
+                  <li><img src="{{ 'icon_discover_white.png' | file_url }}" width="38"></li>
+                </ul>
+              </div>
+            </div>
+          {% elsif block.type == 'quantity' %}
+            <div class="quantity-selector">
+              <button type="button" class="quantity-selector-button quantity-selector-button--down">
+                {% render 'icon-minus' %}
+              </button>
+              <input type="text" name="quantity" readonly value="1" class="quantity-selector-input">
+              <button type="button" class="quantity-selector-button quantity-selector-button--up">
+                {% render 'icon-plus' %}
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endform %}
+  {%- else -%}
+    <span class="featured-product-contents">Select a featured product and edit the content for it</span>
+  {% endif %}
+</div>
+
+<script>
+  
+  $(document).ready(function () {
+    const form = {% if featured %}document.querySelector('.featured-product--{{ section.id }}');{% else %}document.querySelector('.product-main--{{ section.id }}');{% endif %}
+
+    function fetchSelectedOptions() {
+      // Figure out selected options
+      const selectedOptions = [];
+
+      form.querySelectorAll('.product-main-option-value-radio:checked').forEach((o) => {
+        selectedOptions.push(o.value);
+      });
+
+      return selectedOptions;
+    }
+
+    function fetchProductJson() {
+      const jsonEl = form.querySelector('.product-main-json');
+      const jsonRaw = jsonEl.getAttribute('data-json');
+      const json = JSON.parse(jsonRaw);
+
+      return json;
+    }
+
+    function findSelectedVariant(variants, selectedOptions) {
+      const selectedVariant = variants.find((v) => {
+        var pass = true;
+
+        for (var i = 0; i < selectedOptions.length; i++) {
+          if (selectedOptions.indexOf(v.options[i]) === -1) {
+            pass = false;
+            break;
+          }
+        }
+
+        return pass;
+      });
+
+      return selectedVariant;
+    }
+
+    function updateQueryStringParameter(uri, key, value) {
+      var re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
+      var separator = uri.indexOf('?') !== -1 ? '&' : '?';
+      if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + '=' + value + '$2');
+      } else {
+        return uri + separator + key + '=' + value;
+      }
+    }
+
+    function addEventListeners() {
+        if(form != null || form != undefined) {
+          form.querySelectorAll('.product-main-option-value-radio').forEach((input) => {
+              input.addEventListener('change', async () => {
+              const selectedOptions = fetchSelectedOptions();
+              const json = fetchProductJson();
+              const variant = findSelectedVariant(json.variants, selectedOptions);
+      
+              // Fetch the new section
+              const resRaw = await fetch(`/products/${json.handle}?variant=${variant.id}&section_id={{ section.id }}`);
+              const res = await resRaw.text();
+      
+              // New dom
+              const dom = document.createElement('div');
+              dom.innerHTML = res;
+      
+              // Replace price
+              form.querySelector('.product-main-price').replaceWith(dom.querySelector('.product-main-price'))
+      
+              // Replace button
+              form.querySelector('.product-main-add').replaceWith(dom.querySelector('.product-main-add'))
+      
+              // Update id
+              form.querySelector("[name='id'][data-productid='{{ product.id }}']").value = variant.id
+              
+              // Update url
+              {% unless featured %}
+                  const qs = updateQueryStringParameter(window.location.href, 'variant', variant.id);
+                  window.history.replaceState(null, null, qs);
+              {% endunless %}
+      
+              // Switch to featured image
+              if (variant.featured_image) {
+                  const src = variant.featured_image.src;
+                  const position = variant.featured_image.position;
+      
+                  form.querySelector('.product-main-image').setAttribute('src', src);
+                  const thumb = form.querySelector(`.product-main-image-thumb:nth-of-type(${position})`);
+      
+                  form
+                  .querySelector('.product-main-image-thumb--selected')
+                  .classList.remove('product-main-image-thumb--selected');
+                  thumb.classList.add('product-main-image-thumb--selected');
+              }
+              });
+          });
+      }
+
+        document.querySelectorAll('.quantity-selector-button').forEach((button) => {
+          button.addEventListener('click', () => {
+            const isUp = button.classList.contains('quantity-selector-button--up');
+            const input = button.parentElement.querySelector('.quantity-selector-input');
+            const currentValue = Number(input.value);
+  
+            if (isUp) {
+              input.value = currentValue + 1;
+            } else if (!isUp && currentValue > 1) {
+              input.value = currentValue - 1;
+            }
+          });
+        });
+    }
+
+    addEventListeners();
+
+    {% if section.settings.expandable_description %}
+      const height = document.querySelector('.product-main-description-inner').clientHeight;
+      
+      if (height > 144) {
+        form.querySelector('.product-main-description-read').addEventListener('click', () => {
+          if(form.querySelector('.product-main-description').classList.contains('product-main-description--expandable')) {
+            form.querySelector('.product-main-description').style.height = "auto";
+            form.querySelector('.product-main-description').classList.remove('product-main-description--expandable');
+            form.querySelector('.product-main-description').classList.add('product-main-description--collapsable');
+            form.querySelector('.product-main-description-read > h3').innerHTML = "Hide";
+          } else {
+            form.querySelector('.product-main-description').style.height = "144px";
+            form.querySelector('.product-main-description').classList.add('product-main-description--expandable');
+            form.querySelector('.product-main-description').classList.remove('product-main-description--collapsable');
+            form.querySelector('.product-main-description-read > h3').innerHTML = "Read more";
+          }
+        })
+      } else {
+        form.querySelector('.product-main-description').classList.remove('product-main-description--expandable');
+      }
+    {% endif %}
+
+    {%- if settings.thumbnail_type == 'grid' -%}
+      form.querySelectorAll('.product-main-image-thumb').forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          if (thumb.classList.contains('product-main-image-thumb--selected')) return;
+  
+          const src = thumb.querySelector('img').getAttribute('src');
+  
+          form.querySelector('.product-main-image').setAttribute('src', src);
+          form
+              .querySelector('.product-main-image-thumb--selected')
+              .classList.remove('product-main-image-thumb--selected');
+          thumb.classList.add('product-main-image-thumb--selected');
+        }); 
+      });
+    {%- endif -%}
+  });
+  
+  {%- if settings.thumbnail_type == 'grid' -%}
+    function addSliderControlEventListener() {
+      $(".product-main-image-wrapper .slick-prev").click(function() {
+        let active_thumb = $(".product-main-image-thumbs > .product-main-image-thumb--selected");
+        if($(active_thumb).prev().length) {
+          $(active_thumb).prev().addClass("product-main-image-thumb--selected");
+          let prev_image = $(active_thumb).prev().find("img").attr("src");
+          console.log(prev_image);
+          $(".product-main-image").attr("src", prev_image);
+          $(active_thumb).removeClass("product-main-image-thumb--selected"); 
+        }
+      });
+
+      $(".product-main-image-wrapper > span:nth-child(3)").click(function() {
+        let active_thumb = $(".product-main-image-thumbs > .product-main-image-thumb--selected");
+        if($(active_thumb).next().length) {
+          $(active_thumb).next().addClass("product-main-image-thumb--selected");
+          let next_image = $(active_thumb).next().find("img").attr("src");
+          console.log(next_image);
+          $(".product-main-image").attr("src", next_image);
+          $(active_thumb).removeClass("product-main-image-thumb--selected"); 
+        }
+      });
+      addSliderControlEventListener();
+    }
+  {%- endif -%}
+
+  $('#main-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: false,
+    adaptiveHeight: true,
+    infinite: false,
+    useTransform: true,
+    arrows:false,
+    speed: 400,
+    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)', 
+  });
+ 
+  $('#thumbnail-slider')
+    .on('init', function(event, slick) {
+      $('#thumbnail-slider .slick-slide.slick-current').addClass('is-active');
+    })
+    .slick({
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 6,
+      arrows: true,
+      responsive: [
+        {
+          breakpoint: 1440,
+          settings: {
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 680,
+          settings: {
+            centerMode: true, 
+            centerPadding: '40px',
+            slidesToShow: 4
+          }
+        }
+      ]
+    });
+ 
+  $('#main-slider').on('afterChange', function(event, slick, currentSlide) {
+    $('#thumbnail-slider').slick('slickGoTo', currentSlide);
+    var currrentNavSlideElem = '#thumbnail-slider .slick-slide[data-slick-index="' + currentSlide + '"]';
+    console.log(currrentNavSlideElem);
+    $('#thumbnail-slider .slick-slide.is-active').removeClass('is-active');
+    {% comment %} $('#thumbnail-slider .slick-slide.is-active').removeClass('product-main-image-thumb--selected'); {% endcomment %}
+    $(currrentNavSlideElem).addClass('is-active');
+    {% comment %} $(currrentNavSlideElem).addClass('product-main-image-thumb--selected'); {% endcomment %}
+  });
+ 
+  $('#thumbnail-slider').on('click', '.slick-slide', function(event) {
+    event.preventDefault();
+    var goToSingleSlide = $(this).data('slick-index');
+ 
+    $('#main-slider').slick('slickGoTo', goToSingleSlide);
+  });
+
+ $(document).ready(function() {
+    setTimeout(() => {
+      var next_button = $('.slick-next.slick-arrow');
+      $('.slick-next.slick-arrow').empty();
+      var prev_button = $('.slick-prev.slick-arrow');
+      $('.slick-prev.slick-arrow').empty();
+      var next_img = $('<img>');
+      var prev_img = $('<img>');
+      next_img.attr('src', "{{'next.png' | asset_url}}");
+      prev_img.attr('src', "{{'prev.png' | asset_url}}");
+      next_button.append(next_img);
+      prev_button.append(prev_img);
+    }, 300);
+  }); 
+
+</script>

@@ -1,0 +1,302 @@
+{% assign buyButtonBlock = section.blocks | where: 'type', 'buy' %}
+
+<style>
+  .featured-product .product-main-image {
+    border-radius: var(--image_radius);
+  }
+
+  .product-main-buttons > .product-main-add {
+    border: none !important;
+    {% if section.settings.color == "normal" %}
+      background-color: var(--button_color) !important;
+      color: var(--button_text_color) !important;
+    {% else %}
+      background-color: var(--inverse_button_color) !important;
+      color: var(--inverse_button_text_color) !important;
+    {% endif %}
+  }
+</style>
+
+<div class="featured-collection--{{ section.settings.color }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    {% render 'product-main-content', product: all_products[section.settings.product], section: section. featured: true %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "featured-product",
+  "settings": [
+    {
+      "type": "select",
+      "label": "spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    },
+
+    {
+      "type": "select",
+      "label": "Background color",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": []
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "settings": []
+    },
+    {
+      "type": "variants",
+      "name": "Variant picker",
+      "settings": []
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity selector",
+      "settings": []
+    },
+    {
+      "type": "buy",
+      "name": "Buy buttons",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "dynamic",
+          "label": "Show dynamic buy buttons"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": []
+    },
+    {
+      "type": "trust",
+      "name": "Trust badges",
+      "settings": []
+    },
+    {
+      "type": "review",
+      "name": "Featured review",
+      "settings": [
+        {
+          "label": "Color",
+          "id": "color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Normal",
+              "value": "normal"
+            },
+            {
+              "label": "Alt",
+              "value": "alt"
+            },
+            {
+              "label": "Alternate",
+              "value": "inverse"
+            }
+          ]
+        },
+        {
+          "label": "Review",
+          "id": "review",
+          "type": "textarea",
+          "default": "Please Type your review text here. For example: I love this product very much. I'm a fan of this product"
+        },
+        {
+          "label": "Reviewer",
+          "id": "reviewer",
+          "type": "text",
+          "default": "Sample R"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "str",
+          "default": 5
+        }
+      ]
+    },
+    {
+      "type": "collapsable-row",
+      "name": "Collapsable row",
+      "settings": [
+        {
+          "label": "Heading",
+          "id": "heading",
+          "type": "text"
+        },
+        {
+          "label": "Icon",
+          "id": "icon",
+          "type": "image_picker"
+        },
+        {
+          "type": "range",
+          "min": 10,
+          "max": 110,
+          "step": 2,
+          "unit": "px",
+          "default": 30,
+          "id": "icon_size",
+          "label": "Icon size"
+        },
+        {
+          "label": "Body",
+          "id": "body",
+          "type": "richtext"
+        }
+      ]
+    },
+    {
+      "type": "three",
+      "name": "Three points",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Icon #1"
+        },
+        {
+          "type": "range",
+          "id": "image1_width",
+          "label": "Icon #1 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text1",
+          "label": "Text #1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Icon #2"
+        },
+        {
+          "type": "range",
+          "id": "image2_width",
+          "label": "Icon #2 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text2",
+          "label": "Text #2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Icon #3"
+        },
+        {
+          "type": "range",
+          "id": "image3_width",
+          "label": "Icon #3 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text3",
+          "label": "Text #3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variants"
+        },
+        {
+          "type": "quantity"
+        },
+        {
+          "type": "buy"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "trust"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "collapsable-row"
+        },
+        {
+          "type": "three"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,632 @@
+<style>
+  .blogs-content-header {
+    {% if section.settings.bg_image != blank %}
+      background: url("{{ section.settings.bg_image | image_url }}");
+    {% else %}
+      background: url("{{ 'Shop_Banner_38.png' | file_url }}");
+    {% endif %}
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 2.5rem 0;
+  }
+
+  @media only screen and (min-width: 640px) {
+    .blogs-content-header {
+      padding: 4rem 0;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .blogs-content-header {
+      padding: 5rem 0;
+    }
+  }
+
+  .blogs-content-header h1 {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .blogs-content-header form.search-bar {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  .blogs-content-header form.search-bar > input {
+    border: 1px solid rgb(185 180 161);
+    border-radius: 8px;
+    background-color: white;
+    padding: 0 94px 0 16px;
+  }
+
+  .blogs-content-header form.search-bar > button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translate(0, -50%);
+    {% if section.settings.color == "inverse" %}
+      background-color: var(--inverse_button_color);
+      color: var(--inverse_button_text_color);
+    {% else %}
+      background-color: var(--button_color);
+      color: var(--button_text_color);
+    {% endif %}
+    border-radius: 8px;
+    padding: 8px;
+    text-transform: uppercase;
+  }
+
+  .blogs-content-header .tabs {
+    display: inline-flex;
+    width: 100%;
+    background-color: white;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid rgb(223 222 216);
+    overflow-x: scroll;
+  }
+
+  .blogs-content-header .tabs::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+  }
+
+  .blogs-content-header .tabs > a {
+    text-decoration: none;
+    color: black;
+    flex: 1;
+  }
+
+  .blogs-content-header .tabs > a > span {
+    text-align: center;
+    display: block;
+    padding: 0 8px;
+    white-space: nowrap;
+    padding: 6px 10px;
+    margin-right: 8px;
+    text-transform: uppercase;
+  }
+
+  .blogs-content-header .tabs > a.active-blog {
+    {% if section.settings.color == "inverse" %}
+      background-color: var(--inverse_button_color);
+      color: var(--inverse_button_text_color);
+    {% else %}
+      background-color: var(--button_color);
+      color: var(--button_text_color);
+    {% endif %}
+    border-radius: 8px;
+  }
+
+  .article-grid-column-inner > div {
+    grid-column: 1 / 3;
+  }
+
+  .article-grid-column-inner > div.highlight-article {
+    grid-column: 1 / 3;
+    margin-bottom: 3rem;
+  }
+
+  .article-grid-column-inner > div:not(.highlight-article) > div {
+    display: flex;
+  }
+
+  .article-grid-column-inner > div.highlight-article > div > div > a > img {
+    max-width: none;
+    width: 100%;
+  }
+
+  .article-grid-column-inner > div > div > div:nth-child(2) > div > h3 {
+    margin-top: 1.5rem;
+  }
+
+  .article-grid-column-inner > div > div > div:nth-child(2) > div > p {
+    margin-top: 0.75rem;
+  }
+
+  @media only screen and (min-width: 640px) {
+    .article-grid-column-inner > div > div {
+      display: flex;
+      align-items: center;
+    }
+
+    .article-grid-column-inner > div:not(:nth-child(2)) > div > div:nth-child(2) > div > h3 {
+      margin-top: 0;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(2) > div {
+      display: block;
+    }
+
+    .article-grid-column-inner > div.highlight-article > div > div > a > img {
+      max-width: none;
+      width: 100%;
+    }
+
+    .article-grid-column-inner > div {
+      grid-column: 1 / 3;
+    }
+
+    .article-grid-column-inner > div:not(.highlight-article) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .article-grid-column-inner > div.highlight-article:nth-child(1) > div {
+      display: block;
+    }
+
+    .article-grid-column-inner > div.highlight-article {
+      grid-column: 1 / 3;
+    }
+
+    .article-grid-column-inner > div:not(.highlight-article):nth-child(odd) {
+      grid-column: 1 / 2;
+      margin-bottom: 3rem;
+    }
+
+    .article-grid-column-inner > div:not(.highlight-article):nth-child(even) {
+      grid-column: 2 / 3;
+      margin-bottom: 3rem;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .article-grid-column-inner > h2:first-child {
+      grid-area: full_width;
+    }
+
+    .article-grid-column-inner > h2:not(:first-child) {
+      grid-column: 1 / 3;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(2) {
+      grid-area: main_content;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(2) > div {
+      display: block;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(3) {
+      grid-area: top;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(4) {
+      grid-area: middle;
+    }
+
+    .article-grid-column-inner > div.highlight-article:nth-child(5) {
+      grid-area: bottom;
+    }
+  }
+
+  .article-grid-column-inner nav img {
+    width: 20px;
+    padding: 8px;
+    box-sizing: content-box;
+  }
+
+  .article-grid-column-inner nav li {
+    display: block;
+    padding: 0 8px;
+  }
+
+  .article-grid-column-inner nav li > a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .article-grid-column-inner nav li:not(:first-child):not(.active) > a {
+    color: #a5a5a5;
+  }
+
+  .article-grid-column-inner > nav {
+    grid-column: 1 / 3;
+  }
+
+  .result_box {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    box-shadow: 0 8px 8px #e3e3e3;
+    width: 100%;
+  }
+
+  .result_box.visible {
+    padding: 12px;
+    height: 400px;
+    overflow-y: scroll;
+  }
+
+  .result_box > ul > li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .result_box > ul > li > div > a > img {
+    max-width: 140px;
+  }
+
+  .result_box > ul > li > div:nth-child(2) {
+    margin-left: 16px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Blog",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "label": "Color Scheme",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "max_latest_blogs",
+      "min": 1,
+      "max": 10,
+      "default": 4,
+      "label": "Number of latest blogs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Heading text will goes here",
+          "label": "Headline"
+        }
+      ]
+    },
+    {
+      "type": "body",
+      "name": "Body",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "body",
+          "default": "Body text will goes here",
+          "label": "Body text"
+        }
+      ]
+    },
+    {
+      "type": "search_bar",
+      "name": "Search bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "placeholder",
+          "default": "Search for texts...",
+          "label": "Placeholder Text"
+        }
+      ]
+    },
+    {
+      "type": "blog_categories",
+      "name": "Blog Categories",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "blog",
+          "id": "tab_blog1",
+          "label": "Blog"
+        },
+        {
+          "type": "blog",
+          "id": "tab_blog2",
+          "label": "Blog"
+        },
+        {
+          "type": "blog",
+          "id": "tab_blog3",
+          "label": "Blog"
+        },
+        {
+          "type": "blog",
+          "id": "tab_blog4",
+          "label": "Blog"
+        },
+        {
+          "type": "blog",
+          "id": "tab_blog5",
+          "label": "Blog"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "body"
+        },
+        {
+          "type": "search_bar"
+        },
+        {
+          "type": "blog_categories"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="main-custom-blogs-{{ section.id }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% elsif section.settings.spacing == 'none' %}'section-spacing--none'{% else %}section-spacing--bottom{% endif %}">
+  <div class="main-custom-blogs-inner">
+    <div class="blogs-content-header">
+      <div class="width">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'heading' %}
+              <h1>{{ block.settings.heading }}</h1>
+            {% when 'body' %}
+              <p>{{ block.settings.body }}</p>
+            {% when 'search_bar' %}
+              <form class="d-flex search-bar" action="/search">
+                <input
+                  class="form-control me-2 border-0 search-box"
+                  type="text"
+                  name="q"
+                  placeholder="Search For Topics & Articles"
+                  autocomplete="off"
+                >
+                <button>Search</button>
+                <div class="result_box">
+                  <ul class="list-group" id="searchResults"></ul>
+                </div>
+              </form>
+            {% when 'blog_categories' %}
+              <div class="tabs">
+                {% if block.settings.tab_blog1 != blank %}
+                  <a
+                    href="{{ block.settings.tab_blog1.handle }}"
+                    class="{% if blog.handle == block.settings.tab_blog1.handle %}active-blog{% endif %}"
+                  >
+                    <span>{{ block.settings.tab_blog1.title }}</span>
+                  </a>
+                {% else %}
+                  <a href="#" class="active-blog">
+                    <span>Category 1</span>
+                  </a>
+                {% endif %}
+                {% if block.settings.tab_blog2 != blank %}
+                  <a
+                    href="{{ block.settings.tab_blog2.handle }}"
+                    class="{% if blog.handle == block.settings.tab_blog2.handle %}active-blog{% endif %}"
+                  >
+                    <span>{{ block.settings.tab_blog2.title }}</span>
+                  </a>
+                {% else %}
+                  <a href="#">
+                    <span>Category 2</span>
+                  </a>
+                {% endif %}
+                {% if block.settings.tab_blog3 != blank %}
+                  <a
+                    href="{{ block.settings.tab_blog3.handle }}"
+                    class="{% if blog.handle == block.settings.tab_blog3.handle %}active-blog{% endif %}"
+                  >
+                    <span>{{ block.settings.tab_blog3.title }}</span>
+                  </a>
+                {% else %}
+                  <a href="#">
+                    <span>Category 3</span>
+                  </a>
+                {% endif %}
+                {% if block.settings.tab_blog4 != blank %}
+                  <a
+                    href="{{ block.settings.tab_blog4.handle }}"
+                    class="{% if blog.handle == block.settings.tab_blog4.handle %}active-blog{% endif %}"
+                  >
+                    <span>{{ block.settings.tab_blog4.title }}</span>
+                  </a>
+                {% endif %}
+                {% if block.settings.tab_blog5 != blank %}
+                  <a
+                    href="{{ block.settings.tab_blog5.handle }}"
+                    class="{% if blog.handle == block.settings.tab_blog5.handle %}active-blog{% endif %}"
+                  >
+                    <span>{{ block.settings.tab_blog5.title }}</span>
+                  </a>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="blogs-content-body width">
+      <div class="article-grid-column">
+        <div class="article-grid-column-inner">
+          {% paginate blogs[blog.handle].articles by 6 %}
+            {% for blogId in blogs[blog.handle].articles %}
+              {% if forloop.index0 == 0 and paginate.current_page == 1 %}
+                <h2>Latest Posts</h2>
+              {% elsif forloop.index0 == 4 and paginate.current_page == 1 %}
+                <h2>More To Read</h2>
+              {% endif %}
+              <div class="{% if paginate.current_page == 1 and forloop.index0 < 4 %}highlight-article{% endif %}">
+                <div>
+                  <div>
+                    <a href="{{ blogs[blog.handle].articles[forloop.index0].url }}">
+                      <img src="{{ blogs[blog.handle].articles[forloop.index0].image | image_url }}">
+                    </a>
+                  </div>
+                  <div>
+                    <div>
+                      <h3>
+                        <a href="{{ blogs[blog.handle].articles[forloop.index0].url }}">
+                          {{- blogs[blog.handle].articles[forloop.index0].title -}}
+                        </a>
+                      </h3>
+                      <p>{{ blogs[blog.handle].articles[forloop.index0].content }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            {%- if paginate.pages > 1 -%}
+              <nav role="navigation">
+                <ol class="pagination">
+                  {%- if paginate['previous-'] %}
+                    <li>
+                      <a href="{{ paginate.previous.url }}">
+                        <img src="{{ 'icon_left.png' | file_url }}">
+                      </a>
+                    </li>
+                  {%- else -%}
+                    <li class="disabled">
+                      <img src="{{ 'icon_left.png' | file_url }}">
+                    </li>
+                  {%- endif -%}
+
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <li>
+                        <a href="{{ part.url }}"> <span class="visuallyhidden"></span> {{ part.title }} </a>
+                      </li>
+                    {%- else -%}
+                      {%- if part.title == paginate.current_page -%}
+                        <li class="active" aria-current="page">
+                          <span class="visuallyhidden"></span> {{ part.title }}
+                        </li>
+                      {%- else -%}
+                        <li><span class="visuallyhidden"></span> {{ part.title }}</li>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if paginate.next -%}
+                    <li>
+                      <a href="{{ paginate.next.url }}">
+                        <img src="{{ 'icon_right.png' | file_url }}">
+                      </a>
+                    </li>
+                  {%- else -%}
+                    <li class="disabled">
+                      <img src="{{ 'icon_right.png' | file_url }}">
+                    </li>
+                  {%- endif -%}
+                </ol>
+              </nav>
+            {%- endif -%}
+          {% endpaginate %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    $('form.search-bar > input').keyup(function () {
+      var q = $('form.search-bar > input').val();
+      var b = '&resources[type]=article';
+
+      $.ajax('/search/suggest.json?q=' + q + b, {
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function (response) {
+          console.log(response);
+          var productSuggestions = response.resources.results.articles;
+          if (productSuggestions.length > 0) {
+            $('#searchResults').empty();
+            $('.result_box').addClass('visible');
+            $(productSuggestions).each(function () {
+              $('#searchResults').append(
+                '<li class="list-group-item list-group-item-action d-flex align-items-center"><div class="image-parent mr-3"><a href="' +
+                  this.url +
+                  '"><img class="img-fluid" src="' +
+                  this.featured_image.url +
+                  '"/></a></div><div><p class="mb-0">' +
+                  this.title +
+                  '</p><small>' +
+                  moment(this.published_at).format('MMM DD, YYYY') +
+                  '</small></div></li>'
+              );
+            });
+          } else {
+            $('#searchResults')
+              .empty()
+              .append(
+                '<li class="list-group-item list-group-item-action d-flex align-items-center"><small>No Results Found</small></li>'
+              );
+          }
+        },
+      });
+    });
+
+    $(document).on('click', function (event) {
+      var obj = $('.result_box');
+      if (!$(event.target).closest(obj).length) {
+        if ($('.result_box').hasClass('visible')) {
+          $('.result_box').removeClass('visible');
+          $('#searchResults').empty();
+        }
+      }
+    });
+  });
+</script>

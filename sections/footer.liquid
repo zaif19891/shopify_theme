@@ -1,0 +1,232 @@
+<div class="width">
+  <div class="footer-top">
+    {% for block in section.blocks %}
+      <div class="footer-top-column footer-top-column--{{ block.type }}">
+        {% if block.type == 'logo-social' %}
+          {% if block.settings.logo != blank %}
+            <img
+              width="{{ block.settings.logo_width }}"
+              class="footer-top-logo"
+              src="{{ block.settings.logo | img_url: 'master' }}">
+          {% endif %}
+
+          <ul class="footer-top-social">
+            {% if block.settings.twitter != blank %}
+              <li>
+                <a href="{{ block.settings.twitter }}">
+                  {% render 'icon-twitter' %}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if block.settings.facebook != blank %}
+              <li>
+                <a href="{{ block.settings.facebook }}">
+                  {% render 'icon-facebook' %}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if block.settings.youtube != blank %}
+              <li>
+                <a href="{{ block.settings.youtube }}">
+                  {% render 'icon-youtube' %}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if block.settings.instagram != blank %}
+              <li>
+                <a href="{{ block.settings.instagram }}">
+                  {% render 'icon-instagram' %}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+
+        {% elsif block.type == 'menu' %}
+          <h2>{{ block.settings.nav.title }}</h2>
+
+          <ul>
+            {% for link in block.settings.nav.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.footer_disclaimer != blank %}
+    <div class="footer-disclaimer {% if section.settings.footer_border == true %}footer-disclaimer-border{% endif %}">
+      {% render "icon-info" %}
+      <p>
+        {{ section.settings.footer_disclaimer }}
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="footer-bottom">
+    {{ section.settings.copyright }}
+  </div>
+</div>
+
+<style>
+  {% if section.settings.color == "inverse" %}
+    .footer {
+      background-color: var(--inverse_background_color);
+      color: var(--inverse_text_color);
+      border-color: var(--inverse_border_color);
+    }
+
+    .footer a {
+      color: var(--inverse_text_color);
+    }
+
+    .footer .footer-top-social a {
+      border-color: var(--inverse_border_color);
+    }
+  
+    .footer-disclaimer-border {
+      border: 1px dotted var(--inverse_border_color);
+    }
+  {% elsif section.settings.color == "alt" %}
+    .footer {
+      background-color: var(--background_2_color);
+      color: var(--text_color);
+      border-color: var(--border_color);
+    }
+
+    .footer a {
+      color: var(--text_color);
+    }
+
+    .footer .footer-top-social a {
+      border-color: var(--border_color);
+    }
+  
+    .footer-disclaimer-border {
+      border: 1px dotted var(--border_color);
+    }
+  {% else %}
+    .footer {
+      background-color: var(--background_color);
+      color: var(--text_color);
+      border-color: var(--border_color);
+    }
+
+    .footer a {
+      color: var(--text_color);
+    }
+
+    .footer .footer-top-social a {
+      border-color: var(--border_color);
+    }
+  
+    .footer-disclaimer-border {
+      border: 1px dotted var(--border_color);
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "tag": "footer",
+    "class": "footer",
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "logo-social",
+        "name": "Logo & social",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "range",
+            "id": "logo_width",
+            "label": "Logo width",
+            "min": 30,
+            "max": 200,
+            "step": 5,
+            "unit": "px",
+            "default": 60
+          },
+          {
+            "type": "url",
+            "id": "twitter",
+            "label": "Twitter url"
+          },
+          {
+            "type": "url",
+            "id": "facebook",
+            "label": "Facebook url"
+          }, {
+            "type": "url",
+            "id": "youtube",
+            "label": "Youtube url"
+          }, {
+            "type": "url",
+            "id": "instagram",
+            "label": "Instagram"
+          }
+        ]
+      }, {
+        "name": "menu",
+        "type": "menu",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "nav",
+            "label": "Navigation menu"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "type": "select",
+        "label": "Background color",
+        "id": "color",
+        "default": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "alt",
+            "label": "Normal w/ background 2"
+          },
+          {
+            "value": "inverse",
+            "label": "Alternate"
+          }
+        ]
+      },
+      {
+        "type": "richtext",
+        "id": "footer_disclaimer",
+        "label": "Disclaimer Text",
+        "default": "<p>Any kind of disclaimer text you need about the products you sell should go in here.</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "copyright",
+        "label": "Copyright",
+        "default": "<p>© 2023 Optimo Theme. All Rights Reserved Website Design By @the.shopify.guy</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_border",
+        "label": "Enable Border",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

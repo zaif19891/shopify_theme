@@ -1,0 +1,25 @@
+<div class="page-main page-main--{{ section.id }}">
+  <div class="width">
+
+      <div class="page-main-content">
+        {% if page.title != blank %}
+          <h1 class="page-main-content-heading">{{ page.title }}</h1>
+        {% endif %}
+
+        {% if page.content != blank %}
+          <div class="page-main-content-body rte">
+            {{ page.content }}
+          </div>
+        {% endif %}
+      </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page main",
+  "settings": [
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+<div class="login-main login-main--{{ section.id }} auth-page">
+  <div class="width">
+    <div class="auth-page-content">
+      {% form 'customer_login', class: 'login-main-login form-layout show auth-page-section' %}
+        <h1>{{ 'Accounts.login' | t }}</h1>
+
+        {% if form.errors != blank %}
+          <div class="form-layout-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="field">
+          <label for="email">{{ 'Accounts.email' | t }}</label>
+          <input type="email" name="customer[email]">
+        </div>
+        <div class="field">
+          <label for="password">{{ 'Accounts.password' | t }}</label>
+          <input type="password" name="customer[password]">
+        </div>
+        <div class="submit">
+          <input
+            class="button button--full"
+            type="submit"
+            value="{{ 'Accounts.signin' | t }}">
+        </div>
+
+        <ul class="auth-page-links">
+          <li>
+            <a class="login-main-forgot-password">{{ 'Accounts.forgot_your' | t }}</a>
+          </li>
+          <li>
+            <a href="{{ routes.account_register_url }}">{{ 'Accounts.create' | t }}</a>
+          </li>
+        </ul>
+      {% endform %}
+
+      {% form 'recover_customer_password', class: 'login-main-forgot auth-page-section form-layout' %}
+        <h1>{{ 'Accounts.forgot' | t }}</h1>
+
+        {% if form.errors != blank %}
+          <div class="form-layout-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="field">
+          <label for="email">{{ 'Accounts.email' | t }}</label>
+          <input type="email" name="email">
+        </div>
+        <div class="field">
+          <input
+            class="button button--full"
+            type="submit"
+            value="{{ 'Accounts.submit' | t }}">
+        </div>
+        <ul class="auth-page-links">
+          <li>
+            <a class="login-main-login-link">{{ 'Accounts.already' | t }}</a>
+          </li>
+          <li>
+            <a href="{{ routes.account_register_url }}">
+              {{- 'Accounts.create' | t -}}
+            </a>
+          </li>
+        </ul>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateQueryStringParameter(uri, key, value) {
+    var re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
+    var separator = uri.indexOf('?') !== -1
+      ? '&'
+      : '?';
+    if (uri.match(re)) {
+      return uri.replace(re, '$1' + key + '=' + value + '$2');
+    } else {
+      return uri + separator + key + '=' + value;
+    }
+  }
+
+  const root = document.querySelector('.login-main-- {{ section.id }}');
+
+  root.querySelector('.login-main-forgot-password').addEventListener('click', () => {
+    const qs = updateQueryStringParameter(window.location.href, 'forgot', 'true');
+    window.history.replaceState(null, null, qs);
+
+    root.querySelector('.login-main-login').classList.remove('show');
+    root.querySelector('.login-main-forgot').classList.add('show');
+  });
+
+  root.querySelector('.login-main-login-link').addEventListener('click', () => {
+    const qs = updateQueryStringParameter(window.location.href, 'forgot', 'false');
+    window.history.replaceState(null, null, qs);
+
+    root.querySelector('.login-main-forgot').classList.remove('show');
+    root.querySelector('.login-main-login').classList.add('show');
+  });
+
+  if (window.location.href.indexOf('forgot=true') > -1) {
+    root.querySelector('.login-main-login').classList.remove('show');
+    root.querySelector('.login-main-forgot').classList.add('show');
+  }
+</script>

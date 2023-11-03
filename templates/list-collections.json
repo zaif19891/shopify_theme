@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "a4006ab7-d11c-4651-a726-e3a2b2e2eb0b": {
+      "type": "text-tag",
+      "blocks": {
+        "a7737627-949d-458b-bc5e-73bf1a477ec9": {
+          "type": "tag_item",
+          "settings": {
+            "title": "Product#1",
+            "item_link": "shopify:\/\/products\/green-hoodie-1"
+          }
+        },
+        "e5bcd6d6-edf4-41a3-8f6b-9345ad84d3d4": {
+          "type": "tag_item",
+          "settings": {
+            "title": "Product#2",
+            "item_link": "shopify:\/\/products\/sample-product"
+          }
+        },
+        "62fb84f4-e936-4279-a1d5-6846052c6fe3": {
+          "type": "tag_item",
+          "settings": {
+            "title": "Product#3",
+            "item_link": "shopify:\/\/products\/sample-product-1"
+          }
+        }
+      },
+      "block_order": [
+        "a7737627-949d-458b-bc5e-73bf1a477ec9",
+        "e5bcd6d6-edf4-41a3-8f6b-9345ad84d3d4",
+        "62fb84f4-e936-4279-a1d5-6846052c6fe3"
+      ],
+      "settings": {
+        "display_method": "mobile",
+        "header": "Links",
+        "text_uppercase": false,
+        "slider_bg_color": "#ffffff",
+        "slider_txt_color": "#000000",
+        "slider_border_color": "#e5e7eb",
+        "padding_top": 2,
+        "padding_bottom": 2,
+        "margin_top": 2,
+        "margin_bottom": 2
+      }
+    },
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "f8487b73-929b-4afb-8a38-84ffa6b082d3": {
+          "type": "collection_slider_item",
+          "settings": {
+            "title": "Sample Label",
+            "item_link": "shopify:\/\/products\/product-3-name"
+          }
+        },
+        "3f9d3430-6038-46e1-8c7f-52c49e29e12a": {
+          "type": "collection_slider_item",
+          "settings": {
+            "title": "Sample Label",
+            "item_link": "shopify:\/\/products\/product-5-name"
+          }
+        },
+        "bacde5cd-2272-48aa-a1b4-b04ff3b0dd5e": {
+          "type": "collection_slider_item",
+          "settings": {
+            "title": "Sample Label",
+            "item_link": "shopify:\/\/products\/product-4-name"
+          }
+        }
+      },
+      "block_order": [
+        "f8487b73-929b-4afb-8a38-84ffa6b082d3",
+        "3f9d3430-6038-46e1-8c7f-52c49e29e12a",
+        "bacde5cd-2272-48aa-a1b4-b04ff3b0dd5e"
+      ],
+      "settings": {
+        "spacing": "none",
+        "compared_price": false,
+        "banner_image": "shopify:\/\/shop_images\/MERCH_1600_x_300_px_2.png",
+        "product_hover": false,
+        "sale_price_color": "#ff0000",
+        "slider_header": "Shop Hoodies",
+        "header_size": 16,
+        "text_size": 14,
+        "text_uppercase": false,
+        "slider_bg_color": "#ffffff",
+        "slider_txt_color": "#000000",
+        "slider_border_color": "#e5e7eb"
+      }
+    }
+  },
+  "order": [
+    "a4006ab7-d11c-4651-a726-e3a2b2e2eb0b",
+    "main"
+  ]
+}

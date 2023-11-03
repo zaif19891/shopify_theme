@@ -1,0 +1,83 @@
+<div class="intro intro--{{ section.id }} intro--{{ section.settings.color }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% else  %}section-spacing--bottom{% endif %}">
+  <div class="width">
+    <div class="intro-text">
+      <h2>
+        {{ section.settings.small_heading }}
+      </h2>
+      <h3>
+        {{ section.settings.heading }}
+      </h3>
+      {{ section.settings.text }}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Text Block",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Background color",
+      "id": "color",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "alt",
+          "label": "Normal w/ background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Alternate"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "small_heading",
+      "label": "Small heading",
+      "default": "Your smallheading text will go here."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your heading text will go here."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Your body text will go here.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Block"
+    }
+  ]
+}
+{% endschema %}

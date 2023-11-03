@@ -1,0 +1,37 @@
+<div class="collection-slider">
+  {% if section.blocks.size > 0 %}
+    <div class="collection-slider-inner-wrapper">
+      {%- liquid
+        assign current_slugs = request.path | split: '/'
+        assign collection_handler = current_slugs | last
+        assign selected_tag = 0
+      %}
+      <div class="collection-slider-header">
+        <span>{{ section.settings.slider_header }}</span>
+      </div>
+      <div>
+        {% for block in section.blocks %}
+          {%- liquid
+            assign order_class = ''
+            assign order_number = 1 | plus: forloop.index0 | minus: selected_tag
+            assign item_link = block.settings.item_link | split: "/"
+            assign item_link_slug = item_link | last
+            if item_link_slug == collection_handler
+              assign order_class = 'order: 1'
+              assign selected_tag = forloop.index0
+            else
+              assign order_class = 'order: ' | append: order_number
+            endif
+          %}
+          <div class="collection-slider-item" style="{{ order_class }}">
+            <a href="{{ block.settings.item_link }}">
+              <span class="{% if item_link_slug == collection_handler %}selected{% endif %}">
+                {{- block.settings.title -}}
+              </span>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>

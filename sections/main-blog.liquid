@@ -1,0 +1,47 @@
+<div class="blog-main">
+  {% if blog.title != blank or blog.description != blank %}
+    <header class="blog-main-top {% if blog.image != blank %}blog-main-top--has-image{% endif %}">
+      <div class="width">
+        <div class="blog-main-top-flex">
+          <div class="blog-main-top-text">
+            <h1>{{ blog.title }}</h1>
+
+            {% if blog.description != blank %}
+              <p>{{ blog.description }}</p>
+            {% endif %}
+          </div>
+
+          {% if blog.image != blank %}
+            <div class="blog-main-top-image">
+              <img src="{{ blog.image | img_url: 'master' }}">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+  {% endif %}
+
+  <div class="blog-main-posts">
+    <div class="width">
+      {% paginate blog.articles by 24 %}
+        <div class="blog-main-grid">
+          {% for article in blog.articles %}
+            {% render 'article-grid-item', article: article %}
+          {% endfor %}
+        </div>
+
+        <div class="pagination">
+          <div class="pagination-inner">
+            {{ paginate | default_pagination }}
+          </div>
+        </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Blog main",
+    "settings": []
+  }
+{% endschema %}

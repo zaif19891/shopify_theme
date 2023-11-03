@@ -1,0 +1,22 @@
+<a
+  href="{{ article.url }}"
+  class="article-grid-item article-grid-item--{{ settings.grid_item_style }}"
+>
+  {% if article.image %}
+    <img src="{{ article.image | img_url: 'master' }}">
+  {% else %}
+    <span class="grid-item-image-placeholder"></span>
+  {% endif %}
+
+  <span class="article-grid-item-body">
+    <h3>{{ article.title }}</h3>
+
+    {% if article.excerpt != blank %}
+      <p>{{ article.excerpt }}</p>
+    {% endif %}
+
+    {% if show_button %}
+      <span class="button">{{ 'General.shop_now' | t }}</span>
+    {% endif %}
+  </span>
+</a>

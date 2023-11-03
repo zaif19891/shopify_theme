@@ -1,0 +1,355 @@
+{% include 'yotpo-subs-product-page-widget' %}
+{% assign variantBlock = section.blocks | where: 'type', 'variants' %}
+{% assign buyButtonBlock = section.blocks | where: 'type', 'buy' %}
+
+<style>
+  .product-main-option-value input:checked+label,
+  .product-main-option-value label:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .shopify-payment-button .shopify-payment-button__button--unbranded::before {
+    content: url({{ 'icon-bag-bolder.svg' | asset_url }});
+    display: inline-block;
+    width: 24px;
+    height: 30px;
+  }
+  
+  .shopify-payment-button .shopify-payment-button__button--unbranded {
+    background-color: {{ buyButtonBlock[0].settings.btn_color_buy_btn }} !important;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: {{ buyButtonBlock[0].settings.buy_btn_txt_color }} !important;
+    font-family: var(--headings_font);
+    font-weight: var(--headings_font_weight);
+  }
+
+  .product-main-buttons > .product-main-add {
+    background-color: {{ buyButtonBlock[0].settings.btn_color_add_btn }} !important;
+    padding: 5px 0;
+    border: none !important;
+    color: {{ buyButtonBlock[0].settings.add_btn_txt_color }} !important;
+  }
+
+  .product-main--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | append: "px" }};
+    padding-bottom: {{ section.settings.padding_bottom | append: "px" }};
+  }
+
+  .product-main .product-main-image {
+    {% if settings.theme_media_type == "round" %} 
+      border-radius: var(--image_radius);
+    {% endif %}
+  }
+</style>
+
+<div class="product-main product-main--{{ section.id }}">
+  <div class="width">
+    {% render 'product-main-content', product: product, section: section, sale_price_color: section.settings.sale_price_color %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product main",
+  "class": "product-main-wrap",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": []
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "compared_price",
+          "label": "Compared price",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "variants",
+      "name": "Variant picker",
+      "settings": []
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity selector",
+      "settings": []
+    },
+    {
+      "type": "buy",
+      "name": "Buy buttons",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "dynamic",
+          "label": "Show dynamic buy buttons"
+        },
+        {
+          "type": "color",
+          "id": "btn_color_add_btn",
+          "label": "Add Button Color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "btn_color_buy_btn",
+          "label": "Buy Button Color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "add_btn_txt_color",
+          "label": "Add Button Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "buy_btn_txt_color",
+          "label": "Buy Button Text Color",
+          "default": "#fff"
+        },
+        {
+          "type": "number",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "transform_uppercase",
+          "label": "Uppercase",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": []
+    },
+    {
+      "type": "trust",
+      "name": "Trust badges",
+      "settings": []
+    },
+    {
+      "type": "review",
+      "name": "Featured review",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "BG Color",
+          "default": "#f0f0f0"
+        },
+        {
+          "type": "color",
+          "id": "txt_color",
+          "label": "Text Color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "label": "Star Color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color",
+          "default": "#000"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_border",
+          "label": "Enable Border",
+          "default": false
+        },
+        {
+          "label": "Review",
+          "id": "review",
+          "type": "textarea"
+        },
+        {
+          "label": "Reviewer",
+          "id": "reviewer",
+          "type": "text"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "str",
+          "default": 5
+        }
+      ]
+    },
+    {
+      "type": "collapsable-row",
+      "name": "Collapsable row",
+      "settings": [
+        {
+          "label": "Heading",
+          "id": "heading",
+          "type": "text"
+        },
+        {
+          "label": "Icon",
+          "id": "icon",
+          "type": "image_picker"
+        },
+        {
+          "type": "range",
+          "min": 10,
+          "max": 110,
+          "step": 2,
+          "unit": "px",
+          "default": 30,
+          "id": "icon_size",
+          "label": "Icon size"
+        },
+        {
+          "label": "Body",
+          "id": "body",
+          "type": "richtext"
+        }
+      ]
+    },
+    {
+      "type": "three",
+      "name": "Three points",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Icon #1"
+        },
+        {
+          "type": "range",
+          "id": "image1_width",
+          "label": "Icon #1 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text1",
+          "default": "Sample Text",
+          "label": "Text #1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Icon #2"
+        },
+        {
+          "type": "range",
+          "id": "image2_width",
+          "label": "Icon #2 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text2",
+          "default": "Sample Text",
+          "label": "Text #2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Icon #3"
+        },
+        {
+          "type": "range",
+          "id": "image3_width",
+          "label": "Icon #3 width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 80
+        },
+        {
+          "type": "text",
+          "id": "text3",
+          "default": "Sample Text",
+          "label": "Text #3"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "expandable_description",
+      "label": "Exapandable description",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#000"
+    },
+    {
+      "type": "font_picker",
+      "id": "buy_button_font",
+      "label": "Font",
+      "default": "work_sans_n6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product main"
+    }
+  ]
+}
+{% endschema %}

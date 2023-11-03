@@ -1,0 +1,146 @@
+<style>
+  .page-main--contact.page-main--{{ section.id }}{
+    {% case section.settings.spacing %}
+      {% when 'top_bottom' %}
+      padding: 27px 0 !important;
+      {% when 'top_only' %}
+      padding: 27px 0 0 0 !important;
+      {% when 'bottom_only' %}
+      padding: 0 0 27px 0 !important;
+    {% endcase %}
+  }
+</style>
+
+<div class="page-main page-main--contact page-main--{{ section.id }}">
+  <div class="width">
+    <div class="page-main-content">
+      {% if page.content != blank %}
+        <div class="page-main-content-body rte">
+          {{ page.content }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="form-layout-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% form 'contact', class: 'form-layout' %}
+        {% if form.posted_successfully? %}
+          <div class="form-layout-success">
+            <h3>{{ 'Contact.sent' | t }}</h3>
+            <p>{{ 'Contact.sent_message' | t }}</p>
+          </div>
+        {% elsif form.errors %}
+          <div class="form-layout-errors">
+            <h3>{{ 'Contact.error' | t }}</h3>
+            <p>
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}
+            </p>
+          </div>
+        {% endif %}
+
+        <div class="field-row">
+          <div class="field">
+            {% if section.settings.labels %}
+              <label for="ContactForm-name">{{ 'Contact.name_label' | t }}</label>
+            {% endif %}
+            <input
+              autocomplete="name"
+              type="text"
+              id="ContactForm-name"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ 'Contact.name_placeholder' | t }}">
+          </div>
+
+          <div class="field {% if form.errors contains 'email' %}field--error{% endif %}">
+            {% if section.settings.labels %}
+              <label for="ContactForm-email">{{ 'Contact.email_label' | t }}*</label>
+            {% endif %}
+            <input
+              autocomplete="email"
+              type="email"
+              id="ContactForm-email"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="{{ 'Contact.email_placeholder' | t }}">
+
+            {% if form.errors contains 'email' %}
+              <p class="field-error">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field">
+          {% if section.settings.labels %}
+            <label for="ContactForm-phone">{{ 'Contact.phone_label' | t }}</label>
+          {% endif %}
+          <input
+            type="tel"
+            id="ContactForm-phone"
+            autocomplete="tel"
+            name="contact[phone]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'Contact.phone_placeholder' | t }}">
+        </div>
+
+        <div class="field">
+          {% if section.settings.labels %}
+            <label for="ContactForm-body">{{ 'Contact.message_label' | t }}</label>
+          {% endif %}
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            name="contact[body]"
+            placeholder="{{ 'Contact.message_placeholder' | t }}">{{ form.body }}</textarea>
+        </div>
+
+        <div class="field">
+          <button type="submit" class="button">{{ 'Contact.submit' | t }}</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Contact Us Form",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Form heading",
+        "default": "Contact form",
+        "id": "heading"
+      }, {
+        "type": "checkbox",
+        "label": "Show field labels",
+        "default": false,
+        "id": "labels"
+      }, {
+        "type": "select",
+        "id": "spacing",
+        "label": "Form Spacing",
+        "default": "top_bottom",
+        "options": [
+          {
+            "label": "Top and Bottom",
+            "value": "top_bottom"
+          }, {
+            "label": "Top Only",
+            "value": "top_only"
+          }, {
+            "label": "Bottom Only",
+            "value": "bottom_only"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

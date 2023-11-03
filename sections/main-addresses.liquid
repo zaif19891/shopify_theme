@@ -1,0 +1,85 @@
+<div class="account-main account-main--{{ section.id }}">
+  <div class="width">
+    <header class="account-main-header">
+      <h1>
+        <a href="/account">
+          <span>{% render 'icon-chevron-left' %}</span>
+          <span>{{ 'Addresses.title' | t }}</span>
+        </a>
+      </h1>
+
+      <a href="{{ routes.account_logout_url }}">
+        {{ 'Accounts.logout' | t }}
+      </a>
+    </header>
+
+    {% paginate customer.addresses by 6 %}
+      <div class="account-main-address-addresses">
+        <div class="account-main-address-card-grid">
+          {% for address in customer.addresses %}
+            {% render 'address-card', address: address %}
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <div class="pagination">
+            <div class="pagination-inner">
+              {{ paginate | default_pagination }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endpaginate %}
+
+    {% render 'new-address' %}
+  </div>
+</div>
+
+<script>
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  };
+
+  const root = document.querySelector('.account-main--{{ section.id }}');
+
+  root.querySelector('.account-main-add-address-trigger ').addEventListener('click', () => {
+    root.querySelector('.account-modal--add-address').classList.toggle('active');
+  });
+
+  root.querySelectorAll('.account-modal').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      el.classList.remove('active');
+    });
+  });
+
+  root.querySelectorAll('.account-modal-inner').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  });
+
+  root.querySelectorAll('[data-modal-trigger]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      const id = el.getAttribute('data-modal-trigger');
+      const selector = `[data-modal="${id}"]`;
+      document.querySelector(selector).classList.add('active');
+    });
+  });
+
+  root.querySelectorAll('.delete-address').forEach((d) => {
+    d.addEventListener('click', () => {
+      if (confirm("{{ 'Addresses.delete_confirm' | t }}")) {
+        Shopify.postLink(d.getAttribute('data-target'), {
+          parameters: { _method: 'delete' },
+        });
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Addresses main",
+  "settings": []
+}
+{% endschema %}

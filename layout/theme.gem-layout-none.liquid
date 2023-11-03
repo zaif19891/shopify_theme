@@ -1,0 +1,144 @@
+{% comment %}
+	GEMPAGE BUILDER (https://apps.shopify.com/gempage)
+
+	You SHOULD NOT modify source code in this page because
+	It is automatically generated from GEMPAGE BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include 'limespot' %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+    {% render 'metatags' %}
+    <style>
+      {{ settings.body_font | font_face }}
+      {{ settings.body_bold_font | font_face }}
+      {{ settings.headings_font | font_face }}
+      {{ settings.product_name_font | font_face }}
+
+      :root {
+        /* Layout */
+        --page_width: {{ settings.page_width }}px;
+
+        /* Fonts */
+        --body_font: {{ settings.body_font.family }};
+        --body_font_weight: {{ settings.body_font.weight }};
+        --body_font_size: {{ settings.body_fontsize | append: 'px' }};
+        --body_font_size_desktop: {{ settings.body_fontsize | plus: 3 | append: 'px' }};
+        --body_bold_font: {{ settings.body_bold_font.family }};
+        --body_bold_font_weight: {{ settings.body_bold_font.weight }};
+        --body_bold_font_size: {{ settings.bold_text_fontsize | append: 'px' }};
+        --headings_font: {{ settings.headings_font.family }};
+        --headings_font_weight: {{ settings.headings_font.weight }};
+        --headings_font_size: {{ settings.heading_fontsize | append: 'px' }};
+        --headings_font_size_desktop: {{ settings.heading_fontsize | plus: 3 | append: 'px' }};
+        --product_name_font: {{ settings.product_name_font.family }};
+        --product_name_font_weight: {{ settings.product_name_font.weight }};
+        --product_name_font_size: {{ settings.product_name_fontsize | append: 'px' }};
+
+        /* Colors */
+        --star_color: {{ settings.star_color }};
+        --checkmark_color: {{ settings.star_color }};
+        --text_color: {{ settings.text_color }};
+        --background_color: {{ settings.background_color }};
+        --background_2_color: {{ settings.background_2_color }};
+        --accent_color: {{ settings.accent_color }};
+        --accent_text_color: {{ settings.accent_text_color }};
+        --border_color: {{ settings.border_color }};
+        --inverse_background_color: {{ settings.inverse_background_color }};
+        --inverse_text_color: {{ settings.inverse_text_color }};
+        --inverse_border_color: {{ settings.inverse_border_color }};
+        --danger_text_color: #721c24;
+        --danger_background_color: #f8d7da;
+        --danger_border_color: #f6ced2;
+        --success_background_color: #d4edda;
+        --success_text_color: #155724;
+        --success_border_color: #cbe9d2;
+        --inverse_accent_color: {{ settings.inverse_accent_color }};
+        --inverse_accent_text_color: {{ settings.inverse_accent_text_color }};
+        --button_color: {{ settings.button_color }};
+        --button_text_color: {{ settings.button_text_color }};
+        --inverse_button_color: {{ settings.inverse_button_color }};
+        --inverse_button_text_color: {{ settings.inverse_button_text_color }};
+        --inverse_star_color: {{ settings.inverse_star_color }};
+        --inverse_checkmark_color: {{ settings.inverse_checkmark_color }};
+        /* Spacing */
+        --spacing: {{ settings.spacing }}px;
+        --grid_x_spacing: {{ settings.grid_x_spacing }}px;
+        --grid_y_spacing: {{ settings.grid_y_spacing }}px;
+
+        /* Misc */
+        --field_radius: {{ settings.field_radius }}px;
+        {% if settings.theme_media_type == "round" %}
+          --image_radius: {{ settings.image_radius }}px;
+        {% else %}
+          --image_radius: 0px;
+        {% endif %}
+        {% if settings.uppercase %}
+          --text_transform: uppercase;
+        {% else %}
+          --text_transform: none;
+        {% endif %}
+
+        {% if settings.button_style == 'pill' %}
+         --button_radius: 40px;
+        {% elsif settings.button_style == 'rounded' %}
+          --button_radius: 8px;
+        {% else %}
+          --button_radius: 0;
+        {% endif %}
+
+
+        /* Transitions */
+        --fadeOff: left 0s 0.2s, top 0s 0.2s, opacity 0.2s;
+        --fadeOn: left 0s, top 0s, opacity 0.2s;
+
+        /* Other */
+        --navDrawerOffset: 110px;
+      }
+    </style>
+    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+
+    <!-- Link to the file hosted on your server, -->
+
+    <!-- or link to the CDN -->
+    {% if customer %}{{ '//cdn.shopify.com/s/shopify/shopify_common.js' | script_tag }}{% endif %}
+
+    {{ content_for_header }}
+
+    {{ shop.metafields.loox.global_html_head }}
+
+    {{ '//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js' | script_tag }}
+    {{ '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js' | script_tag }}
+    {{ '//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js' | | script_tag }}
+    {{ '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js' | script_tag }}
+
+    {% include 'yotpo-widgets-loader-script' %}
+  </head>
+  <body>
+<div class="gem-container">
+	{{ content_for_layout }}
+</div><!-- end .gem-container -->
+<!--Gem_Page_Footer_Script-->
+{% render 'gem-app-footer-scripts', GEM_FOOTER_SCRIPT: GEM_FOOTER_SCRIPT %}
+<!--End_Gem_Page_Footer_Script-->
+</body>
+</html>

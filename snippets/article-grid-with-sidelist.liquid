@@ -1,0 +1,20 @@
+<div class="article-grid-with-sidelist">
+  <div class="article-grid-with-sidelist-inner">
+    {% assign top_articles = blogs["educate"].articles | sort: "created_at" %}
+    {% for blogId in (1..maxTopBlogNumber) %}
+      {% if top_articles[forloop.index0] != blank  %}
+        <div>
+          <div>
+            <img src="{{ top_articles[forloop.index0].image | image_url }}" />
+          </div>
+          <div>
+            <div>
+              <a href="{{ top_articles[forloop.index0].handle }}">{{ top_articles[forloop.index0].title }}</a>
+              <p>{{ top_articles[forloop.index0].content }}</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

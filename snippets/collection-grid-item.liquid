@@ -1,0 +1,16 @@
+<a href="{{ product.url | within: collection }}" class="collection-grid-item">
+  <div class="collection-grid-item-image">
+    <img src="{{ collection.image | img_url: 'master' }}">
+  </div>
+
+  <h3>{{ product.title }}</h3>
+
+  <div>
+    <p>
+      {{ collection.description | slice: 0, 100 -}}
+      {%- if collection.description.size > 60 %}...{% endif %}
+    </p>
+  </div>
+
+  <span class="button">{{ 'General.shop_collection' | t }}</span>
+</a>

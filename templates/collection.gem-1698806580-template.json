@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "694f2d8d-6770-47db-8475-e45e5a640e77": {
+          "type": "slider_item",
+          "settings": {
+            "title": "T-Shirts",
+            "item_link": "shopify:\/\/collections\/t-shirts"
+          }
+        },
+        "2e10631a-82ed-49dd-a10c-8e19450a4d9c": {
+          "type": "slider_item",
+          "settings": {
+            "title": "Hoodies",
+            "item_link": "shopify:\/\/collections\/hoodie-crewneck"
+          }
+        },
+        "3dae3591-3414-40a1-b19a-868d47bd68d9": {
+          "type": "slider_item",
+          "settings": {
+            "title": "Bottoms",
+            "item_link": "shopify:\/\/collections\/bottoms"
+          }
+        },
+        "fa387459-fffd-4d23-9477-f0bea409aa1e": {
+          "type": "slider_item",
+          "settings": {
+            "title": "Accessories",
+            "item_link": "shopify:\/\/collections\/accessories"
+          }
+        }
+      },
+      "block_order": [
+        "694f2d8d-6770-47db-8475-e45e5a640e77",
+        "2e10631a-82ed-49dd-a10c-8e19450a4d9c",
+        "3dae3591-3414-40a1-b19a-868d47bd68d9",
+        "fa387459-fffd-4d23-9477-f0bea409aa1e"
+      ],
+      "settings": {
+        "spacing": "none",
+        "compared_price": false,
+        "banner_image": "shopify:\/\/shop_images\/New_Project_23.png",
+        "product_hover": true,
+        "show_sorting": true,
+        "sale_price_color": "#ff0000",
+        "slider_header": "Links",
+        "text_uppercase": true,
+        "slider_bg_color": "#ffffff",
+        "slider_txt_color": "#000000",
+        "slider_border_color": "#e5e7eb",
+        "thumbnail_type": "grid"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

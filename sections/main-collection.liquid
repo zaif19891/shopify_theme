@@ -1,0 +1,264 @@
+<style>
+  .collection-main--{{ section.id }} .collection-slider .collection-slider-item > a > span {
+    font-size: var(--body_font_size);
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+    background-color: {{ section.settings.slider_bg_color }};
+    color: {{ section.settings.slider_txt_color }};
+    border: 1px solid {{ section.settings.slider_border_color }};
+  }
+
+  .collection-main--{{ section.id }} .collection-slider-header > span {
+    font-size: var(--body_bold_font_size);
+    {% if section.settings.text_uppercase == true %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .collection-body-grid .product-grid-item--standard img {
+    {% if settings.theme_media_type == "rounded" %}
+      border-radius: var(--image_radius);
+    {% endif %}
+  }
+</style>
+
+<div class="collection-main collection-main--{{ section.id }} {% if section.settings.spacing == 'both' %}section-spacing--both{% elsif section.settings.spacing == 'top' %}section-spacing--top{% elsif section.settings.spacing == 'none' %}section-spacing--none{% else %}section-spacing--bottom{% endif %}">
+  {% if collection.title != blank or collection.description != blank %}
+    <header class="collection-top {% if collection.image != blank %}collection-top--has-image{% endif %}">
+      <div class="width">
+        <div class="collection-top-flex">
+          <div class="collection-top-text"></div>
+
+          {% if section.settings.banner_image != blank %}
+            <div class="collection-top-image">
+              <img src="{{ section.settings.banner_image | image_url }}">
+            </div>
+          {% else %}
+            <div class="collection-top-image">
+              <img src="{{ 'img_sample_banner.png' | asset_url }}">
+            </div>
+          {% endif %}
+          {% if section.blocks.size > 0 %}
+            {% render 'collection-slider', section: section %}
+          {% endif %}
+        </div>
+      </div>
+    </header>
+  {% endif %}
+
+  <div class="collection-body">
+    <div class="width">
+      {% if section.settings.show_sorting %}
+        <div class="collection-body-filters">
+          <div class="collection-body-filters-sort">
+            <label for="sort-by">{{ 'General.sort_by' | t }}</label>
+            <select id="sort-by" onchange="sortProduct()">
+              {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+              {% for option in collection.sort_options %}
+                <option
+                  value="{{ option.value }}"
+                  {% if option.value == sort_by %}
+                    selected="selected"
+                  {% endif %}
+                >
+                  {{ option.name }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      {% endif %}
+
+      {% paginate collection.products by 24 %}
+        <div class="collection-body-grid">
+          {% if sort_by == 'price-ascending' %}
+            {% assign product_sort = collection.products | sort: 'price' %}
+          {% else %}
+            {% assign product_sort = collection.products | sort: 'price' | reverse %}
+          {% endif %}
+
+          {% for c_product in product_sort %}
+            {% render 'product-grid-item',
+              product: c_product,
+              show_review: true,
+              from_robust: false,
+              show_button: false,
+              sale_price_color: section.settings.sale_price_color,
+              show_sale_price: section.settings.compared_price
+            %}
+          {% endfor %}
+        </div>
+
+        <div class="pagination">
+          <div class="pagination-inner">
+            {{ paginate | default_pagination }}
+          </div>
+        </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+<script>
+  Shopify.queryParams = {};
+  var is_product_hover = {{ section.settings.product_hover }};
+  if (location.search.length) {
+    var params = location.search.substr(1).split('&');
+    for (var i = 0; i < params.length; i++) {
+      var keyValue = params[i].split('=');
+      if (keyValue.length) {
+        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if(is_product_hover) {
+      $(".product-grid-item").mouseenter(function() {
+        $(this).find("img:first-child").css("display", "none");
+        $(this).find("img:nth-child(2)").css("display", "block");
+      });
+
+      $(".product-grid-item").mouseleave(function() {
+        $(this).find("img:first-child").css("display", "block");
+        $(this).find("img:nth-child(2)").css("display", "none");
+      })
+    }
+  });
+
+  function sortProduct(){
+    {% comment %} window.location = '?sort_by=title-ascending'; {% endcomment %}
+    console.log(document.getElementById('sort-by').value);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Collection main",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Spacing",
+      "id": "spacing",
+      "default": "both",
+      "options": [
+        {
+          "value": "both",
+          "label": "Top and bottom"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "compared_price",
+      "label": "Show Compared Price",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_hover",
+      "label": "Product Hover",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sorting",
+      "label": "Show sorting",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "text",
+      "id": "slider_header",
+      "label": "Slider Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_uppercase",
+      "label": "Transform Uppercase",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "slider_bg_color",
+      "label": "Slider Item Background",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "slider_txt_color",
+      "label": "Slider Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "slider_border_color",
+      "label": "Slider Item Border Color",
+      "default": "#E5E7EB"
+    },
+    {
+      "type": "select",
+      "label": "thumbnail type",
+      "id": "thumbnail_type",
+      "default": "grid",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slider_item",
+      "name": "Slider Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "Sample Label"
+        },
+        {
+          "type": "url",
+          "id": "item_link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection main"
+    }
+  ]
+}
+{% endschema %}

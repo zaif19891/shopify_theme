@@ -1,0 +1,147 @@
+<button class="account-main-add-address-trigger button">{{ 'Addresses.add_new' | t }}</button>
+
+<div class="account-modal account-modal--add-address">
+  <div class="account-modal-inner">
+    {%- form 'customer_address', customer.new_address, class: 'form-layout' -%}
+      <h2 id="AddressNewHeading">{{ 'Addresses.add_new' | t }}</h2>
+
+      <div class="field">
+        <label for="AddressFirstNameNew">{{ 'Addresses.first_name' | t }}</label>
+        <input
+          type="text"
+          id="AddressFirstNameNew"
+          name="address[first_name]"
+          value="{{ form.first_name }}"
+          autocomplete="given-name"
+          placeholder="{{ 'Addresses.first_name' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressLastNameNew">{{ 'Addresses.last_name' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressLastNameNew"
+          name="address[last_name]"
+          value="{{ form.last_name }}"
+          autocomplete="family-name"
+          placeholder="{{ 'Addresses.last_name' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCompanyNew">{{ 'Addresses.company' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressCompanyNew"
+          name="address[company]"
+          value="{{ form.company }}"
+          autocomplete="organization"
+          placeholder="{{ 'Addresses.company' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressAddress1New">{{ 'Addresses.address1' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressAddress1New"
+          name="address[address1]"
+          value="{{ form.address1 }}"
+          autocomplete="address-line1"
+          placeholder="{{ 'Addresses.address1' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressAddress2New">{{ 'Addresses.address2' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressAddress2New"
+          name="address[address2]"
+          value="{{ form.address2 }}"
+          autocomplete="address-line2"
+          placeholder="{{ 'Addresses.address2' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCityNew">{{ 'Addresses.city' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressCityNew"
+          name="address[city]"
+          value="{{ form.city }}"
+          autocomplete="address-level2"
+          placeholder="{{ 'Addresses.city' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressCountryNew">{{ 'Addresses.country' | t }}</label>
+
+        <select
+          id="AddressCountryNew"
+          name="address[country]"
+          data-default="{{ form.country }}"
+          autocomplete="country"
+        >
+          {{ all_country_option_tags }}
+        </select>
+      </div>
+
+      <div class="field" style="display: none">
+        <label for="AddressProvinceNew">{{ 'Addresses.province' | t }}</label>
+
+        <select
+          id="AddressProvinceNew"
+          name="address[province]"
+          data-default="{{ form.province }}"
+          autocomplete="address-level1"
+        ></select>
+      </div>
+
+      <div class="field">
+        <label for="AddressZipNew">{{ 'Addresses.zip' | t }}</label>
+
+        <input
+          type="text"
+          id="AddressZipNew"
+          name="address[zip]"
+          value="{{ form.zip }}"
+          autocapitalize="characters"
+          autocomplete="postal-code"
+          placeholder="{{ 'Addresses.zip' | t }}"
+        >
+      </div>
+
+      <div class="field">
+        <label for="AddressPhoneNew">{{ 'Addresses.phone' | t }}</label>
+
+        <input
+          type="tel"
+          id="AddressPhoneNew"
+          name="address[phone]"
+          value="{{ form.phone }}"
+          autocomplete="tel"
+          placeholder="{{ 'Addresses.phone' | t }}"
+        >
+      </div>
+
+      <div class="field checkbox">
+        {{ form.set_as_default_checkbox }}
+        <label for="address_default_address_new">{{ 'Addresses.set_default' | t }}</label>
+      </div>
+
+      <div class="field">
+        <button class="button full">{{ 'Addresses.add' | t }}</button>
+        <button style="margin-left: 20px" type="reset">{{ 'Addresses.cancel' | t }}</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
